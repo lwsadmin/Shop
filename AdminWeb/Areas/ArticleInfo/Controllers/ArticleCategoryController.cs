@@ -60,6 +60,12 @@ namespace Shop.AdminWeb.Areas.ArticleInfo.Controllers
             category.Sort = Convert.ToInt32(Request.Form["Sort"]);
             category.Remark = Request.Form["Remark"];
 
+
+            string s = "";
+            if (string.IsNullOrWhiteSpace(Request.QueryString["ss"]))
+            {
+                s = $"1212313";
+            }
             string msg = string.Empty;
             return Json(new { succ = ArticleCategoryLogic.Add(category, out msg), msg = msg });
         }
