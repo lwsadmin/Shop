@@ -1,0 +1,280 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+    <style>
+        #divTable > .media {
+            border-bottom: .5px solid #d2d2d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">同城生活></a></li>
+            <li class="active"><a href="#">资讯评论</a></li>
+        </ol>
+        <div class="portlet-body">
+            <div class="tabbable tabbable-custom boxless tabbable-reversed">
+
+
+                <form action="/WeiDianManage/Comment" class="form-inline" id="SearchBusiness" method="post" style="margin-left:70px;">
+
+                    @*<button type="submit" class="btn btn-primary btn-sm ">
+                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                        </button>*@
+                </form>
+
+                <div id="divTable">
+
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="http://wx.qlogo.cn/mmopen/Q3auHgzwzM78lYMdh9dlh30iaMxdkoib9WYg5PrO55m6zkkVCryQ6TsibOwkfW1iaEsgWUa6L9z7Vz02DdAjkmiat87fUbDULxKWyxxrbLDSz4Hc/0" onerror="this.src='/Assets/images/default.png'" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                            <p class="text-warning text-center"><small>深圳九盟科技-付生</small></p>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">威尔登休闲会所南山店</h4>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <p>服务好</p>
+                            <p class="text-right">
+                                <label style="display: inline;" class="text-danger">(已显示)</label>
+                                <span>2017-05-18 11:18</span>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" data-title="深圳九盟科技-付生" data-guid="dc2bdcd3-773b-e711-a8c6-ef69d082ec31" data-memberguid="1ff82ed4-85f1-e511-bb2c-ed4215ffcf09" data-objectguid="e4ffb595-6eac-e411-a105-9b93cfc94d37" onclick="Show(this)">回复</a>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" onclick="Change('dc2bdcd3-773b-e711-a8c6-ef69d082ec31')">隐藏</a>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDSgBcrcl3QzHhTzqCVKHt3V7rX5FZs4PpQzrGC0egSq0VCtibziaDMPlCX86FC421icIOwodz5RUfCg/0" onerror="this.src='/Assets/images/default.png'" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                            <p class="text-warning text-center"><small>好男儿</small></p>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">尚尚小店</h4>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <p>还不错</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-3">
+                                    <a href="#" class="thumbnail">
+                                        <img src="http://file.91sjlm.cn/Upload/JiuMeng/Images/0512121720600833.jpeg" data-holder-rendered="true">
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-right">
+                                <label style="display: inline;" class="text-danger">(已显示)</label>
+                                <span>2017-05-12 00:12</span>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" data-title="好男儿" data-guid="68249f51-6536-e711-9186-aea2b5b84d3f" data-memberguid="c2abb565-86ca-e611-b9f3-9c60ae70d706" data-objectguid="7a35a588-1747-e511-95ec-d590d4903b06" onclick="Show(this)">回复</a>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" onclick="Change('68249f51-6536-e711-9186-aea2b5b84d3f')">隐藏</a>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="http://wx.qlogo.cn/mmopen/dq5Rls82fs0Ay0YWcRPj4XZ5I939bYhEuQn2ULC2N2zPpN6n1KBSmSmmibosSqAHLLE9bXW1ZssKH3ExklD4icFVKiae84WDJCm/0" onerror="this.src='/Assets/images/default.png'" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                            <p class="text-warning text-center"><small>九盟科技-何义光</small></p>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">茶餐厅（民治店）</h4>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <p>环境很好，服务不错</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-3">
+                                    <a href="#" class="thumbnail">
+                                        <img src="http://file.91sjlm.cn/Upload/JiuMeng/Images/0505120415287693.jpeg" data-holder-rendered="true">
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a href="#" class="thumbnail">
+                                        <img src="http://file.91sjlm.cn/Upload/JiuMeng/Images/0505120522655653.jpeg" data-holder-rendered="true">
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a href="#" class="thumbnail">
+                                        <img src="http://file.91sjlm.cn/Upload/JiuMeng/Images/0505120524634055.jpeg" data-holder-rendered="true">
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-right">
+                                <label style="display: inline;" class="text-danger">(已显示)</label>
+                                <span>2017-05-05 12:05</span>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" data-title="九盟科技-何义光" data-guid="c6c14d2d-4831-e711-9186-aea2b5b84d3f" data-memberguid="91dbfe6b-d8aa-e611-b9f3-9c60ae70d706" data-objectguid="8c37ca0a-c329-e511-a531-d3e720bc8b7f" onclick="Show(this)">回复</a>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" onclick="Change('c6c14d2d-4831-e711-9186-aea2b5b84d3f')">隐藏</a>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="/Assets/images/default.png" onerror="this.src='/Assets/images/default.png'" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                            <p class="text-warning text-center"><small>不忘初心</small></p>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">萨客思披萨店</h4>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <p>不错😄</p>
+                            <p class="text-right">
+                                <label style="display: inline;" class="text-danger">(已显示)</label>
+                                <span>2017-04-23 23:23</span>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" data-title="不忘初心" data-guid="91426158-3d28-e711-9186-aea2b5b84d3f" data-memberguid="2fa71f01-8524-e711-9186-aea2b5b84d3f" data-objectguid="b6040241-461e-e611-b34d-c024a7dff001" onclick="Show(this)">回复</a>
+                                <a href="javascript:void(0);" class="btn btn-default btn-xs" onclick="Change('91426158-3d28-e711-9186-aea2b5b84d3f')">隐藏</a>
+                            </p>
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading text-primary">admin的回复:</h4>
+                                    <p class="text-primary"> 欢迎光顾</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal" id="Reply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" id="headerTitle"></h4>
+                        </div>
+
+                        <form action="/WeiDianManage/Comment/Reply" class="form-horizontal" id="FormReply" method="post">
+                            <br>           <br>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">
+                                            内容
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input type="hidden" value="" id="Guid" name="Guid">
+                                            <input type="hidden" value="" id="ObjectGuid" name="ObjectGuid">
+                                            <input type="hidden" value="" id="MemberGuid" name="MemberGuid">
+
+                                            <textarea name="Content" style="text-align: left;" class="form-control" cols="10" rows="3" id="Content"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>            <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="Save();">
+                                保存
+                            </button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default">
+                                取消
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <script type="text/javascript">
+
+                function Save() {
+
+                    if ($("#Content").val().trim().length > 0) {
+
+                        $("#FormReply").ajaxSubmit({
+
+                            success: function () {
+                                dialog({ id: "id", title: '提示', content: "回复成功!", cancel: false, okValue: '确定', width: 250, ok: function () { } }).show();
+                                $(this).removeData('modal');
+                                $("#Reply").modal('hide');
+                                $("#Search").submit();
+                            }
+                        });
+                    }
+                }
+
+
+            </script>
+
+            <script>
+                $(function () {
+                    RemoveReply();
+                })
+                function RemoveReply() {
+                    $(".reply").each(function () {
+                        var s = $(this).parents(".media-heading").siblings(".media").html();
+                        if (s != undefined)//已经有回复
+                        {
+                            $(this).remove();
+                        }
+                    });
+                }
+                function Show(obj) {
+                    $(this).removeData('modal');
+                    var guid = $(obj).data("guid");
+                    var ObjectGuid = $(obj).data("objectguid");
+                    var MemberGuid = $(obj).data("memberguid");
+                    var txt = $(obj).data("title");
+                    $("#headerTitle").text("回复--" + txt);
+                    $("#Content").focus();
+                    $("#Guid").val(guid);
+                    $("#ObjectGuid").val(ObjectGuid); $("#MemberGuid").val(MemberGuid);
+                    $(this).removeData('modal');
+                    $("#Reply").modal('show');
+
+                    $("#Content").val("");
+                }
+
+
+                function Change(guid) {
+                    $.ajax(
+                        {
+                            url: "/WeiDianManage/comment/change",
+                            data: { "guid": guid },
+                            type: "post",
+                            success: function () {
+                                //  $("#Search").submit();
+                                window.location.reload();
+                            }
+                        });
+                }
+            </script>
+        </div>
+
+    </div>
+</body>
+</html>

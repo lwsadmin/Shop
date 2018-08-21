@@ -1,0 +1,68 @@
+﻿@using System.Data;
+@using Shop.Entity;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线上商城></a></li>
+            <li class="active">商品管理</li>
+        </ol>
+
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" role="search" style="padding:0px;">
+                <a class="btn btn-primary btn-sm " href="/GoodsManage/Goods/Add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</a>
+            </div>
+            <form class="navbar-form navbar-left" id="formSearch" role="form" action="/GoodsManage/Goods/List">
+                <div class="form-group">
+                    <input type="hidden" name="PageSize" value="15" />
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入商品名称" />
+                    @Html.DropDownList("GoodsCategory", (SelectList)ViewData["CateGory"], "-所属类别-", new { @class = "form-control input-sm" })
+
+                    @Html.DropDownList("Brand", (List<SelectListItem>)ViewData["Brand"], "-所属品牌-", new { @class = "form-control input-sm" })
+                    @Html.DropDownList("Business", (SelectList)ViewData["Buiness"], "-所属商户-", new { @class = "form-control input-sm" })
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+                @{Html.RegisterMvcPagerScriptResource();}
+            </div>
+        </div>
+    </div>
+    <script src="/Content/layer/layer.js"></script>
+    <script>
+        function ShowMsg(id, msg)
+        {
+            layer.tips(msg, "#" + id, {
+                tips: [2, '#3595CC'],
+                time: 10000
+            });
+            $("#" + id).mouseout(function ()
+            {
+                layer.closeAll('tips'); //关闭所有的tips层
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("/Scripts/jquery-1.10.2.min.js")"></script>
+    <link href="/Content/treeTable/script/treeTable/default/jquery.treeTable.css" rel="stylesheet" />
+    <script src="/Content/treeTable/script/treeTable/jquery.treeTable.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <style>
+        .pibarea {
+            float: left;
+            margin-left: 2em;
+        }
+
+        .remark {
+            overflow: hidden;
+            width: 20rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 20rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线上商城></a></li>
+            <li class="active"><a href="#">商品分类</a></li>
+        </ol>
+        <div class="navbar-form navbar-left" style="padding:0;" role="search">
+            <a class="btn  btn-primary  btn-sm" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace" data-ajax-success="Add" data-ajax-update="#divAdd" href="/GoodsManage/GoodsCategory/Add">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新增
+            </a>
+        </div>
+        <div class="portlet-body">
+            <form class="navbar-form navbar-left" action="/GoodsManage/GoodsCategory/List" id="formSearch" role="form" method="post">
+                <input type="hidden" name="PageSize" value="15" />
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="输入分类名称" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+            </div>
+            @{Html.RegisterMvcPagerScriptResource();}
+            <div id="divAdd">
+                @Html.Partial("Add", new TGoodsCategory())
+            </div>
+        </div>
+    </div>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script type="text/javascript">
+        function Add(data) {
+            $("#divAdd").html("");
+            $("#divAdd").html(data);
+            $("#Guid").val("");
+            $("#Title").val("");
+            $("#Sort").val("");
+            $("#Remark").val("");
+            $("#headerTitle").val("新增分类");
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+
+        function Edit(data) {
+            $("#divAdd").html(data);
+            $("#headerTitle").html("编辑分类-" + $("#Title").val().trim());
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+        function Delete(obj, title) {
+            parent.layer.confirm('确定要删除商品类别【' + title + '】吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                $.post("/goods/goodscategory/delete", { guid: obj }, function (data) {
+                    parent.layer.closeAll('dialog'); //关闭信息框
+                    if (data.succ) {
+                        // window.location.reload();
+                    } else {
+                        parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 10000 });
+                    }
+
+                })
+            }, function () { });
+        }
+        function PageSizeChange() {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            //$("#formSearch").submit();
+            window.location.href = '/GoodsManage/GoodsCategory/List?PageSize=' + $("input[name='PageSize']").val();
+        }
+    </script>
+</body>
+</html>

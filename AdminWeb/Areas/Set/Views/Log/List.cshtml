@@ -1,0 +1,84 @@
+﻿
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="portlet-body">
+            <ol class="breadcrumb">
+                <li><a href="/set/admin/center">首页></a></li>
+                <li><a href="#">系统设置></a></li>
+                <li class="active">日志监控</li>
+            </ol>
+            <form class="navbar-form navbar-left" style="padding:0;" id="formSearch" role="form" action="/systemset/log/List">
+                <input type="hidden" name="PageSize" value="15" />
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入日志内容" />
+                    <input type="text" class="form-control input-sm" name="TimeFrom" id="OperateTimeFrom" placeholder="日志时间" onclick="WdatePicker();" />
+                    至
+                    <input type="text" class="form-control input-sm" name="TimeTo" id="OperateTimeTo" placeholder="日志时间" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'OperateTimeFrom\')}' });" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+
+            </div>
+            @{Html.RegisterMvcPagerScriptResource();}
+        </div>
+        <script type="text/javascript">
+
+            function InputPageIndex(obj)
+            {
+                var pageIndex = $(obj).val().trim();
+                if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+                {
+                    $(obj).val($("#TotalPageCount").val());
+                }
+            }
+
+            function GoPageIndex()
+            {
+                var pager = Webdiyer.MvcPagers[0];
+                var pageIndex = $("#pageIndexBox").val().trim();
+                var TotalPageCount = $("#TotalPageCount").val().trim();
+                if (parseInt(pageIndex) > parseInt(TotalPageCount))
+                {
+                    pageIndex = TotalPageCount;
+                }
+                if (pager != null)
+                {
+                    pager.goToPage(parseInt(pageIndex));
+                } else
+                { alert("找不到指定的MvcPager！"); }
+
+            }
+            function PageSizeChange()
+            {
+                $("input[name='PageSize']").val($("#PageSize").val());
+                $("#formSearch").submit();
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = null;
+}
+
+<div class="collapse" id="QueryInfo" style="margin-top: 10px;">
+    <div class="well">
+        <form action="/MemberManage/MemberList/SaveMeberFinder" class="" id="formSearchMember" method="post">
+            <input type="hidden" id="isSearchByFinder" name="isSearchByFinder">
+            <input type="hidden" id="searchGuid" name="searchGuid">
+            <input type="hidden" id="saveSearch" name="saveSearch">
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    会员信息:
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="Name" name="Name" placeholder="姓名">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="CardId" name="CardId" placeholder="手机号/卡号">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="RecommendMemberGuid" name="RecommendMemberGuid" placeholder="推荐人卡号">
+                </div>
+                <div class="form-group">
+                    <select class="form-control input-sm">
+                        <option value="">---所属门店---</option>
+                        <option value="f12cc6a5-4d8b-e411-847f-000000143522">大碗菜岳阳店</option>
+                        <option value="c211a96d-e38b-e411-95bd-000000143522">大碗菜长沙店</option>
+                        <option value="0eac3408-b58c-e411-99b5-000000143522">8号仓奥特莱斯</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control input-sm">
+                        <option value="">---所属类别---</option>
+                        <option value="8a88f94c-a61d-e611-b34d-c024a7dff001">铂金会员</option>
+                        <option value="2bae4afc-6a29-e611-b34d-c024a7dff001">普通会员</option>
+                        <option value="d082a9c4-3b4a-e611-b34d-c024a7dff001">黑金会员</option>
+                        <option value="e8c1862b-d082-e511-95ec-d590d4903b06">银卡会员</option>
+                        <option value="b3879945-f6a9-e511-bdc4-eb4bf2cc25fd">金卡会员</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control input-sm">
+                        <option value="">---选择性别---</option>
+                        <option value="8a88f94c-a61d-e611-b34d-c024a7dff001">男</option>
+                        <option value="2bae4afc-6a29-e611-b34d-c024a7dff001">女</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control input-sm">
+                        <option value="">---注册来源---</option>
+                        <option value="8a88f94c-a61d-e611-b34d-c024a7dff001">到店登记</option>
+                        <option value="2bae4afc-6a29-e611-b34d-c024a7dff001">微信注册</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    <p class="form-control-static">消费次数:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="CosnumeCountFrom" id="TotalConsumeCountFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="CosnumeCountTo" id="TotalConsumeCountTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static">消费金额:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="CosnumeMoneyFrom" id="CosnumeMoneyFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="CosnumeMoneyTo" id="CosnumeMoneyTo">
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    <p class="form-control-static">可用积分:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="AvailablePointFrom" id="AvailablePointFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="AvailablePointTo" id="AvailablePointTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static">总积分:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="TotalPointFrom" id="TotalPointFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="TotalPointTo" id="TotalPointTo">
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    <p class="form-control-static">可用余额:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="AvailableValueFrom" id="AvailableValueFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="AvailableValueTo" id="AvailableValueTo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static">总余额:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="TotalValueFrom" id="TotalValueFrom">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="TotalValueTo" id="TotalValueTo">
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    <p class="form-control-static">到期时间:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" name="DueTimeFrom" id="DueTimeFrom">
+                        <div class="input-group-addon">天后到期</div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static">登记时间:</p>
+                    <div class="input-group">
+                        <input class="form-control input-sm" data-val="true" type="text" placeholder="输入开始时间" name="RegisterTimeFrom" id="RegisterTimeFrom" onclick="WdatePicker();">
+                        <div class="input-group-addon">至</div>
+                        <input class="form-control input-sm" data-val="true" type="text" name="RegisterTimeTo" id="RegisterTimeTo" onclick="WdatePicker();">
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+                <div class="form-group">
+                    <p class="form-control-static">显示排序:</p>
+                    <select class="form-control input-sm" id="OrderBy" name="OrderBy">
+                        <option value="">--请选择--</option>
+                        <option value="AvailablePoint desc">积分降序</option>
+                        <option value="AvailablePoint asc">积分升序</option>
+                        <option value="AvailableValue desc">余额降序</option>
+                        <option value="AvailableValue asc">余额升序</option>
+                        <option value="registertime desc">注册时间降序</option>
+                        <option value="registertime asc">注册时间升序</option>
+                        <option value="registertime desc">到期时间降序</option>
+                        <option value="registertime asc">到期时间升序</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">超过</div>
+                        <input type="text" class="form-control input-sm" name="ConsumeDay" placeholder="">
+                        <div class="input-group-addon">天未消费</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline" style="margin-top: 5px;">
+            </div>
+            <div style="margin-top: 5px; text-align: center; border-top: solid 1px #808080">
+                <button type="button" class="btn btn-primary btn-sm" onclick="SearchMember()" style="margin-top: 5px;">
+                    查询
+                </button>
+
+                <button type="button" data-dismiss="modal" class="btn btn-default btn-sm" onclick="Clear();" style="margin-top: 5px;">
+                    清空筛选
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+                function Clear()
+                {
+                    $("#formSearchMember").find("input").each(function ()
+                    {
+                        $(this).val("");
+                    });
+                    $("#formSearchMember").find("select").each(function ()
+                    {
+                        $(this).val("");
+                    });
+                }
+</script>

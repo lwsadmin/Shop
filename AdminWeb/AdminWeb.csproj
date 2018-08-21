@@ -1,0 +1,1221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C15044DE-B8E4-4E34-81E3-3EF023D7DFA1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdminWeb</RootNamespace>
+    <AssemblyName>AdminWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LitJSON">
+      <HintPath>Content\kindeditor-4.1.10\asp.net\bin\LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Webdiyer.MvcPager, Version=3.0.2015.521, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\MvcPager\Webdiyer.MvcPager.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CMSFilter.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\ArticleInfo\ArticleInfoAreaRegistration.cs" />
+    <Compile Include="Areas\ArticleInfo\Controllers\ArticleCategoryController.cs" />
+    <Compile Include="Areas\ArticleInfo\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\ArticleInfo\Controllers\CommentController.cs" />
+    <Compile Include="Areas\Business\BusinessAreaRegistration.cs" />
+    <Compile Include="Areas\Business\Controllers\BusinessController.cs" />
+    <Compile Include="Areas\Business\Controllers\ChainStoreController.cs" />
+    <Compile Include="Areas\CityLife\CityLifeAreaRegistration.cs" />
+    <Compile Include="Areas\CityLife\Controllers\ActivityController.cs" />
+    <Compile Include="Areas\CityLife\Controllers\LifeController.cs" />
+    <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Coupon\Controllers\BusinessCouponController.cs" />
+    <Compile Include="Areas\Coupon\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Coupon\Controllers\CouponPackageController.cs" />
+    <Compile Include="Areas\Coupon\CouponAreaRegistration.cs" />
+    <Compile Include="Areas\Gift\Controllers\GiftCategoryController.cs" />
+    <Compile Include="Areas\Gift\Controllers\GiftController.cs" />
+    <Compile Include="Areas\Gift\GiftAreaRegistration.cs" />
+    <Compile Include="Areas\GoodsManage\Controllers\BrandController.cs" />
+    <Compile Include="Areas\GoodsManage\Controllers\GoodsAttrController.cs" />
+    <Compile Include="Areas\GoodsManage\Controllers\GoodsCategoryController.cs" />
+    <Compile Include="Areas\GoodsManage\Controllers\GoodsController.cs" />
+    <Compile Include="Areas\GoodsManage\GoodsManageAreaRegistration.cs" />
+    <Compile Include="Areas\GroupBuy\Controllers\CommentController.cs" />
+    <Compile Include="Areas\GroupBuy\Controllers\GroupBuyController.cs" />
+    <Compile Include="Areas\GroupBuy\Controllers\ImageController.cs" />
+    <Compile Include="Areas\GroupBuy\Controllers\RushOrderController.cs" />
+    <Compile Include="Areas\GroupBuy\GroupBuyAreaRegistration.cs" />
+    <Compile Include="Areas\Member\Controllers\MemberCategoryController.cs" />
+    <Compile Include="Areas\Member\Controllers\MemberController.cs" />
+    <Compile Include="Areas\Member\Controllers\MemberRegController.cs" />
+    <Compile Include="Areas\Member\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
+    <Compile Include="Areas\OffLine\Controllers\GoodsConsumeController.cs" />
+    <Compile Include="Areas\OffLine\Controllers\QuickConsumeController.cs" />
+    <Compile Include="Areas\OffLine\Controllers\RechargeController.cs" />
+    <Compile Include="Areas\OffLine\OffLineAreaRegistration.cs" />
+    <Compile Include="Areas\Settlement\Controllers\GlobalController.cs" />
+    <Compile Include="Areas\Settlement\Controllers\StoreCapitalController.cs" />
+    <Compile Include="Areas\Settlement\Controllers\StoreMoneyReportController.cs" />
+    <Compile Include="Areas\Settlement\Controllers\StoreSetController.cs" />
+    <Compile Include="Areas\Settlement\SettlementAreaRegistration.cs" />
+    <Compile Include="Areas\Set\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Set\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Set\Controllers\LogController.cs" />
+    <Compile Include="Areas\Set\Controllers\PayController.cs" />
+    <Compile Include="Areas\Set\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Set\SetAreaRegistration.cs" />
+    <Compile Include="Areas\Statistics\Controllers\ChainStoreSmsNoteController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\GiftExchangeNoteController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\MemberConsumeController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\MemberPointController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\MemberRechargeController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\StorePointController.cs" />
+    <Compile Include="Areas\Statistics\Controllers\StoreValueNoteController.cs" />
+    <Compile Include="Areas\Statistics\StatisticsAreaRegistration.cs" />
+    <Compile Include="Areas\SystemNotic\Controllers\AnnouncementController.cs" />
+    <Compile Include="Areas\SystemNotic\Controllers\EmailSendController.cs" />
+    <Compile Include="Areas\SystemNotic\Controllers\SmsSendController.cs" />
+    <Compile Include="Areas\SystemNotic\SystemNoticAreaRegistration.cs" />
+    <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\admin\css\bootstrap.min.css" />
+    <Content Include="Content\admin\css\login.css" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\admin\img\bg1.png" />
+    <Content Include="Content\admin\img\btnbg.png" />
+    <Content Include="Content\admin\img\buttonbg.png" />
+    <Content Include="Content\admin\img\captcha.jpeg.jpg" />
+    <Content Include="Content\admin\img\cloud.png" />
+    <Content Include="Content\admin\img\coupon.jpg" />
+    <Content Include="Content\admin\img\defaultIcon.png" />
+    <Content Include="Content\admin\img\hot.gif" />
+    <Content Include="Content\admin\img\lefttop.gif" />
+    <Content Include="Content\admin\img\loginpassword.png" />
+    <Content Include="Content\admin\img\loginsj.png" />
+    <Content Include="Content\admin\img\loginuser.png" />
+    <Content Include="Content\admin\img\mask.png" />
+    <Content Include="Content\admin\img\tbg.png" />
+    <Content Include="Content\admin\img\tcbg.gif" />
+    <Content Include="Content\admin\img\th.gif" />
+    <Content Include="Content\admin\img\time.png" />
+    <Content Include="Content\admin\img\toolbg.gif" />
+    <Content Include="Content\admin\img\topbg.gif" />
+    <Content Include="Content\admin\img\uew_icon_hover.png" />
+    <Content Include="Content\admin\js\bootstrap.min.js" />
+    <Content Include="Content\admin\js\jquery-1.10.2.min.js" />
+    <Content Include="Content\admin\js\jquery-1.8.3.min.js" />
+    <Content Include="Content\admin\js\jquery.min.js" />
+    <Content Include="Content\admin\js\login.js" />
+    <Content Include="Content\admin\menu\app.css" />
+    <Content Include="Content\admin\menu\menu.js" />
+    <Content Include="Content\admin\menu\style.css" />
+    <Content Include="Content\ExpandableTable\css\bootstrap-table-expandable.css" />
+    <Content Include="Content\ExpandableTable\css\default.css" />
+    <Content Include="Content\ExpandableTable\css\normalize.css" />
+    <Content Include="Content\ExpandableTable\fonts\icomoon.svg" />
+    <Content Include="Content\ExpandableTable\images\arrows.png" />
+    <Content Include="Content\ExpandableTable\index.html" />
+    <Content Include="Content\ExpandableTable\js\bootstrap-table-expandable.js" />
+    <Content Include="Content\ExpandableTable\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\fileinput\css\fileinput-rtl.css" />
+    <Content Include="Content\fileinput\css\fileinput-rtl.min.css" />
+    <Content Include="Content\fileinput\css\fileinput.css" />
+    <Content Include="Content\fileinput\css\fileinput.min.css" />
+    <Content Include="Content\fileinput\img\loading-sm.gif" />
+    <Content Include="Content\fileinput\img\loading.gif" />
+    <Content Include="Content\fileinput\js\fileinput.js" />
+    <Content Include="Content\fileinput\js\fileinput.min.js" />
+    <Content Include="Content\fileinput\js\locales\ar.js" />
+    <Content Include="Content\fileinput\js\locales\az.js" />
+    <Content Include="Content\fileinput\js\locales\bg.js" />
+    <Content Include="Content\fileinput\js\locales\ca.js" />
+    <Content Include="Content\fileinput\js\locales\cr.js" />
+    <Content Include="Content\fileinput\js\locales\cs.js" />
+    <Content Include="Content\fileinput\js\locales\da.js" />
+    <Content Include="Content\fileinput\js\locales\de.js" />
+    <Content Include="Content\fileinput\js\locales\el.js" />
+    <Content Include="Content\fileinput\js\locales\es.js" />
+    <Content Include="Content\fileinput\js\locales\et.js" />
+    <Content Include="Content\fileinput\js\locales\fa.js" />
+    <Content Include="Content\fileinput\js\locales\fi.js" />
+    <Content Include="Content\fileinput\js\locales\fr.js" />
+    <Content Include="Content\fileinput\js\locales\gl.js" />
+    <Content Include="Content\fileinput\js\locales\hu.js" />
+    <Content Include="Content\fileinput\js\locales\id.js" />
+    <Content Include="Content\fileinput\js\locales\it.js" />
+    <Content Include="Content\fileinput\js\locales\ja.js" />
+    <Content Include="Content\fileinput\js\locales\ka.js" />
+    <Content Include="Content\fileinput\js\locales\kr.js" />
+    <Content Include="Content\fileinput\js\locales\kz.js" />
+    <Content Include="Content\fileinput\js\locales\LANG.js" />
+    <Content Include="Content\fileinput\js\locales\lt.js" />
+    <Content Include="Content\fileinput\js\locales\nl.js" />
+    <Content Include="Content\fileinput\js\locales\no.js" />
+    <Content Include="Content\fileinput\js\locales\pl.js" />
+    <Content Include="Content\fileinput\js\locales\pt-BR.js" />
+    <Content Include="Content\fileinput\js\locales\pt.js" />
+    <Content Include="Content\fileinput\js\locales\ro.js" />
+    <Content Include="Content\fileinput\js\locales\ru.js" />
+    <Content Include="Content\fileinput\js\locales\sk.js" />
+    <Content Include="Content\fileinput\js\locales\sl.js" />
+    <Content Include="Content\fileinput\js\locales\sv.js" />
+    <Content Include="Content\fileinput\js\locales\th.js" />
+    <Content Include="Content\fileinput\js\locales\tr.js" />
+    <Content Include="Content\fileinput\js\locales\uk.js" />
+    <Content Include="Content\fileinput\js\locales\vi.js" />
+    <Content Include="Content\fileinput\js\locales\zh-TW.js" />
+    <Content Include="Content\fileinput\js\locales\zh.js" />
+    <Content Include="Content\fileinput\js\plugins\piexif.js" />
+    <Content Include="Content\fileinput\js\plugins\piexif.min.js" />
+    <Content Include="Content\fileinput\js\plugins\purify.js" />
+    <Content Include="Content\fileinput\js\plugins\purify.min.js" />
+    <Content Include="Content\fileinput\js\plugins\sortable.js" />
+    <Content Include="Content\fileinput\js\plugins\sortable.min.js" />
+    <Content Include="Content\img\people.png" />
+    <Content Include="Content\kindeditor\asp.net\bin\LitJSON.dll" />
+    <Content Include="Content\kindeditor\docs\_static\file.png" />
+    <Content Include="Content\kindeditor\docs\_static\firebug_upload_json.gif" />
+    <Content Include="Content\kindeditor\docs\_templates\classy\layout.html" />
+    <Content Include="Content\kindeditor\Gruntfile.js" />
+    <Content Include="Content\kindeditor\kindeditor-all-min.js" />
+    <Content Include="Content\kindeditor\kindeditor-all.js" />
+    <Content Include="Content\kindeditor\lang\ar.js" />
+    <Content Include="Content\kindeditor\lang\en.js" />
+    <Content Include="Content\kindeditor\lang\ko.js" />
+    <Content Include="Content\kindeditor\lang\ru.js" />
+    <Content Include="Content\kindeditor\lang\zh-CN.js" />
+    <Content Include="Content\kindeditor\lang\zh-TW.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\background.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\contentScript.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug-lite-beta.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug.jpg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug128.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug16.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug24.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug24_disabled.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug32.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\firebug48.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\googleChrome.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\license.txt" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\blank.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\buttonBg.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\buttonBgHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\detach.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\detachHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\disable.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\disable.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\disableHover.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\disableHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\down.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\downActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\downHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\errorIcon-sm.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\errorIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\errorIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\firebug-1.3a2.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\firebug.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\firebug.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\firebug.IE6.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\firebug.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\group.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\infoIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\infoIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\loading_16.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\min.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\minHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\off.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\offHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\pixel_transparent.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\search.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\search.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\shadow.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\shadow2.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\shadowAlpha.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\sprite.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabHoverLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabHoverMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabHoverRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMenuCheckbox.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMenuPin.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMenuRadio.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMenuTarget.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMenuTargetHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tabRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\textEditorBorders.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\textEditorBorders.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\textEditorCorners.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\textEditorCorners.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\titlebarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\toolbarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tree_close.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\tree_open.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\up.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\upActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\upHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\warningIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\warningIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\background.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\contentScript.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug-lite.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug.jpg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug128.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug16.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug24.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug24_disabled.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug32.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\firebug48.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\googleChrome.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\license.txt" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\blank.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\buttonBg.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\buttonBgHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\detach.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\detachHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\disable.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\disable.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\disableHover.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\disableHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\down.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\downActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\downHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\errorIcon-sm.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\errorIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\errorIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\firebug-1.3a2.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\firebug.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\firebug.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\firebug.IE6.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\firebug.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\group.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\infoIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\infoIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\loading_16.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\min.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\minHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\off.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\offHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\pixel_transparent.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\search.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\search.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\shadow.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\shadow2.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\shadowAlpha.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\sprite.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabHoverLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabHoverMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabHoverRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMenuCheckbox.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMenuPin.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMenuRadio.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMenuTarget.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMenuTargetHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tabRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\textEditorBorders.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\textEditorBorders.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\textEditorCorners.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\textEditorCorners.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\titlebarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\toolbarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tree_close.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\tree_open.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\up.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\upActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\upHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\warningIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\warningIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\firebug-lite-beta.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\firebug-lite-debug.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\firebug-lite.js" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\license.txt" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\plugin\proxy\proxy.php" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\blank.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\buttonBg.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\buttonBgHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\detach.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\detachHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\disable.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\disable.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\disableHover.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\disableHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\down.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\downActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\downHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\errorIcon-sm.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\errorIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\errorIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\firebug.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\firebug.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\firebug.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\group.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\infoIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\infoIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\loading_16.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\min.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\minHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\off.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\offHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\pixel_transparent.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\search.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\search.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\shadow.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\shadow2.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\shadowAlpha.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\sprite.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabHoverLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabHoverMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabHoverRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMenuCheckbox.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMenuPin.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMenuRadio.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMenuTarget.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMenuTargetHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tabRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\textEditorBorders.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\textEditorBorders.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\textEditorCorners.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\textEditorCorners.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\titlebarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\toolbarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tree_close.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\tree_open.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\twistyClosed.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\twistyOpen.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\up.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\upActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\upHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\warningIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\warningIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\blank.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\buttonBg.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\buttonBgHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\close.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\closeHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\detach.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\detachHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\disable.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\disable.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\disableHover.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\disableHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\down.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\downActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\downHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\errorIcon-sm.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\errorIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\errorIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\firebug.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\firebug.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\firebug.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\group.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\infoIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\infoIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\loading_16.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\min.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\minHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\off.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\offHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\pixel_transparent.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\search.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\search.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\shadow.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\shadow2.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\shadowAlpha.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\sprite.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabHoverLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabHoverMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabHoverRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMenuCheckbox.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMenuPin.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMenuRadio.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMenuTarget.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMenuTargetHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tabRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\textEditorBorders.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\textEditorBorders.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\textEditorCorners.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\textEditorCorners.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\titlebarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\toolbarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tree_close.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\tree_open.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\twistyClosed.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\twistyOpen.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\up.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\upActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\upHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\warningIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\warningIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\blank.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\buttonBg.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\buttonBgHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\detach.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\detachHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\disable.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\disable.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\disableHover.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\disableHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\down.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\downActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\downHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\errorIcon-sm.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\errorIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\errorIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\firebug-1.3a2.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\firebug.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\firebug.html" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\firebug.IE6.css" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\firebug.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\group.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\infoIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\infoIcon.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\loading_16.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\min.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\minHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\off.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\offHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\pixel_transparent.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\search.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\search.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\shadow.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\shadow2.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\shadowAlpha.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\sprite.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabHoverLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabHoverMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabHoverRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabLeft.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMenuCheckbox.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMenuPin.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMenuRadio.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMenuTarget.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMenuTargetHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tabRight.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\textEditorBorders.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\textEditorBorders.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\textEditorCorners.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\textEditorCorners.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\titlebarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\toolbarMid.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tree_close.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\tree_open.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\up.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\upActive.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\upHover.png" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\warningIcon.gif" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\warningIcon.png" />
+    <Content Include="Content\kindeditor\lib\jquery.min.js" />
+    <Content Include="Content\kindeditor\lib\qunit\qunit.css" />
+    <Content Include="Content\kindeditor\lib\qunit\qunit.js" />
+    <Content Include="Content\kindeditor\plugins\anchor\anchor.js" />
+    <Content Include="Content\kindeditor\plugins\autoheight\autoheight.js" />
+    <Content Include="Content\kindeditor\plugins\baidumap\baidumap.js" />
+    <Content Include="Content\kindeditor\plugins\baidumap\index.html" />
+    <Content Include="Content\kindeditor\plugins\baidumap\map.html" />
+    <Content Include="Content\kindeditor\plugins\clearhtml\clearhtml.js" />
+    <Content Include="Content\kindeditor\plugins\code\code.js" />
+    <Content Include="Content\kindeditor\plugins\code\prettify.css" />
+    <Content Include="Content\kindeditor\plugins\code\prettify.js" />
+    <Content Include="Content\kindeditor\plugins\emoticons\emoticons.js" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\0.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\1.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\10.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\100.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\101.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\102.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\103.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\104.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\105.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\106.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\107.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\108.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\109.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\11.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\110.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\111.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\112.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\113.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\114.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\115.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\116.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\117.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\118.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\119.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\12.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\120.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\121.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\122.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\123.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\124.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\125.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\126.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\127.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\128.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\129.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\13.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\130.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\131.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\132.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\133.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\134.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\14.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\15.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\16.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\17.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\18.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\19.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\2.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\20.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\21.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\22.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\23.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\24.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\25.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\26.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\27.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\28.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\29.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\3.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\30.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\31.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\32.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\33.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\34.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\35.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\36.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\37.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\38.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\39.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\4.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\40.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\41.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\42.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\43.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\44.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\45.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\46.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\47.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\48.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\49.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\5.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\50.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\51.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\52.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\53.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\54.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\55.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\56.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\57.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\58.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\59.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\6.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\60.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\61.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\62.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\63.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\64.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\65.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\66.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\67.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\68.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\69.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\7.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\70.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\71.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\72.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\73.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\74.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\75.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\76.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\77.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\78.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\79.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\8.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\80.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\81.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\82.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\83.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\84.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\85.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\86.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\87.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\88.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\89.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\9.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\90.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\91.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\92.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\93.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\94.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\95.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\96.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\97.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\98.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\99.gif" />
+    <Content Include="Content\kindeditor\plugins\emoticons\images\static.gif" />
+    <Content Include="Content\kindeditor\plugins\filemanager\filemanager.js" />
+    <Content Include="Content\kindeditor\plugins\filemanager\images\file-16.gif" />
+    <Content Include="Content\kindeditor\plugins\filemanager\images\file-64.gif" />
+    <Content Include="Content\kindeditor\plugins\filemanager\images\folder-16.gif" />
+    <Content Include="Content\kindeditor\plugins\filemanager\images\folder-64.gif" />
+    <Content Include="Content\kindeditor\plugins\filemanager\images\go-up.gif" />
+    <Content Include="Content\kindeditor\plugins\fixtoolbar\fixtoolbar.js" />
+    <Content Include="Content\kindeditor\plugins\flash\flash.js" />
+    <Content Include="Content\kindeditor\plugins\image\image.js" />
+    <Content Include="Content\kindeditor\plugins\image\images\align_left.gif" />
+    <Content Include="Content\kindeditor\plugins\image\images\align_right.gif" />
+    <Content Include="Content\kindeditor\plugins\image\images\align_top.gif" />
+    <Content Include="Content\kindeditor\plugins\image\images\refresh.png" />
+    <Content Include="Content\kindeditor\plugins\insertfile\insertfile.js" />
+    <Content Include="Content\kindeditor\plugins\lineheight\lineheight.js" />
+    <Content Include="Content\kindeditor\plugins\link\link.js" />
+    <Content Include="Content\kindeditor\plugins\map\map.html" />
+    <Content Include="Content\kindeditor\plugins\map\map.js" />
+    <Content Include="Content\kindeditor\plugins\media\media.js" />
+    <Content Include="Content\kindeditor\plugins\multiimage\images\image.png" />
+    <Content Include="Content\kindeditor\plugins\multiimage\images\select-files-en.png" />
+    <Content Include="Content\kindeditor\plugins\multiimage\images\select-files-zh-CN.png" />
+    <Content Include="Content\kindeditor\plugins\multiimage\images\swfupload.swf" />
+    <Content Include="Content\kindeditor\plugins\multiimage\multiimage.js" />
+    <Content Include="Content\kindeditor\plugins\pagebreak\pagebreak.js" />
+    <Content Include="Content\kindeditor\plugins\plainpaste\plainpaste.js" />
+    <Content Include="Content\kindeditor\plugins\preview\preview.js" />
+    <Content Include="Content\kindeditor\plugins\quickformat\quickformat.js" />
+    <Content Include="Content\kindeditor\plugins\table\table.js" />
+    <Content Include="Content\kindeditor\plugins\template\html\1.html" />
+    <Content Include="Content\kindeditor\plugins\template\html\2.html" />
+    <Content Include="Content\kindeditor\plugins\template\html\3.html" />
+    <Content Include="Content\kindeditor\plugins\template\template.js" />
+    <Content Include="Content\kindeditor\plugins\wordpaste\wordpaste.js" />
+    <Content Include="Content\kindeditor\src\ajax.js" />
+    <Content Include="Content\kindeditor\src\cmd.js" />
+    <Content Include="Content\kindeditor\src\colorpicker.js" />
+    <Content Include="Content\kindeditor\src\config.js" />
+    <Content Include="Content\kindeditor\src\core.js" />
+    <Content Include="Content\kindeditor\src\dialog.js" />
+    <Content Include="Content\kindeditor\src\edit.js" />
+    <Content Include="Content\kindeditor\src\event.js" />
+    <Content Include="Content\kindeditor\src\footer.js" />
+    <Content Include="Content\kindeditor\src\header.js" />
+    <Content Include="Content\kindeditor\src\html.js" />
+    <Content Include="Content\kindeditor\src\main.js" />
+    <Content Include="Content\kindeditor\src\menu.js" />
+    <Content Include="Content\kindeditor\src\node.js" />
+    <Content Include="Content\kindeditor\src\range.js" />
+    <Content Include="Content\kindeditor\src\selector.js" />
+    <Content Include="Content\kindeditor\src\tabs.js" />
+    <Content Include="Content\kindeditor\src\toolbar.js" />
+    <Content Include="Content\kindeditor\src\uploadbutton.js" />
+    <Content Include="Content\kindeditor\src\widget.js" />
+    <Content Include="Content\kindeditor\themes\common\anchor.gif" />
+    <Content Include="Content\kindeditor\themes\common\blank.gif" />
+    <Content Include="Content\kindeditor\themes\common\flash.gif" />
+    <Content Include="Content\kindeditor\themes\common\loading.gif" />
+    <Content Include="Content\kindeditor\themes\common\media.gif" />
+    <Content Include="Content\kindeditor\themes\common\rm.gif" />
+    <Content Include="Content\kindeditor\themes\default\background.png" />
+    <Content Include="Content\kindeditor\themes\default\default.css" />
+    <Content Include="Content\kindeditor\themes\default\default.png" />
+    <Content Include="Content\kindeditor\themes\qq\editor.gif" />
+    <Content Include="Content\kindeditor\themes\qq\qq.css" />
+    <Content Include="Content\kindeditor\themes\simple\simple.css" />
+    <Content Include="Content\multiselect\css\multiselect.css" />
+    <Content Include="Content\multiselect\js\multiselect.js" />
+    <Content Include="Content\MvcPager\MvcPager.dll" />
+    <Content Include="Content\MvcPager\MvcPager.js" />
+    <Content Include="Content\MvcPager\MvcPager.min.js" />
+    <Content Include="Content\MvcPager\pagerstyles.css" />
+    <Content Include="Content\MvcPager\Webdiyer.MvcPager.dll" />
+    <Content Include="Content\img\noImg.jpg" />
+    <Content Include="Content\noImg.jpg" />
+    <Content Include="Content\treeTable\demo\style\demo.css" />
+    <Content Include="Content\treeTable\script\jquery.js" />
+    <Content Include="Content\treeTable\script\treeTable\default\allbgs.png" />
+    <Content Include="Content\treeTable\script\treeTable\default\jquery.treeTable.css" />
+    <Content Include="Content\treeTable\script\treeTable\jquery.treeTable.js" />
+    <Content Include="Content\treeTable\script\treeTable\vsStyle\allbgs.png" />
+    <Content Include="Content\treeTable\script\treeTable\vsStyle\jquery.treeTable.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\ArticleInfo\Views\ArticleCategory\List.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\ArticleCategory\_Add.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\Article\Add.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\Article\List.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\Article\_Table.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\Comment\List.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\web.config" />
+    <Content Include="Areas\ArticleInfo\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Business\Views\Business\Add.cshtml" />
+    <Content Include="Areas\Business\Views\Business\List.cshtml" />
+    <Content Include="Areas\Business\Views\Business\_Table.cshtml" />
+    <Content Include="Areas\Business\Views\ChainStore\Add.cshtml" />
+    <Content Include="Areas\Business\Views\ChainStore\List.cshtml" />
+    <Content Include="Areas\Business\Views\ChainStore\Map.cshtml" />
+    <Content Include="Areas\Business\Views\ChainStore\_Table.cshtml" />
+    <Content Include="Areas\Business\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Business\Views\web.config" />
+    <Content Include="Areas\Business\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\GroupBuy\Views\web.config" />
+    <Content Include="Areas\GroupBuy\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\GroupBuy\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\GroupBuy\Views\GroupBuy\List.cshtml" />
+    <Content Include="Areas\GroupBuy\Views\GroupBuy\Add.cshtml" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Common\Views\web.config" />
+    <Content Include="Areas\GroupBuy\Views\Image\List.cshtml" />
+    <Content Include="Areas\Member\Views\web.config" />
+    <Content Include="Areas\Member\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Member\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Member\Views\MemberCategory\List.cshtml" />
+    <Content Include="Areas\Member\Views\MemberCategory\Add.cshtml" />
+    <Content Include="Areas\Member\Views\Member\List.cshtml" />
+    <Content Include="Areas\Member\Views\Member\Search.cshtml" />
+    <Content Include="Areas\Member\Views\MemberReg\Index.cshtml" />
+    <Content Include="Areas\Coupon\Views\web.config" />
+    <Content Include="Areas\Coupon\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Coupon\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Coupon\Views\Coupon\List.cshtml" />
+    <Content Include="Areas\Coupon\Views\Coupon\Add.cshtml" />
+    <Content Include="Areas\Coupon\Views\BusinessCoupon\List.cshtml" />
+    <Content Include="Areas\Coupon\Views\BusinessCoupon\Add.cshtml" />
+    <Content Include="Areas\Coupon\Views\CouponPackage\List.cshtml" />
+    <Content Include="Areas\Coupon\Views\CouponPackage\Add.cshtml" />
+    <Content Include="Areas\Gift\Views\web.config" />
+    <Content Include="Areas\Gift\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Gift\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Gift\Views\GiftCategory\List.cshtml" />
+    <Content Include="Areas\Gift\Views\GiftCategory\_Add.cshtml" />
+    <Content Include="Areas\Gift\Views\Gift\List.cshtml" />
+    <Content Include="Areas\Gift\Views\Gift\Add.cshtml" />
+    <Content Include="Areas\Set\Views\web.config" />
+    <Content Include="Areas\Set\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Set\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Set\Views\Admin\_Table.cshtml" />
+    <Content Include="Areas\Set\Views\Admin\Add.cshtml" />
+    <Content Include="Areas\Set\Views\Admin\Center.cshtml" />
+    <Content Include="Areas\Set\Views\Admin\Edit.cshtml" />
+    <Content Include="Areas\Set\Views\Admin\List.cshtml" />
+    <Content Include="Areas\Set\Views\Log\List.cshtml" />
+    <Content Include="Areas\Set\Views\Role\Add.cshtml" />
+    <Content Include="Areas\Set\Views\Role\List.cshtml" />
+    <Content Include="Areas\Set\Views\Pay\Type.cshtml" />
+    <Content Include="Areas\Settlement\Views\web.config" />
+    <Content Include="Areas\Settlement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Settlement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Settlement\Views\Global\Index.cshtml" />
+    <Content Include="Areas\Settlement\Views\StoreCapital\List.cshtml" />
+    <Content Include="Areas\Settlement\Views\StoreCapital\Recharge.cshtml" />
+    <Content Include="Areas\Statistics\Views\web.config" />
+    <Content Include="Areas\Statistics\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Statistics\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Statistics\Views\StorePoint\List.cshtml" />
+    <Content Include="Areas\Settlement\Views\StoreMoneyReport\List.cshtml" />
+    <Content Include="Areas\OffLine\Views\web.config" />
+    <Content Include="Areas\OffLine\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\OffLine\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\OffLine\Views\QuickConsume\Index.cshtml" />
+    <Content Include="Areas\OffLine\Views\GoodsConsume\Index.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\web.config" />
+    <Content Include="Areas\SystemNotic\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\SmsSend\Index.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\Announcement\List.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\Announcement\_Add.cshtml" />
+    <Content Include="Areas\SystemNotic\Views\EmailSend\Index.cshtml" />
+    <Content Include="Areas\Statistics\Views\StoreValueNote\List.cshtml" />
+    <Content Include="Areas\Settlement\Views\StoreSet\List.cshtml" />
+    <Content Include="Areas\Settlement\Views\StoreSet\Set.cshtml" />
+    <Content Include="Areas\OffLine\Views\Recharge\Index.cshtml" />
+    <Content Include="Areas\Statistics\Views\MemberRecharge\List.cshtml" />
+    <Content Include="Areas\Statistics\Views\Coupon\List.cshtml" />
+    <Content Include="Areas\Statistics\Views\ChainStoreSmsNote\List.cshtml" />
+    <Content Include="Areas\Statistics\Views\ChainStoreSmsNote\_RechargeTable.cshtml" />
+    <Content Include="Areas\Statistics\Views\ChainStoreSmsNote\_SendTable.cshtml" />
+    <Content Include="Areas\Statistics\Views\Coupon\_Operator.cshtml" />
+    <Content Include="Areas\Statistics\Views\Coupon\_Business.cshtml" />
+    <Content Include="Areas\Statistics\Views\GiftExchangeNote\List.cshtml" />
+    <Content Include="Areas\Statistics\Views\MemberPoint\List.cshtml" />
+    <Content Include="Areas\Statistics\Views\MemberConsume\List.cshtml" />
+    <Content Include="Areas\Set\Views\Industry\List.cshtml" />
+    <Content Include="Areas\Set\Views\Industry\_Table.cshtml" />
+    <Content Include="Areas\Set\Views\Industry\_Add.cshtml" />
+    <Content Include="Content\treeTable\script\treeTable\vsStyle\allbgs.psd" />
+    <Content Include="Areas\GoodsManage\Views\web.config" />
+    <Content Include="Areas\GoodsManage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Brand\List.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsCategory\List.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsCategory\_Table.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsCategory\Add.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Brand\_Add.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Brand\_Table.cshtml" />
+    <Content Include="Areas\ArticleInfo\Views\ArticleCategory\_Table.cshtml" />
+    <Content Include="Areas\CityLife\Views\web.config" />
+    <Content Include="Areas\CityLife\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CityLife\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CityLife\Views\Activity\CategoryList.cshtml" />
+    <Content Include="Areas\CityLife\Views\Activity\_CategoryTable.cshtml" />
+    <Content Include="Areas\CityLife\Views\Activity\_CategoryAdd.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Goods\List.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Goods\_Table.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Goods\Add.cshtml" />
+    <Content Include="Areas\Set\Views\Role\_Table.cshtml" />
+    <Content Include="Areas\Set\Views\Log\_Table.cshtml" />
+    <Content Include="Areas\CityLife\Views\Life\MessageList.cshtml" />
+    <Content Include="Areas\GroupBuy\Views\RushOrder\List.cshtml" />
+    <Content Include="Content\ExpandableTable\fonts\icomoon.eot" />
+    <Content Include="Content\ExpandableTable\fonts\icomoon.ttf" />
+    <Content Include="Content\ExpandableTable\fonts\icomoon.woff" />
+    <Content Include="Areas\GroupBuy\Views\Comment\List.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsAttr\List.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsAttr\_Table.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\GoodsAttr\_Add.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Goods\_tabBasic.cshtml" />
+    <Content Include="Areas\GoodsManage\Views\Goods\_tabAttr.cshtml" />
+    <Content Include="Areas\Business\Views\ChainStore\_Image.cshtml" />
+    <Content Include="Content\kindeditor\asp.net\file_manager_json.ashx" />
+    <Content Include="Content\kindeditor\asp.net\upload_json.ashx" />
+    <Content Include="Content\kindeditor\docs\ajax.rst" />
+    <Content Include="Content\kindeditor\docs\changelog.rst" />
+    <Content Include="Content\kindeditor\docs\classyext.py" />
+    <Content Include="Content\kindeditor\docs\classyext.pyc" />
+    <Content Include="Content\kindeditor\docs\cmd.rst" />
+    <Content Include="Content\kindeditor\docs\colorpicker.rst" />
+    <Content Include="Content\kindeditor\docs\conf.py" />
+    <Content Include="Content\kindeditor\docs\core.rst" />
+    <Content Include="Content\kindeditor\docs\dialog.rst" />
+    <Content Include="Content\kindeditor\docs\editor.rst" />
+    <Content Include="Content\kindeditor\docs\event.rst" />
+    <Content Include="Content\kindeditor\docs\index.rst" />
+    <Content Include="Content\kindeditor\docs\make.bat" />
+    <Content Include="Content\kindeditor\docs\Makefile" />
+    <Content Include="Content\kindeditor\docs\menu.rst" />
+    <Content Include="Content\kindeditor\docs\node.rst" />
+    <Content Include="Content\kindeditor\docs\option.rst" />
+    <Content Include="Content\kindeditor\docs\plugin.rst" />
+    <Content Include="Content\kindeditor\docs\qna.rst" />
+    <Content Include="Content\kindeditor\docs\range.rst" />
+    <Content Include="Content\kindeditor\docs\selector.rst" />
+    <Content Include="Content\kindeditor\docs\tabs.rst" />
+    <Content Include="Content\kindeditor\docs\theme.rst" />
+    <Content Include="Content\kindeditor\docs\upgrade.rst" />
+    <Content Include="Content\kindeditor\docs\upload.rst" />
+    <Content Include="Content\kindeditor\docs\uploadbutton.rst" />
+    <Content Include="Content\kindeditor\docs\usage.rst" />
+    <Content Include="Content\kindeditor\docs\widget.rst" />
+    <Content Include="Content\kindeditor\docs\_templates\classy\static\classy.css_t" />
+    <Content Include="Content\kindeditor\docs\_templates\classy\theme.conf" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\.htaccess" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\build.bat" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\manifest.json" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension-beta\skin\xp\roundCorner.svg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\manifest.json" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\chrome-extension\skin\xp\roundCorner.svg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\build\compress.bat" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\classic\roundCorner.svg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\light\roundCorner.svg" />
+    <Content Include="Content\kindeditor\lib\firebug-lite\skin\xp\roundCorner.svg" />
+    <Content Include="Content\kindeditor\package.json" />
+    <Content Include="Areas\GoodsManage\Views\Goods\_tabImages.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MvcPager.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shop\Login.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\ArticleInfo\Models\" />
+    <Folder Include="Areas\Business\Models\" />
+    <Folder Include="Areas\CityLife\Models\" />
+    <Folder Include="Areas\Common\Models\" />
+    <Folder Include="Areas\Common\Views\Common\" />
+    <Folder Include="Areas\Common\Views\Shared\" />
+    <Folder Include="Areas\Coupon\Models\" />
+    <Folder Include="Areas\Gift\Models\" />
+    <Folder Include="Areas\GoodsManage\Models\" />
+    <Folder Include="Areas\GroupBuy\Models\" />
+    <Folder Include="Areas\Member\Models\" />
+    <Folder Include="Areas\Member\Views\Register\" />
+    <Folder Include="Areas\Member\Views\Reg\" />
+    <Folder Include="Areas\OffLine\Models\" />
+    <Folder Include="Areas\Settlement\Models\" />
+    <Folder Include="Areas\Settlement\Views\StoreMoney\" />
+    <Folder Include="Areas\Set\Models\" />
+    <Folder Include="Areas\Statistics\Models\" />
+    <Folder Include="Areas\Statistics\Views\SmsSendNote\" />
+    <Folder Include="Areas\SystemNotic\Models\" />
+    <Folder Include="Config\" />
+    <Folder Include="Content\admin\font-awesome\" />
+    <Folder Include="Content\checkbox\css\" />
+    <Folder Include="Content\checkbox\Font-Awesome\" />
+    <Folder Include="Content\checkbox\fonts\" />
+    <Folder Include="Content\layer\" />
+    <Folder Include="Content\LwsJS\" />
+    <Folder Include="Content\My97DatePicker\" />
+    <Folder Include="Content\Validform_v5.3.2\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Bll\Shop.Bll.csproj">
+      <Project>{70bac27b-0931-42eb-aa39-4bc1f2f90a11}</Project>
+      <Name>Shop.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Dal\Shop.Dal.csproj">
+      <Project>{cb71f002-b3bb-45ff-968c-f26f3a209c2e}</Project>
+      <Name>Shop.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Entity\Shop.Entity.csproj">
+      <Project>{5a92bf5e-f642-4866-89a5-cea61a4ceca4}</Project>
+      <Name>Shop.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Help\Shop.Help.csproj">
+      <Project>{41fb0cfd-578d-4f07-8977-5259e0a8597d}</Project>
+      <Name>Shop.Help</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.ViewModel\Shop.ViewModel.csproj">
+      <Project>{46052901-7c22-4a75-8c8d-a34a539c62cb}</Project>
+      <Name>Shop.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

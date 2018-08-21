@@ -1,0 +1,94 @@
+﻿@using System.Data;
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@model  PagedList<DataRow>
+@{
+    string actionString = RoleLogic.GetPowerStr("Article", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+
+
+<table class="table table-bordered  table-condensed table-condensed  table-hover">
+    <thead>
+        <tr>
+            <th>领取时间</th>
+            <th>代金券</th>
+            <th>会员姓名</th>
+            <th>会员手机号</th>
+            <th>是否使用</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>@Convert.ToDateTime(row["SendTime"]).ToString("yyyy-MM-dd HH:mm")</td>
+
+                <td class="title">@row["Title"]</td>
+
+                <td> @row["LoginName"]</td>
+                <td>@row["Mobile"]</td>
+                <td>@row["IsUsed"]</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+<div class="text-center">
+    <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select id="PageSize" name="PageSize" onchange="PageSizeChange();" style="font-size: smaller;">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "BusinessPageIndex",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "BuinessPageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "BusinessTable",
+    HttpMethod = "Post",
+    DataFormId = "formBusinessSearch",
+    EnableHistorySupport = false,
+    //OnSuccess = "Success();",
+    EnablePartialLoading = true
+}
+)
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true" style="padding: 2px 3px;">
+                跳转到第<input id="BuinessPageIndexBox" class="form-control input-sm" style="width:auto;display:inline-block;" oninput="InputPageIndex(this);" />
+                <button class="btn btn-primary btn-sm" id="goBtn1" onclick="GoPageIndex();">Go</button>
+            </span>
+        </li>
+    </ul>
+</div>
+

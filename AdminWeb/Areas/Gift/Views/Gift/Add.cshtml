@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+@using Shop.Entity;
+@model TGift
+
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<ol class="breadcrumb">
+    <li><a href="/set/admin/center">首页></a></li>
+    <li><a href="/gift/gift/list">礼品列表></a></li>
+    <li class="active">@(Model.Guid == Guid.Empty ? "新增礼品" : "编辑礼品")</li>
+</ol>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <strong>提示:</strong>图片建议尺寸为宽:高为 1.66:1像素.
+</div>
+<div class="modal-body">
+    @{Html.BeginForm("add", "gift", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+    @Html.HiddenFor(c => c.Guid)
+    @Html.HiddenFor(c => c.OperatorGuid)
+    @Html.HiddenFor(c => c.BusinessGuid)
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*礼品名称</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Name, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "标题不能超过50个字符！", @nullmsg = "请输入标题！" })
+                </div>
+                <label class="col-sm-2 control-label">*所属类别</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(c => c.GiftCategoryGuid, (SelectList)ViewData["CateGory"], "-选择类别-", new { id = "Category", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属分类!", @errormsg = "请选择所属分类!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*礼品总数</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.StockCount, new { @class = "form-control input-sm", @Value = Model.Guid == Guid.Empty ? "" : Model.StockCount.ToString(), @placeholder = "", @datatype = "n", @errormsg = "数量必须是数字", @nullmsg = "请填写礼品数量!" })
+                </div>
+                <label class="col-sm-2 control-label">*单人限兑</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.SingleLimit, new { @class = "form-control input-sm", @Value = Model.Guid == Guid.Empty ? "" : Model.SingleLimit.ToString(), @datatype = "n", @errormsg = "单人限兑数量必须是数字", @nullmsg = "请填写单人限兑数量！" })
+                        <span class="input-group-addon">份</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">兑换方式</label>
+                <div class="col-sm-3">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default btn-sm @(Model.ExchangeType.Contains("TakeOut") ? "active" :"")">
+                            @Html.CheckBox("ExchangeType", Model.ExchangeType.Contains("TakeOut") ? true : false, new { @Value = "TakeOut" }) 配送上门
+                        </label>
+                        <label class="btn btn-default btn-sm @(Model.ExchangeType.Contains("TakeSelf") ? "active" :"")">
+                            @Html.CheckBox("ExchangeType", Model.ExchangeType.Contains("TakeSelf") ? true : false, new { @Value = "TakeSelf" }) 到店自取
+                        </label>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label">形象图片</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.Image, new { @id = "url1", @class = "form-control input-sm", @value = "", @readonly = "readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-sm" type="button" id="image1">上传图片</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*所需积分</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Point, new { @class = "form-control input-sm", @Value = Model.Guid == Guid.Empty ? "" : Model.StockCount.ToString(), @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "所需积分必须是数字!", @nullmsg = "请输入兑换所需积分!" })
+                </div>
+                <label class="col-sm-2 control-label">所属商户</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(c => c.BusinessGuid, ViewData["Business"] as IEnumerable<SelectListItem>, "-选择类别-", new { id = "Category", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属商户!", @errormsg = "请选择所属商户!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">*上下架</label>
+                <div class="col-sm-3">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default btn-sm @(Model.Status == 0 ? "active" : "")">
+                            @Html.RadioButtonFor(c => c.Status, "0", new { })
+                            上架
+                        </label>
+                        <label class="btn btn-default btn-sm @(Model.Status == 1 ? "active":"")">
+                            @Html.RadioButtonFor(c => c.Status, "1", new { })
+                            下架
+                        </label>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label">显示顺序</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Sort, new { @class = "form-control input-sm", @placeholder = "数字小优先显示", @datatype = "n", @errormsg = "排序必须是数字", @nullmsg = "请填写展示顺序!", @onfocus = "SortTip();" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*兑换地址</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(c => c.ExchangeAddress, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-200", @errormsg = "兑换地址最多200个字符！", @nullmsg = "请输入兑换地址！" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注信息</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(c => c.Memo, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @errormsg = "备注最多200个字符！", @succmsg = "" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">兑换须知</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(c => c.ExchangeNotes, new { @style = "width:550px;height:300px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">礼品介绍</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(c => c.Description, new { @style = "width:550px;height:300px;" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" style="margin-left: -30%;" value="保存" />
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript: self.location = document.referrer;">取消</button>
+    </div>
+    @{Html.EndForm();}
+</div>
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<script type="text/javascript">
+
+    var editor;
+    KindEditor.ready(function (K)
+    {
+        editor = K.create('#Description',
+            {
+                uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                allowFileManager: false,
+                formatUploadUrl: false,
+                afterBlur: function () { this.sync(); }
+            });
+        editor2 = K.create('#ExchangeNotes',
+    {
+        uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+        fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+        allowFileManager: false,
+        formatUploadUrl: false,
+        afterBlur: function () { this.sync(); }
+    });
+        K('#image1').click(function ()
+        {
+            editor.loadPlugin('image', function ()
+            {
+                editor.plugin.imageDialog({
+                    imageUrl: K('#url1').val(),
+                    urlType: "relative",
+                    showRemote: false,
+                    clickFn: function (url, title, width, height, border, align)
+                    {
+                        K('#url1').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+
+    function SortTip()
+    {
+        debugger;
+        var index = layer.tips('礼品按照该数字从小到大升序显示', '#Sort', {
+            id: "Sort",
+            tips: [3, '#3595CC'],
+            time: 5000
+        });
+    }
+    function ShowTipMsg(id, msg)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16, offset: ['40%', '40%'] });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/gift/gift/list/@Request.QueryString["pageIndex"]';
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg != "通过信息验证！")
+                {
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+            }
+        }
+        );
+    });
+</script>

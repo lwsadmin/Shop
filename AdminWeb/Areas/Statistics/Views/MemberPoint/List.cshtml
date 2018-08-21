@@ -1,0 +1,191 @@
+﻿
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+    <style>
+        .pibarea {
+            float: left;
+            margin-left: 2em;
+        }
+
+        .navbar-form {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">统计分析></a></li>
+            <li class="active">会员积分统计</li>
+        </ol>
+
+        <div class="portlet-body">
+            <form class="navbar-form navbar-left" id="formSearch" role="form" action="/Statistics/GiftExchangeNote/List">
+                <input type="hidden" name="PageSize" value="@ViewData["PageSize"]" />
+                查询:
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="会员卡号/手机号/姓名" />
+                    @*<div class="form-group">
+                            <select class="form-control input-sm" id="Status" name="Status">
+                                <option value="">-兑换状态-</option>
+                                <option value="2558f03c-dedb-44dd-8268-668bf75b5ff1">已领取</option>
+                            </select>
+                        </div>*@
+                    <input type="text" class="form-control input-sm" name="TimeFrom" id="OperateTimeFrom" placeholder="操作时间" onclick="WdatePicker();" />
+                    至
+                    <input type="text" class="form-control input-sm" name="TimeTo" id="OperateTimeTo" placeholder="操作时间" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'OperateTimeFrom\')}' });" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+
+            </form>
+            <div id="divTable">
+                <table class="table table-bordered  table-condensed table-condensed  table-hover">
+                    <thead>
+                        <tr>
+                            <th>会员姓名</th>
+                            <th>会员手机号</th>
+
+                            <th>单据号</th>
+                            <th>积分操作</th>
+                            <th>积分类型</th>
+                            <th>操作后积分类型</th>
+                            <th>操作员</th>
+                            <th>操作门店</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model)
+                        {
+                            <tr>
+
+                                <td>@row["NickName"]</td>
+                                <td>@row["Mobile"]</td>
+                                <td>@row["BillNumber"] </td>
+                                <td>@row["Type"]</td>
+                                <td>@row["Way"]</td>
+                                <td>@row["UserAccount"]</td>
+                                <td class="title">
+                                    @Convert.ToDateTime(row["Operatetime"]).ToString("yyyy-MM-dd HH:mm:ss")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+                    <ul class="pagination">
+                        <li>
+                            <span aria-hidden="true">
+                                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+                            </span>
+                        </li>
+                        <li>
+                            <span aria-hidden="true">
+                                每页
+                                <select id="PageSize" name="PageSize" onchange="PageSizeChange();" style="font-size: smaller;">
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                条
+                            </span>
+                        </li>
+                    </ul>
+                    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    OnSuccess = "Success()",
+    EnablePartialLoading = true
+}
+)
+                    <ul class="pagination">
+                        <li>
+                            <span aria-hidden="true" style="padding: 2px 3px;">
+                                跳转到第<input id="pageIndexBox" class="form-control input-sm" style="border-radius:0px;width:auto;display:inline-block;" oninput="InputPageIndex(this);" />
+                                <button class="btn btn-primary btn-sm" id="goBtn1" style="border-radius:0px;" onclick="GoPageIndex();">Go</button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <script>
+                    function Success()
+                    {
+                        $("#PageSize").val('@ViewData["PageSize"]');
+                    }
+                </script>
+            </div>
+        </div>
+        @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+        }
+
+        <script type="text/javascript">
+
+            function InputPageIndex(obj)
+            {
+                var pageIndex = $(obj).val().trim();
+                if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+                {
+                    $(obj).val($("#TotalPageCount").val());
+                }
+            }
+            function PageSizeChange()
+            {
+                $("input[name='PageSize']").val($("#PageSize").val());
+                $("#formSearch").submit();
+            }
+            function GoPageIndex()
+            {
+                var pager = Webdiyer.MvcPagers[0];
+                var pageIndex = $("#pageIndexBox").val().trim();
+                var TotalPageCount = $("#TotalPageCount").val().trim();
+                if (parseInt(pageIndex) > parseInt(TotalPageCount))
+                {
+                    pageIndex = TotalPageCount;
+                }
+                if (pager != null)
+                {
+                    pager.goToPage(parseInt(pageIndex));
+                } else
+                { alert("找不到指定的MvcPager！"); }
+
+            }
+        </script>
+    </div>
+</body>
+</html>

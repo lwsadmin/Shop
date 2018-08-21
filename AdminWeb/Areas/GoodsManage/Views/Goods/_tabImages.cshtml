@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+@using Shop.ViewModel
+
+@model GoodsModel
+<link href="~/Content/fileinput/css/fileinput.min.css" rel="stylesheet" />
+<script src="~/Content/fileinput/js/fileinput.min.js"></script>
+<script src="~/Content/fileinput/js/locales/zh.js"></script>
+<br />
+
+<style>
+    .file-drop-zone {
+        height: auto;
+    }
+</style>
+<p></p>
+@for (int i = 0; i < Model.goodsImges.Count; i++)
+{
+
+    @Html.HiddenFor(c => c.goodsImges[i].Url, new { id = Model.goodsImges[i].Guid, @class = "hid" + i });
+
+}
+
+<div class=“file-loading”>
+    <input id="input" name="File" type="file" multiple>
+</div>
+
+
+<script>
+    var ImaArray = [@MvcHtmlString.Create(ViewBag.Imgs)];
+    $(document).on("ready", function () {
+        $("#input").fileinput({
+            language: 'zh', //设置语言
+            fileSingle: '图片',
+            filePlural: '个图片',
+            dropZoneTitle: '拖图片件到这里 &hellip;<br>支持多图片同时上传',
+            browseLabel: '浏览',
+            uploadUrl: "/common/common/upload",
+            maxFileCount: 5,
+            validateInitialCount: true,
+            showUpload: true,
+            uploadAsync: true,
+            showClose: false,
+            layoutTemplates: {
+                actionDrag: '',//去除上传预览缩略图中移动，因为功能未能实现；
+            },
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: ImaArray,
+            initialPreviewConfig: [@MvcHtmlString.Create(ViewBag.config)],
+            maxFileSize: 1024,
+            maxFileCount: 5,
+            allowedFileTypes: ['image'],
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+    });
+
+    //选择文件后处理事件
+    $("#input").on("filebatchselected", function (event, files) {
+        //  $("#file-1").fileinput("upload");
+        var filesCount = $('#file-1').fileinput('getFilesCount');
+    });
+    //上传成功后处理方法
+    $("#input").on("fileuploaded", function (event, data, previewId, index) {
+        var url = data.response.url;
+        $(".hid" + index).val(url).addClass(previewId);
+    });
+
+//图片上传成功后，预览图点击删除按钮的回调函数
+    $("#input").on("filesuccessremove", function (event, data, previewId) {
+        if (previewId < 0) {
+            previewId = $("#zoom-" + data).attr("data-fileindex");
+        }
+        var url = $(".hid" + previewId).val();
+        $.post("/common/common/UploadedImageDelete", { url: url }, function (data) {
+            parent.layer.closeAll('dialog'); //关闭信息框
+            if (data.success) {
+                $(".hid" + previewId).val("");
+            } else {
+                parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 5000 });
+                return true;
+            }
+
+        })
+    });
+</script>

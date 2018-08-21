@@ -1,0 +1,264 @@
+﻿@{
+    Layout = null;
+    string requestMenu = string.Empty;
+
+    Dictionary<string, string>
+    actionDic = ViewData["Action"] as Dictionary<string, string>
+        ;
+    List<TManagerRole> roleList = (List<TManagerRole>)ViewData["ManageRole"];
+}
+@using System.Data;
+@using Shop.Entity;
+@using Shop.Bll;
+@using System.Xml;
+@model TManagerRole
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+    <link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/multiselect/css/multiselect.css" rel="stylesheet" />
+
+
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/multiselect/js/multiselect.js" charset="gbk"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">系统设置></a></li>
+            <li class="active">@(Model.Guid == Guid.Empty ? "新增权限" : "编辑权限")</li>
+        </ol>
+        <form class="form-horizontal" id="form1" method="post" action="/set/role/add" style="margin-bottom:50px;">
+            @Html.HiddenFor(c => c.Guid)
+            @Html.HiddenFor(c => c.AddTime)
+            @Html.HiddenFor(c => c.ChainStoreGuid)
+            @Html.HiddenFor(c => c.OperatorGuid)
+            @Html.HiddenFor(c => c.IsBusinessSuper)
+            @Html.HiddenFor(c => c.ManageRange)
+            @Html.HiddenFor(c => c.ManageRole, new { @id = "ManageRole" })
+            <div class="row">
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">权限组名称</label>
+                    <div class="col-sm-5">
+
+                        @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @datatype = "*1-30", @errormsg = "角色名称不能超过30个字符！", @nullmsg = "请输入角色名称！" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">所属商户</label>
+                    <div class="col-sm-5">
+                        @Html.DropDownListFor(c => c.BusinessGuid, ViewData["Business"] as IEnumerable<SelectListItem>, "-选择商户-", new { @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属商户77777！" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">管辖权限组</label>
+                    <div class="col-sm-10">
+                        <select id="select" multiple="multiple">
+                            @foreach (TManagerRole role in roleList)
+                            {
+                                if (!string.IsNullOrEmpty(Model.ManageRole) && Model.ManageRole.Contains(role.Guid.ToString()))
+                                {
+                                    <option value="@role.Guid" selected="selected">@role.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@role.Guid">@role.Title</option>
+                                }
+                            }
+                        </select>
+                        <script type="text/javascript">
+                            $('#select').multiselect({
+                                onChange: function () {
+                                    var selectValueStr = [];
+                                    $("#select").find("option:selected").each(function () {
+                                        selectValueStr.push($(this).val());
+                                    });
+                                    $("#ManageRole").val(selectValueStr);
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(c => c.Remark, new { @class = "form-control input-sm", @rows = 3 })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限配置</label>
+
+                    <div class="col-sm-9">
+                        <div class="table-responsive">
+                            <table class="table table-bordered  table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>菜单</th>
+                                        <th>权限</th>
+                                        <th>全选</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (XmlNode item in ViewBag.NodeList)
+                                    {
+                                        requestMenu += item.Attributes["Name"].Value + ",";
+                                        <tr>
+                                            <th scope="row">
+                                                <h4><code><strong>@item.Attributes["Title"].Value</strong></code></h4>
+                                            </th>
+                                            <td>
+
+                                                <div class="checkbox checkbox-inline checkbox-primary">
+                                                    <input id="@item.Attributes["Name"].Value" type="checkbox" @(actionDic.ContainsKey(item.Attributes["Name"].Value) && actionDic[item.Attributes["Name"].Value].Contains(@item.Attributes["Name"].Value) ? "checked='checked'" : "" )
+                                                           name="@item.Attributes["Name"].Value" value="@item.Attributes["Name"].Value" />
+                                                    <label for="@item.Attributes["Name"].Value">查看</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="checkbox checkbox-inline checkbox-primary">
+                                                    <input type="checkbox" name="selectAll" value="" />
+                                                    <label for="selectAll"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        foreach (XmlNode itemSeond in MenuLogic.GetSecond(item.Attributes["Name"].Value))
+                                        {
+                                            requestMenu += itemSeond.Attributes["Name"].Value + ",";
+                                            <tr>
+                                                <td>@itemSeond.Attributes["Title"].Value</td>
+                                                <td>
+                                                    <div class="checkbox checkbox-inline checkbox-primary">
+                                                        <input id="@itemSeond.Attributes["Name"].Value" type="checkbox" @(actionDic.ContainsKey(itemSeond.Attributes["Name"].Value) && actionDic[itemSeond.Attributes["Name"].Value].Contains(@itemSeond.Attributes["Name"].Value) ? "checked='checked'" : "" )
+                                                               name="@itemSeond.Attributes["Name"].Value" value="@itemSeond.Attributes["Name"].Value" />
+                                                        <label for="@itemSeond.Attributes["Name"].Value">查看</label>
+
+                                                    </div>
+                                                    @if (itemSeond.Attributes["Url"].Value != "")
+                                                    {
+                                                        foreach (XmlNode action in itemSeond.ChildNodes)
+                                                        {
+                                                            <div class="checkbox checkbox-inline checkbox-primary">
+                                                                <input id="@action.Attributes["Name"].Value@itemSeond.Attributes["Name"].Value" class="styled" type="checkbox"
+                                                                       @(actionDic.ContainsKey(itemSeond.Attributes["Name"].Value) && actionDic[itemSeond.Attributes["Name"].Value].Contains(action.Attributes["Name"].Value) ? "checked='checked'" : "" )
+                                                                       name="@itemSeond.Attributes["Name"].Value" value="@action.Attributes["Name"].Value" />
+                                                                <label for="@action.Attributes["Name"].Value@itemSeond.Attributes["Name"].Value">@action.Attributes["Title"].Value</label>
+                                                            </div>
+                                                        }
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    <div class="checkbox checkbox-inline checkbox-primary">
+                                                        <input type="checkbox" name="selectAll" value="">
+                                                        <label for="selectAll"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            if (itemSeond.Attributes["Url"].Value == "")//第三级菜单
+                                            {
+
+                                                foreach (XmlNode Third in itemSeond.ChildNodes)
+                                                {
+                                                    requestMenu += Third.Attributes["Name"].Value + ",";
+                                                    <tr>
+                                                        <th scope="row">
+
+                                                            <h5 style="text-align:right;">@Third.Attributes["Title"].Value</h5>
+
+                                                        </th>
+                                                        <td>
+                                                            @foreach (XmlNode FourthAction in MenuLogic.GetFourth(Third.Attributes["Name"].Value))
+                                                            {
+                                                                <div class="checkbox checkbox-inline checkbox-primary">
+                                                                    <input id="@FourthAction.Attributes["Name"].Value@Third.Attributes["Name"].Value"
+                                                                           class="styled" type="checkbox" @(actionDic.ContainsKey(Third.Attributes["Name"].Value) && actionDic[Third.Attributes["Name"].Value].Contains(Third.Attributes["Name"].Value) ? "checked='checked'" : "" )
+                                                                           name="@FourthAction.Attributes["Name"].Value" value="@FourthAction.Attributes["Name"].Value" />
+                                                                    <label for="@FourthAction.Attributes["Name"].Value@Third.Attributes["Name"].Value">@FourthAction.Attributes["Title"].Value</label>
+                                                                </div>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <div class="checkbox checkbox-inline checkbox-primary">
+                                                                <input type="checkbox" name="selectAll" value="">
+                                                                <label for="selectAll"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="requestMenu" value="@requestMenu" />
+            <div class="modal-footer" style="text-align:center;position:fixed;bottom:0px;width: 100%;
+    background-color: white;">
+                <input type="submit" class="btn btn-primary btn-sm" value="保存" />
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="javascript:history.back(-1);">取消</button>
+            </div>
+        </form>
+    </div>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript">
+        $("label[for='selectAll']").click(function () {
+            $(this).siblings("input[name='selectAll']").click();
+        });
+
+        $("input[name='selectAll']").change(function () {
+            var selectAll = $(this);
+            selectAll.parents("td").siblings("td").find("input[type='checkbox']").each(function () {
+                $(this).prop("checked", selectAll.is(":checked"));
+            });
+        });
+        $("#form1").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform) {
+              parent.layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                parent.layer.closeAll();
+                if (data.succ)
+                {
+                    window.location.href = '/set/role/list/@Request.QueryString["pageIndex"]';
+                } else {
+                    alert("保存失败!请查看日志!");
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg.trim() != "" && o.type != 1)
+                {
+                    //layer.tips(msg, '#' + $(o.obj).attr("id"), { tipsMore: true });
+                }
+            }
+        }
+        );
+    </script>
+</body>
+</html>

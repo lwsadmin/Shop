@@ -1,0 +1,87 @@
+﻿
+@{
+
+    Layout = null;
+    string actionString = RoleLogic.GetPowerStr("Industry", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+    <link href="/Content/treeTable/script/treeTable/default/jquery.treeTable.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Content/admin/js/bootstrap.min.js"></script>
+    <script src="/Content/treeTable/script/treeTable/jquery.treeTable.js"></script>
+    <script src="/Content/MvcPager/MvcPager.js"></script>
+
+    <style>
+        .pibarea {
+            float: left;
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">系统设置></a></li>
+            <li class="active"><a href="#">行业管理</a></li>
+        </ol>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>提示:</strong>将按照显示顺序由小到大排列。
+        </div>
+        <div class="portlet-body">
+            @if (actionString.Contains("Add"))
+            {
+                <div class="navbar-form navbar-left" style="padding:0;" role="search">
+                    <a class="btn btn-primary btn-sm" onclick="Add();"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</a>
+                </div>
+            }
+            <form class="navbar-form navbar-left" id="formSearch" role="form" action="/set/industry/list">
+                <input type="hidden" name="PageSize" value="15" />
+            </form>
+
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+            </div>
+            @{Html.RegisterMvcPagerScriptResource();}
+            <div id="divAdd">
+                @Html.Partial("_Add")
+            </div>
+        </div>
+
+    </div>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+
+    <script type="text/javascript">
+        function Add()
+        {
+
+            $("#Guid").val("");
+            $("#Title").val("");
+            $("#Sort").val("");
+
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+        function PageSizeChange()
+        {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            $("#formSearch").submit();
+        }
+    </script>
+</body>
+</html>

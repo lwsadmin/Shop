@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+@using Shop.Entity;
+@model TArticle
+
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Validform_v5.3.2/Validform_v5.3.2/demo/css/style.css" rel="stylesheet" />
+
+<link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+<link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<ol class="breadcrumb">
+    <li><a href="/set/admin/center">首页></a></li>
+    <li><a href="#">资讯信息></a></li>
+    <li><a href="/articleinfo/article/list">资讯列表></a></li>
+    <li class="active">@(Model.Guid == Guid.Empty ? "新增资讯" : "编辑资讯")</li>
+</ol>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <strong>提示:</strong>图片建议尺寸为宽:高为 1.66:1像素.
+</div>
+<div class="modal-body">
+    @{Html.BeginForm("add", "article", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+    @Html.HiddenFor(c => c.Guid)
+    @Html.HiddenFor(c => c.OperatorGuid)
+    @Html.HiddenFor(c => c.BusinessGuid)
+    @Html.HiddenFor(c => c.ChainStoreGuid)
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*标题</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "标题不能超过50个字符！", @nullmsg = "请输入标题！" })
+                </div>
+                <label class="col-sm-2 control-label">来源</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Souce, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "*1-20", @errormsg = "来源不能超过20字符！" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*类别</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(c => c.CategoryGuid, (List<SelectListItem>)ViewData["CateGory"], "-选择类别-", new { id = "Category", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属分类!", @errormsg = "请选择所属分类!" })
+                </div>
+                <label class="col-sm-2 control-label">作者</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.author, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "*1-20", @errormsg = "作者不能超过20个字符！" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标签</label>
+                <div class="col-sm-8">
+                    <div class="checkbox checkbox-inline checkbox-primary">
+                        <input name="Level" value="AllowComment" id="AllowComment" class="styled" type="checkbox" checked="@(Model.Level.Contains("AllowComment") ? true : false)">
+                        <label for="AllowComment">允许评论</label>
+                    </div>
+
+                    <div class="checkbox  checkbox-inline checkbox-primary">
+                        <input name="Level" value="Top" id="Top" class="styled" type="checkbox" checked="@(Model.Level.Contains("Top") ? true : false)">
+                        <label for="Top">置顶</label>
+                    </div>
+
+                    <div class="checkbox checkbox-inline checkbox-primary">
+                        <input name="Level" value="Recommend" id="Recommend" class="styled" type="checkbox" checked="@(Model.Level.Contains("Recommend") ? true : false)">
+                        <label for="Recommend">推荐</label>
+                    </div>
+
+                    <div class="checkbox checkbox-inline checkbox-primary">
+                        <input name="Level" value="Hot" id="Hot" class="styled" type="checkbox" checked="@(Model.Level.Contains("Hot") ? true : false)">
+                        <label for="Hot">热门</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*打开</label>
+                <div class="col-sm-3">
+
+                    <div class="radio radio-primary radio-inline">
+                        @Html.RadioButtonFor(c => c.Target, "_self", new { @id = "_self", @class = "" })
+                        <label for="_self">本页面打开</label>
+                    </div>
+
+                    <div class="radio radio-primary radio-inline">
+                        @Html.RadioButtonFor(c => c.Target, "_blank", new { @id = "_blank" })
+                        <label for="_blank">新页面打开</label>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.SmallImg, new { @id = "url1", @class = "form-control input-sm", @value = "", @readonly = "readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-sm" type="button" id="image1">上传图片</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">序号</label>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(c => c.Sort, new { @class = "form-control input-sm", @placeholder = "数字小优先显示", @datatype = "n", @errormsg = "排序必须是数字", @nullmsg = "请填写展示顺序!" })
+                </div>
+                <p class="text-warning">数据按照该数字从小到大依次显示</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">简介</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(c => c.Describle, new { @class = "form-control input-sm", @style = "text-align: left;", @rows = "2", @ignore = "ignore", @datatype = "*1-200", @errormsg = "简介不能超过200字符！", @sucmsg = "", @nullmsg = "" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">详情</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(c => c.Content, new { @style = "width:100%;height:300px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" style="margin-left: -20%;" value="保存" />
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript: self.location = document.referrer;">取消</button>
+    </div>
+    @{Html.EndForm();}
+</div>
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<script type="text/javascript">
+
+    var editor;
+    KindEditor.ready(function (K)
+    {
+        editor = K.create('#Content',
+            {
+                uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                allowFileManager: false,
+                formatUploadUrl: false,
+                items: [
+                    'undo', 'redo', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'table', 'link', 'emoticons', 'baidumap', 'quickformat',
+                    'preview', 'fullscreen',],
+                afterBlur: function () { this.sync(); }
+            });
+        K('#image1').click(function ()
+        {
+            editor.loadPlugin('image', function ()
+            {
+                editor.plugin.imageDialog({
+                    imageUrl: K('#url1').val(),
+                    urlType: "relative",
+                    showRemote: false,
+                    clickFn: function (url, title, width, height, border, align)
+                    {
+                        K('#url1').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+
+
+    function ShowTipMsg(id, msg)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/articleinfo/article/list/@Request.QueryString["pageIndex"]';
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg != "通过信息验证！")
+                {
+
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+
+            }
+
+        }
+        );
+    });
+</script>

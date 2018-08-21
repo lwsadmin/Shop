@@ -1,0 +1,114 @@
+﻿@{ Layout = null;}
+@using Shop.Bll;
+@using System.Data;
+@using Shop.Help;
+@using Webdiyer.WebControls.Mvc
+@using Shop.Entity;
+@{     string actionString = RoleLogic.GetPowerStr("ManagerRole", ManagerLogic.GetLoginInfo().ManagerRoleGuid);}
+@model  PagedList<DataRow>
+<table class="table table-bordered  table-condensed table-condensed  table-hover  table-condensed">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>所属商户</th>
+            <th>备注</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow item in Model)
+            {
+            <tr>
+                <td class="title">@item["Title"]</td>
+                <td>@item["BusinessName"]</td>
+                <td>@item["remark"]</td>
+                <td>@Convert.ToDateTime(item["AddTime"]).ToString("yyyy-MM-dd hh:mm")</td>
+                <td>
+                    <div class="view">
+                        <button class="btn  btn-default btn-xs" type="button" onclick="window.location.href = '/set/role/add/@item["Guid"]';">编辑</button>
+                        <a class="btn  btn-default btn-xs" onclick="Delete('@item["Guid"]','/set/role/delete','/set/role/list/@(Model.CurrentPageIndex - 1 > 1 ? Model.CurrentPageIndex - 1 : 1)');">删除</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+
+<input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+<div class="col-xs-9" style="width:auto;padding-left:0px;">
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option selected="selected" value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+        new PagerOptions
+        {
+            PageIndexParameterName = "id",
+            CssClass = "pagination",
+            FirstPageText = "首页",
+            LastPageText = "尾页",
+            PrevPageText = "上一页",
+            PageIndexBoxId = "pageIndexBox",
+            GoToButtonId = "Go",
+            PageIndexOutOfRangeErrorMessage = "页码有误!",
+            NumericPagerItemCount = 8,
+            NextPageText = "下一页",
+            CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/Set/Role/List/{0}\">{0}</a></li>",
+            DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+            PagerItemTemplate = "<li>{0}</li>",
+            AutoHide = false,
+
+        }, new MvcAjaxOptions
+        {
+            UpdateTargetId = "divTable",
+            HttpMethod = "Post",
+            DataFormId = "formSearch"
+            //OnSuccess = "Success();"
+        }
+        )
+</div>
+<div class="pagination" style="width:20%;margin-top: 0px;">
+    <ul class="pagination">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon">第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                <span class="input-group-addon">页</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="Go" type="button">GO</button>>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var txt = $("#SearchTitle").val().trim();
+    if (txt.length > 0)
+    {
+        $(".title").each(function ()
+        {
+            var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+            $(this).html(newTxt);
+        });
+    }
+
+    $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+    $("#PageSize").val(@ViewData["NowPageSize"]);
+</script>
+

@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    
+</head>
+<body>
+    <div class="container-fluid">
+
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">系统通知></a></li>
+            <li class="active">发送邮件</li>
+        </ol>
+        <div class="alert alert-warning alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <strong>提示:</strong>请不要频繁发送邮件。
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <form class="form-horizontal" role="form" action="/SystemNotic/EmailSend/SendEmail" method="post">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">邮件内容</label>
+                        <div class="col-sm-10">
+                            <textarea name="content" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">收件人</label>
+                        <div class="col-sm-10">
+                            <textarea name="reicver" class="form-control" rows="3" id="Reicver"></textarea>
+                            <p class="text-warning">多个邮箱之间请用英文逗号隔开</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" onclick="return FormSubmit();">发送</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var editor;
+        KindEditor.ready(function (K)
+        {
+            editor = K.create('textarea[name="content"]', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+
+        function FormSubmit()
+        {
+            if ($("#Reicver").val().trim().length == 0)
+            {
+                $("#Reicver").focus();
+                return false;
+            }
+        }
+
+        @ViewData["msg"]
+    </script>
+</body>
+</html>

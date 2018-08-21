@@ -1,0 +1,98 @@
+﻿
+@using Shop.Bll;
+@using System.Data;
+@using Shop.Entity;
+@using Shop.Help;
+@using Webdiyer.WebControls.Mvc
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+    string actionString = RoleLogic.GetPowerStr("Manager", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@model  PagedList<DataRow>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">系统设置></a></li>
+            <li class="active">账号管理</li>
+        </ol>
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" role="search" style="padding-left:0px;">
+                @if (actionString.Contains("Add"))
+                {
+                    <button type="submit" class="btn btn-primary btn-sm " data-toggle="modal" onclick="Add();">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true">新增</span>
+                    </button>
+                }
+                <button type="submit" class="btn btn-primary btn-sm " id="checkAll" onclick="CheckAll(this);">
+                    <span class="glyphicon glyphicon-check" aria-hidden="true">全选</span>
+                </button>
+                @if (actionString.Contains("Delete"))
+                {
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="Delete(null, '/systemset/admin/delete', '/systemset/admin/list');">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
+                    </button>
+                }
+            </div>
+            <form class="navbar-form navbar-left" role="search" action="/systemset/admin/list" id="formSearch">
+                <input type="hidden" name="PageSize" value="15" />
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" name="loginName" id="loginName" placeholder="请输入登录名/姓名" />
+                    @Html.DropDownList("Business", ViewData["Business"] as List<SelectListItem>, "-选择商户-", new { @class = "form-control input-sm" })
+
+                    @Html.DropDownList("RoleList", ViewData["RoleList"] as List<SelectListItem>, "-选择权限组-", new { @class = "form-control input-sm" })
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+
+            </div>
+            @{Html.RegisterMvcPagerScriptResource();}
+
+            <div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                @Html.Partial("Add", new TManager())
+            </div>
+
+            <div class="modal fade" id="DivEdit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                @Html.Partial("Edit", new TManager())
+            </div>
+        </div>
+        <script src="/Content/admin/js/bootstrap.min.js"></script>
+        <script src="/Content/LwsJS/List.js"></script>
+        <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+        <script src="~/Content/layer/layer.js"></script>
+        <script type="text/javascript">
+            function Add()
+            {
+                $("#headerTitle").text("添加操作员");
+                $(this).removeData('modal');
+                $("#add").find("input").each(function ()
+                {
+                    $(this).val("");
+                });
+                $("#Add").modal('show');
+            }
+            function PageSizeChange()
+            {
+                $("input[name='PageSize']").val($("#PageSize").val());
+                $("#formSearch").submit();
+            }
+        </script>
+    </div>
+</body>
+</html>

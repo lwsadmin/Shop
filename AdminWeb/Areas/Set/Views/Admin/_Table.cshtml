@@ -1,0 +1,168 @@
+﻿@{ Layout = null;}
+@using Shop.Bll;
+@using System.Data;
+@using Shop.Help;
+@using Webdiyer.WebControls.Mvc
+@using Shop.Entity;
+@{     string actionString = RoleLogic.GetPowerStr("Manager", ManagerLogic.GetLoginInfo().ManagerRoleGuid);}
+@model  PagedList<DataRow>
+
+<table class="table table-bordered  table-condensed table-condensed  table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>登录名</th>
+            <th>联系方式</th>
+            <th>姓名</th>
+            <th>权限组</th>
+            <th>所属商户</th>
+            <th>邮箱</th>
+            <th>注册时间</th>
+            <th>最后登录</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="treeTable1">
+
+        @foreach (DataRow item in Model)
+            {
+            <tr>
+                <td>
+                    <input type="checkbox" name="subBox" value="@item["Guid"]" id="ck@(item["Guid"])" />
+                </td>
+                <td class="loginName">@item["LoginName"]</td>
+                <td>@item["Phone"]</td>
+                <td class="loginName">@item["Name"]</td>
+                <td>@item["RoleTitle"] </td>
+                <td>@item["BusinessName"] </td>
+                <td>@item["Email"]</td>
+                <td>@Convert.ToDateTime(item["AddTime"]).ToString("yyyy-MM-dd hh:mm")</td>
+                <td>@Convert.ToDateTime(item["LastLoginTime"]).ToString("yyyy-MM-dd hh:mm")</td>
+                <td>
+                    <div class="view">
+                        @if (actionString.Contains("Edit"))
+                        {
+                            @Ajax.ActionLink("编辑", "Edit", new { id = item["Guid"] }, new AjaxOptions { OnSuccess = "EditShow", HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "DivEdit" }, new { @class = "btn  btn-default btn-xs" })
+                        }
+                        @if (actionString.Contains("Delete"))
+                        {
+                            <button class="btn  btn-default btn-xs" type="button" onclick="Delete('@item["Guid"]','/systemset/admin/delete', '/systemset/admin/list')">删除</button>
+
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+
+<input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+<div class="col-xs-9" style="width:auto;padding-left:0px;">
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option selected="selected" value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+        new PagerOptions
+        {
+            PageIndexParameterName = "id",
+            CssClass = "pagination",
+            FirstPageText = "首页",
+            LastPageText = "尾页",
+            PrevPageText = "上一页",
+            PageIndexBoxId = "pageIndexBox",
+            GoToButtonId = "Go",
+            PageIndexOutOfRangeErrorMessage = "页码有误!",
+            NumericPagerItemCount = 8,
+            NextPageText = "下一页",
+            CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/Set/admin/List/{0}\">{0}</a></li>",
+            DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+            PagerItemTemplate = "<li>{0}</li>",
+            AutoHide = false,
+
+        }, new MvcAjaxOptions
+        {
+            UpdateTargetId = "divTable",
+            HttpMethod = "Post",
+            DataFormId = "formSearch",
+            EnableHistorySupport = true
+        }
+        )
+</div>
+<div class="pagination" style="width:20%;margin-top: 0px;">
+    <ul class="pagination">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon">第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                <span class="input-group-addon">页</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="Go" type="button">GO</button>>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var txt = $("#loginName").val().trim();
+    if (txt.length > 0)
+    {
+        $(".loginName").each(function ()
+        {
+            var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+            $(this).html(newTxt);
+        });
+        $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+        $("#PageSize").val(@ViewData["NowPageSize"]);
+    }
+    function EditShow(data)
+    {
+        $("#DivEdit").modal('hide');
+        $(this).removeData('modal');
+        $("#headerTitle").text("编辑操作员");
+
+        $("#DivEdit").modal('show');
+    }
+
+    function InputPageIndex(obj)
+    {
+        var pageIndex = $(obj).val().trim();
+        if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+        {
+            $(obj).val($("#TotalPageCount").val());
+        }
+    }
+
+    function GoPageIndex()
+    {
+        var pager = Webdiyer.MvcPagers[0];
+        var pageIndex = $("#pageIndexBox").val().trim();
+        var TotalPageCount = $("#TotalPageCount").val().trim();
+        if (parseInt(pageIndex) > parseInt(TotalPageCount))
+        {
+            pageIndex = TotalPageCount;
+        }
+        if (pager != null)
+        {
+            pager.goToPage(parseInt(pageIndex));
+        } else
+        { alert("找不到指定的MvcPager！"); }
+
+    }
+</script>

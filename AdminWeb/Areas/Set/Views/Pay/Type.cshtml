@@ -1,0 +1,219 @@
+﻿
+@using Shop.Bll;
+@using System.Data;
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using Webdiyer.WebControls.Mvc
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title></title>
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Content/admin/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">系统设置></a></li>
+            <li class="active">支付方式</li>
+        </ol>
+        <div class="portlet-body">
+                
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                                <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab_weixin" id="home-tab" role="tab" data-toggle="tab" aria-controls="tab_weixin" aria-expanded="true">支付宝支付设置</a></li>
+                                    <li role="presentation" class=""><a href="#tab_ali" role="tab" id="profile-tab" data-toggle="tab" aria-controls="tab_ali" aria-expanded="false">微信支付设置</a></li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="tab_weixin">
+                                        <div class="modal-body">
+                                            <!-- BEGIN FORM-->
+                                            <form action="/SystemManage/PayParameter/SaveParameter" class="form-horizontal" id="formValueParameter" method="post">
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3">
+                                                                partner
+                                                            </label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control  input-inline input-large" value="2088911732453562" id="partner" name="partner">
+                                                            </div>
+                                                            <span class="help-block">支付宝合作者身份ID</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3">
+                                                                支付宝当面付应用id
+                                                            </label>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control  input-inline input-large" value="2015092100306975" name="merchant_private_appid">
+                                                            </div>
+                                                            <span class="help-block">支付宝当面付应用id</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3">
+                                                                RSA密钥
+                                                            </label>
+                                                            <div class="col-sm-5">
+                                                                <textarea class="form-control" id="merchant_private_key" name="merchant_private_key" rows="9">MIICXQIBAAKBg*************************FbP8lsxNaLFl6ljOuswF425Os+qbGIMT1L2CCq4TlgbDSpT6og46DIl9URFjrFNyjAc9+L9opQf6I/osRAKrSypRB/FEzhSEwmBUl3/2Fe1OURK+S8bDmLFpkA0Q+yAibA0zb78JDIoYdtccpmYwIDAQABAoGBAK3djgKaXTMRCUfKFul9uVd8Vzk6G4VKhfv5g30RKvfEc6BnNih1SDJ6Wo1pDfQA85kvo/O1WOmaKQD9vBJCyBstc9UWcR0Z2w6Gf0Xr5PUGoL+I8DYHxroiEbg5Kos6CDwWO8F3zFqC+ZDPToJJNLPYXhU4u1+O/gtQSVGi63SBAkEA79gMyUGkjQ3zZTX3L5mxdthXE51pCoBcvLpORcvDWGOxugT8i024Q7ZIFXj0DjET6m3mAmYQSDAoJV8jqm3l8wJBAOTezgRE0lX29OdUdqTKoK7wO9eEFknx0KNUg9o5aVLcgKgks7O8QPU3TQ8eTtHT795nfWHC1TdaHzE7rwV7adECQDCl5OoJe4P02XKlAI9SIFHXzcm3uu+bW7QYIfo8O1I5Xno5urPSvtZVKcfZMb+TKtP5GJdR9ml+AxaZdpWCFwsCQQCluGb4VFTxBhajAle+TzI2OaE7FluFQ2FNQr8OXo/S/fLyzVCJjoCCjn5vugRcjtea9Nim1wrIP6tiXNMIZyphAkBFRnVF22dWWNeDVoFoVwI0YIS4BIXgfBs/QNwxAQsvjwvq+8TcvQnWDpxw6DNGlHMtacXNNEy4xepfXrPc2Hwh</textarea>
+                                                            </div>
+                                                            <span class="help-block"><a onclick="window.open('https://openhome.alipay.com/doc/docIndex.htm?url=https://openhome.alipay.com/doc/viewKbDoc.htm?key=236615_428849&type=info','','height=500,width=611,scrollbars=yes,status =yes')">支付宝私钥，没有转PKCS8</a></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3">
+                                                                RSA密钥PKCS8格式
+                                                            </label>
+                                                            <div class="col-sm-5">
+                                                                <textarea class="form-control" id="private_key" name="private_key" rows="9">MIICdwIBADANB*************************JdAgEAAoGBANZtKcIvIhN0PMf10bsm4YVbAVs/yWzE1osWXqWM66zAXjbk6z6psYgxPUvYIKrhOWBsNKlPqiDjoMiX1REWOsU3KMBz34v2ilB/oj+ixEAqtLKlEH8UTOFITCYFSXf/YV7U5REr5LxsOYsWmQDRD7ICJsDTNvvwkMihh21xymZjAgMBAAECgYEArd2OAppdMxEJR8oW6X25V3xXOTobhUqF+/mDfREq98RzoGc2KHVIMnpajWkN9ADzmS+j87VY6ZopAP28EkLIGy1z1RZxHRnbDoZ/Revk9Qagv4jwNgfGuiIRuDkqizoIPBY7wXfMWoL5kM9Ogkk0s9heFTi7X47+C1BJUaLrdIECQQDv2AzJQaSNDfNlNfcvmbF22FcTnWkKgFy8uk5Fy8NYY7G6BPyLTbhDtkgVePQOMRPqbeYCZhBIMCglXyOqbeXzAkEA5N7OBETSVfb051R2pMqgrvA714QWSfHQo1SD2jlpUtyAqCSzs7xA9TdNDx5O0dPv3md9YcLVN1ofMTuvBXtp0QJAMKXk6gl7g/TZcqUAj1IgUdfNybe675tbtBgh+jw7Ujleejm6s9K+1lUpx9kxv5Mq0/kYl1H2aX4DFpl2lYIXCwJBAKW4ZvhUVPEGFqMCV75PMjY5oTsWW4VDYU1Cvw5ej9L98vLNUImOgIKOfm+6BFyO15r02KbXCsg/q2Jc0whnKmECQEVGdUXbZ1ZY14NWgWhXAjRghLgEheB8Gz9A3DEBCy+PC+r7xNy9CdYOnHDoM0aUcy1pxc00TLjF6l9es9zYfCE=</textarea>
+                                                            </div>
+                                                            <span class="help-block"><a onclick="window.open('https://openhome.alipay.com/doc/docIndex.htm?url=https://openhome.alipay.com/doc/viewKbDoc.htm?key=236615_428849&type=info','','height=500,width=611,scrollbars=yes,status =yes')">支付宝私钥转PKCS8格式</a></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>                                <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-offset-5 col-sm-7">
+                                                        <input type="button" value="保存" class="btn btn-primary" onclick="SaveValueParameterPaySet('formValueParameter')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- END FORM-->
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="tab_ali">
+
+                                        <div class="modal-body">
+                                            <!-- BEGIN FORM-->
+                                            <form action="/SystemManage/PayParameter/SaveParameter" class="form-horizontal" id="formValueParameter2" method="post">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        总部微信收款设置
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    总部微信商户号
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control input-sm"
+                                                                           value="1230258902" id="mch_id" name="mch_id">
+                                                                </div>
+                                                                <span class="help-block">微信支付商户后台"账户预览"中查询</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    微信支付API密钥
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control input-sm" value="198*************************5816" id="payKey" name="payKey">
+                                                                </div>
+                                                                <span class="help-block">如果开启商户独立收款，服务商支付密钥和总部微信商户号密钥保持一致</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    微信证书上传
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control input-sm" style="height: 25px;" id="fileTxt" name="WeiXinLEC" readonly="readonly" type="text" value="">
+                                                                        <span class="input-group-btn">
+                                                                            <input type="button" id="uploadButton" value="上传证书" />
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    微信支付费率
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control input-sm" value="0.006" name="WeiXinPaidRates">
+                                                                </div>
+                                                                <span class="help-block">设置后与商户结算金额，自动扣除费率</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        服务商微信收款设置
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    服务商商户号
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control input-sm" value="1332698901" id="server_mch_id" name="server_mch_id">
+                                                                </div>
+                                                                <span class="help-block">服务商收款商户号</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-3">
+                                                                    商户独立收款
+                                                                </label>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control  input-sm" name="IsBusinessCollection" id="IsBusinessCollection">
+                                                                        <option value="true">启用</option>
+                                                                        <option value="false">关闭</option>
+                                                                    </select>
+                                                                </div>
+                                                                <span class="help-block">开启商户独立收款需要申请成为服务商</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>                                <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-offset-5 col-sm-7">
+                                                        <input type="button" value="保存" class="btn btn-primary" onclick="SaveValueParameterPaySet('formValueParameter2')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- END FORM-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Map";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src=@Url.Content("/Content/admin/js/bootstrap.min.js")></script>
+</head>
+<body>
+
+    <ol class="breadcrumb">
+        <li><a href="/set/admin/center">首页></a></li>
+        <li><a href="/business/chainstore/list">门店列表></a></li>
+        <li class="active">位置标记</li>
+    </ol>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-inline">
+                    <input type="text" class="form-control input-sm" id="txtAddress" placeholder="输入您的具体地址" />
+                    <button type="button" class="btn btn-primary" onclick="SearchMap();">
+                        搜索我的位置<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                    </button>
+                    <span class="text-primary">点击地图出现红点，拖动红点到你的位置，点击保存即可。</span>
+                </div>
+            </div>
+        </div>
+        <!--引用百度地图API-->
+        <style type="text/css">
+            .iw_poi_title {
+                color: #CC5522;
+                font-size: 14px;
+                font-weight: bold;
+                overflow: hidden;
+                padding-right: 13px;
+                white-space: nowrap;
+            }
+
+            .iw_poi_content {
+                font: 12px arial,sans-serif;
+                overflow: visible;
+                padding-top: 4px;
+                /*white-space: -moz-pre-wrap;*/
+                word-wrap: break-word;
+            }
+        </style>
+        <div class="row">
+            <div class="form-group">
+            </div>
+        </div>
+        <!--ak=你的秘钥-->
+        <!--百度地图容器-->
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height:350px;border:#ccc solid 1px;overflow:hidden;" id="dituContent"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="SaveMap();">保存</button>
+        <button type="button" class="btn btn-default" onclick="javascript: window.history.back(-1);" data-dismiss="modal">返回</button>
+
+    </div>
+
+
+    @Html.Hidden("Longitude", Request.QueryString["lng"])
+    @Html.Hidden("Latitude", Request.QueryString["Lat"])
+    @Html.Hidden("ChainStoreGuid", Request.QueryString["guid"])
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9a76a6f405d191d7a5382cf9c657b57e"></script>
+    <script type="text/javascript">
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        map.addEventListener("click", function (e)
+        {
+            map.clearOverlays();
+            point = new BMap.Point(e.point.lng, e.point.lat);
+            var marker = new BMap.Marker(point);
+            marker.setTitle("标记我的位置");
+            marker.enableMassClear();
+            marker.enableDragging();
+            map.addOverlay(marker);
+            $("#Longitude").val(e.point.lng);
+            $("#Latitude").val(e.point.lat);
+        });
+        //Longitude 经度,Latitude 纬度
+        function PointMap(lng, lat)
+        {
+            map.reset();
+            map.centerAndZoom(new BMap.Point(lng, lat), 17);
+            map.enableScrollWheelZoom(true);
+            map.clearOverlays();
+            var new_point = new BMap.Point(lng, lat);
+            var marker = new BMap.Marker(new_point);  // 创建标注
+            map.addOverlay(marker);              // 将标注添加到地图中
+            map.panTo(new_point);
+        }
+        function SearchMap()
+        {
+            var address = $("#txtAddress").val().trim();
+            if (address == "")
+            {
+                $("#txtAddress").focus(); return;
+            }
+            map.reset();
+            var local = new BMap.LocalSearch(map, {
+                renderOptions: { map: map }
+            });
+            local.search(address);
+            var point = map.getCenter();
+            map.centerAndZoom(point, 17);
+        }
+
+        function DefaultPoint()
+        {
+            map.reset();
+            var point = new BMap.Point(116.331398, 39.897445);
+            map.enableScrollWheelZoom();
+            function myFun(result)
+            {
+                var cityName = result.name;
+                map.setCenter(cityName);
+            }
+            var myCity = new BMap.LocalCity();
+            myCity.get(myFun);
+            var point = map.getCenter();
+            map.centerAndZoom(point, 17);
+        }
+
+        function SaveMap()
+        {
+            var lng = $("#Longitude").val();
+            var lat = $("#Latitude").val();
+            var chianStoreGuid = $("#ChainStoreGuid").val();
+            $.post("/business/chainstore/savemap", {
+                guid: chianStoreGuid, lng: lng, lat: lat
+            }, function (data)
+            {
+                if (data.succ)
+                {
+                    parent.layer.alert(data.msg, { title: "提示", icon: 6, time: 4000, yes: function () { window.location.reload(); } });
+                } else
+                { parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 4000 }); }
+            });
+        }
+        document.onkeydown = function (e)
+        {
+            if (!e)
+            {
+                e = window.event;
+            }
+            if ((e.keyCode || e.which) == 13)
+            {
+                SearchMap();
+            }
+        }
+        $(function ()
+        {
+            var Longitude = $("#Longitude").val();
+            var Latitude = $("#Latitude").val();
+            $("#txtAddress").val("");
+            debugger;
+            if (Longitude == "" || Latitude == "")
+            {
+                DefaultPoint();
+            } else
+            {
+
+                PointMap(Longitude, Latitude);
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+﻿
+@{
+    Layout = null;
+}
+@using Shop.Entity
+
+@model TGoods
+<br />
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">*商品编号</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.Barcode, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-100", @errormsg = "商品编号不能超过100个字符！", @nullmsg = "请输入商品编号！" })
+            </div>
+            <label class="col-sm-2 control-label">*商品名称</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-300", @errormsg = "商品名称不能超过300个字符！", @nullmsg = "请输入商品名称！" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">*所属商户</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(c => c.BusinessGuid, (IEnumerable<SelectListItem>)ViewData["Business"], "-所属商户-", new { id = "Business", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属分类!", @errormsg = "请选择所属分类!" })
+            </div>
+            <label class="col-sm-2 control-label">*所属类别</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(c => c.GoodsCategoryGuid, (SelectList)ViewData["CateGory"], "-所属类别-", new { id = "Category", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属分类!", @errormsg = "请选择所属分类!" })
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+
+            <label class="col-sm-2 control-label">*所属品牌</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(c => c.BrandGuid, (List<SelectListItem>)ViewData["Brand"], "-所属品牌(可选)-", new { @class = "form-control input-sm" })
+            </div>
+
+            <label class="col-sm-2 control-label">显示顺序</label>
+            <div class="col-sm-3" data-toggle="tooltip" data-placement="right" title="商品将按照该数字从大到小依次显示">
+                @Html.TextBoxFor(c => c.Sort, new
+           {
+               @class = "form-control input-sm",
+               @placeholder = "数字小优先显示",
+               @datatype = "n",
+               @errormsg = "排序必须是数字",
+               @nullmsg = "请填写展示顺序!"
+           })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">*分销设置</label>
+            <div class="col-sm-3">
+                <div class="radio radio-primary radio-inline">
+                    @Html.RadioButtonFor(c => c.AllowDistribution, "true", new { @id = "allow", @class = "" })
+                    <label for="allow">允许</label>
+                </div>
+
+                <div class="radio radio-primary radio-inline">
+                    @Html.RadioButtonFor(c => c.AllowDistribution, "false", new { @id = "no", @class = "" })
+                    <label for="no">禁止</label>
+                </div>
+            </div>
+
+            <label class="col-sm-2 control-label">*分销提成</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    @Html.TextBoxFor(c => c.DistributionMoney, new { @id = "url1", @class = "form-control input-sm", @value = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "分销提成数额必须是数字!", @nullmsg = "请填写分销提成!" })
+                    <div class="input-group-addon">元</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">*上下架</label>
+            <div class="col-sm-3">
+                <div class="radio radio-primary radio-inline">
+                    @Html.RadioButtonFor(c => c.Status, "0", new { @id = "up", @class = "" })
+                    <label for="up">上架</label>
+                </div>
+
+                <div class="radio radio-primary radio-inline">
+                    @Html.RadioButtonFor(c => c.Status, "-1", new { @id = "down", @class = "" })
+                    <label for="down">下架</label>
+                </div>
+            </div>
+
+            <label class="col-sm-2 control-label">*库存总量</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.StoreCount, new { @class = "form-control input-sm", @placeholder = "", @datatype = "n", @errormsg = "库存数量必须是数字", @nullmsg = "请填写库存数量!" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">*门市价</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    @Html.TextBoxFor(c => c.MarketPrice, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "价格必须是数字!", @nullmsg = "请填写门市价!" })
+                    <div class="input-group-addon">元</div>
+                </div>
+            </div>
+            <label class="col-sm-2 control-label">*商城价</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    @Html.TextBoxFor(c => c.OnLinePrice, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "价格必须是数字!", @nullmsg = "请填写商城价!" })
+                    <div class="input-group-addon">元</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-8">
+                @Html.TextAreaFor(c => c.Detail, new { @style = "width:100%;height:300px;" })
+            </div>
+        </div>
+    </div>
+</div>

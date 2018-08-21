@@ -1,0 +1,17 @@
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Help.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Help.pdb
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Dal.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\System.Web.Mvc.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Entity.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\EntityFramework.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Dal.pdb
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\System.Web.Mvc.xml
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Entity.pdb
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\Shop.Entity.dll.config
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\EntityFramework.xml
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\zh-Hans\System.Web.Mvc.resources.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\obj\Debug\Shop.Help.csprojResolveAssemblyReference.cache
+G:\我的项目\Shop\Shop2.0\Shop.Help\obj\Debug\Shop.Help.dll
+G:\我的项目\Shop\Shop2.0\Shop.Help\obj\Debug\Shop.Help.pdb
+G:\我的项目\Shop\Shop2.0\Shop.Help\obj\Debug\Shop.Help.csproj.CoreCompileInputs.cache

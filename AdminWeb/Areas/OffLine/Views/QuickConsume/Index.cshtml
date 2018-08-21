@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线下></a></li>
+            <li class="active">快速消费</li>
+        </ol>
+        <div class="col-md-10 row">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h4><strong>快速消费</strong></h4></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4 class="text-right lead"><strong>会员号:</strong></h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" id="MemberCard" class="form-control input-lg" placeholder="手机号/卡号">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-lg" type="button">读卡</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal ">
+                                <dt>姓名:</dt>
+                                <dd>李大成</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal">
+                                <dt>手机号:</dt>
+                                <dd>15220231800</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal">
+                                <dt>会员等级:</dt>
+                                <dd>铂金会员</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal ">
+                                <dt>余额:</dt>
+                                <dd>896.56</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal">
+                                <dt>积分:</dt>
+                                <dd>7899.50</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <dl class="dl-horizontal">
+                                <dt>注册时间:</dt>
+                                <dd>2015-12-05</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <hr style="border-color: #d2a3a3;" />
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="font-size:20px;">消费金额</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="number" class="form-control input-lg" id="Value" placeholder="">
+                                    <div class="input-group-addon">元</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label" style="font-size:20px;">获得积分</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="number" class="form-control input-lg" id="Point" placeholder="系统自动计算" readonly="readonly" />
+                                    <div class="input-group-addon">分</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-10">
+                                <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-hand-up"></span>确定消费</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("#MemberCard").focus();
+    </script>
+</body>
+</html>

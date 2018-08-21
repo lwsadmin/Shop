@@ -1,0 +1,242 @@
+2018-01-10 19:48:47 2153************ /n/n0
+2018-01-10 19:53:23 3524************ /n/n0
+2018-01-10 20:22:37 1197************ /n/n 1=1 and OperatorGuid='c9eae6cd-a30f-e611-8e87-b888e3d73bed'
+2018-01-10 20:22:37 2167************ /n/nerror line: 1, error number: 156, error message: 关键字 'select' 附近有语法错误。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 Shop.Bll.RoleLogic.GetSelectRole(String where) 位置 G:\我的项目\Shop\Shop2.0\Shop.Bll\SystemSet\RoleLogic.cs:行号 64
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 57
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:22:37
+2018-01-10 20:23:40 2823************ /n/nerror line: 1, error number: 156, error message: 关键字 'select' 附近有语法错误。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 Shop.Bll.RoleLogic.GetSelectRole(String where) 位置 G:\我的项目\Shop\Shop2.0\Shop.Bll\SystemSet\RoleLogic.cs:行号 64
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 57
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:23:40
+2018-01-10 20:24:30 4872************ /n/nerror line: 1, error number: 207, error message: 列名 'OperatorGuid' 无效。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 Shop.Bll.RoleLogic.GetSelectRole(String where) 位置 G:\我的项目\Shop\Shop2.0\Shop.Bll\SystemSet\RoleLogic.cs:行号 64
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 57
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:24:30
+2018-01-10 20:25:35 4329************ /n/n财务出纳
+2018-01-10 20:25:35 4339************ /n/n商铺管理员
+2018-01-10 20:25:35 4349************ /n/n美的总部管理员
+2018-01-10 20:25:35 4349************ /n/n总经理
+2018-01-10 20:25:35 4349************ /n/n收银
+2018-01-10 20:25:35 4359************ /n/n超管
+2018-01-10 20:25:35 4359************ /n/n小米董事长
+2018-01-10 20:25:35 4359************ /n/n总部管理员
+2018-01-10 20:25:35 4369************ /n/n终端操作员
+2018-01-10 20:25:38 5601************ /n/nDataBinding:“System.Web.Mvc.SelectListItem”不包含名为“Guid”的属性。----   在 System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   在 System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   在 System.Web.Mvc.MultiSelectList.Eval(Object container, String expression)
+   在 System.Web.Mvc.MultiSelectList.<>c__DisplayClass2.<GetListItemsWithValueField>b__1(Object item)
+   在 System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 System.Web.Mvc.MultiSelectList.GetEnumerator()
+   在 System.Web.Mvc.Html.SelectExtensions.GetSelectListWithDefaultValue(IEnumerable`1 selectList, Object defaultValue, Boolean allowMultiple)
+   在 System.Web.Mvc.Html.SelectExtensions.SelectInternal(HtmlHelper htmlHelper, ModelMetadata metadata, String optionLabel, String name, IEnumerable`1 selectList, Boolean allowMultiple, IDictionary`2 htmlAttributes)
+   在 System.Web.Mvc.Html.SelectExtensions.DropDownListFor[TModel,TProperty](HtmlHelper`1 htmlHelper, Expression`1 expression, IEnumerable`1 selectList, String optionLabel, IDictionary`2 htmlAttributes)
+   在 ASP._Page_Areas_Set_Views_admin_Add_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\Add.cshtml:行号 40
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 ASP._Page_Areas_Set_Views_admin_List_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\List.cshtml:行号 68
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:25:38
+2018-01-10 20:27:40 7590************ /n/n财务出纳
+2018-01-10 20:27:40 7590************ /n/n商铺管理员
+2018-01-10 20:27:40 7590************ /n/n美的总部管理员
+2018-01-10 20:27:40 7590************ /n/n总经理
+2018-01-10 20:27:40 7600************ /n/n收银
+2018-01-10 20:27:40 7600************ /n/n超管
+2018-01-10 20:27:40 7600************ /n/n小米董事长
+2018-01-10 20:27:40 7600************ /n/n总部管理员
+2018-01-10 20:27:40 7610************ /n/n终端操作员
+2018-01-10 20:27:46 1293************ /n/nDataBinding:“System.Web.Mvc.SelectListItem”不包含名为“Guid”的属性。----   在 System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   在 System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   在 System.Web.Mvc.MultiSelectList.Eval(Object container, String expression)
+   在 System.Web.Mvc.MultiSelectList.<>c__DisplayClass2.<GetListItemsWithValueField>b__1(Object item)
+   在 System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 System.Web.Mvc.MultiSelectList.GetEnumerator()
+   在 System.Web.Mvc.Html.SelectExtensions.GetSelectListWithDefaultValue(IEnumerable`1 selectList, Object defaultValue, Boolean allowMultiple)
+   在 System.Web.Mvc.Html.SelectExtensions.SelectInternal(HtmlHelper htmlHelper, ModelMetadata metadata, String optionLabel, String name, IEnumerable`1 selectList, Boolean allowMultiple, IDictionary`2 htmlAttributes)
+   在 System.Web.Mvc.Html.SelectExtensions.DropDownListFor[TModel,TProperty](HtmlHelper`1 htmlHelper, Expression`1 expression, IEnumerable`1 selectList, String optionLabel, IDictionary`2 htmlAttributes)
+   在 ASP._Page_Areas_Set_Views_admin_Edit_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\Edit.cshtml:行号 40
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 ASP._Page_Areas_Set_Views_admin_List_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\List.cshtml:行号 72
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:27:46
+2018-01-10 20:28:01 0352************ /n/n财务出纳
+2018-01-10 20:28:01 0352************ /n/n商铺管理员
+2018-01-10 20:28:01 0352************ /n/n美的总部管理员
+2018-01-10 20:28:01 0352************ /n/n总经理
+2018-01-10 20:28:01 0352************ /n/n收银
+2018-01-10 20:28:01 0362************ /n/n超管
+2018-01-10 20:28:01 0362************ /n/n小米董事长
+2018-01-10 20:28:01 0362************ /n/n总部管理员
+2018-01-10 20:28:01 0362************ /n/n终端操作员
+2018-01-10 20:28:06 2175************ /n/nDataBinding:“System.Web.Mvc.SelectListItem”不包含名为“Guid”的属性。----   在 System.Web.UI.DataBinder.GetPropertyValue(Object container, String propName)
+   在 System.Web.UI.DataBinder.Eval(Object container, String[] expressionParts)
+   在 System.Web.Mvc.MultiSelectList.Eval(Object container, String expression)
+   在 System.Web.Mvc.MultiSelectList.<>c__DisplayClass2.<GetListItemsWithValueField>b__1(Object item)
+   在 System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 System.Web.Mvc.MultiSelectList.GetEnumerator()
+   在 System.Web.Mvc.Html.SelectExtensions.GetSelectListWithDefaultValue(IEnumerable`1 selectList, Object defaultValue, Boolean allowMultiple)
+   在 System.Web.Mvc.Html.SelectExtensions.SelectInternal(HtmlHelper htmlHelper, ModelMetadata metadata, String optionLabel, String name, IEnumerable`1 selectList, Boolean allowMultiple, IDictionary`2 htmlAttributes)
+   在 System.Web.Mvc.Html.SelectExtensions.DropDownListFor[TModel,TProperty](HtmlHelper`1 htmlHelper, Expression`1 expression, IEnumerable`1 selectList, String optionLabel, IDictionary`2 htmlAttributes)
+   在 ASP._Page_Areas_Set_Views_admin_Edit_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\Edit.cshtml:行号 40
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 ASP._Page_Areas_Set_Views_admin_List_cshtml.Execute() 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Views\admin\List.cshtml:行号 72
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:28:06
+2018-01-10 20:28:24 6906************ /n/n财务出纳
+2018-01-10 20:28:24 6916************ /n/n商铺管理员
+2018-01-10 20:28:24 6916************ /n/n美的总部管理员
+2018-01-10 20:28:24 6916************ /n/n总经理
+2018-01-10 20:28:24 6916************ /n/n收银
+2018-01-10 20:28:24 6926************ /n/n超管
+2018-01-10 20:28:24 6926************ /n/n小米董事长
+2018-01-10 20:28:24 6926************ /n/n总部管理员
+2018-01-10 20:28:24 6926************ /n/n终端操作员
+2018-01-10 20:29:45 6112************ /n/n财务出纳
+2018-01-10 20:29:45 6122************ /n/n商铺管理员
+2018-01-10 20:29:45 6122************ /n/n商铺管理员
+�员
+2018-01-10 20:29:45 6122************ /n/n总经理
+2018-01-10 20:29:45 6132************ /n/n美的总部管理员
+2018-01-10 20:29:45 6132************ /n/n收银
+2018-01-10 20:29:45 6132************ /n/n总经理
+2018-01-10 20:29:45 6132************ /n/n超管
+2018-01-10 20:29:45 6132************ /n/n收银
+2018-01-10 20:29:45 6132************ /n/n小米董事长
+2018-01-10 20:29:45 6132************ /n/n超管
+2018-01-10 20:29:45 6142************ /n/n总部管理员
+2018-01-10 20:29:45 6142************ /n/n小米董事长
+2018-01-10 20:29:45 6142************ /n/n终端操作员
+2018-01-10 20:29:45 6142************ /n/n总部管理员
+2018-01-10 20:29:45 6142************ /n/n终端操作员
+2018-01-10 20:29:51 6355************ /n/nerror line: 7, error number: 207, error message: 列名 'ManageRole' 无效。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 54
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:29:51
+2018-01-10 20:29:55 5818************ /n/nerror line: 7, error number: 207, error message: 列名 'ManageRole' 无效。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 54
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:29:55
+2018-01-10 20:30:51 9230************ /n/nerror line: 2, error number: 207, error message: 列名 'manageRole' 无效。----   在 Shop.Dal.DalGeneric`1.GetPaged(Int32 start, Int32 limit, String table, String fields, String where, String orderBy, Int32& total) 位置 G:\我的项目\Shop\Shop2.0\Shop.Dal\DalGeneric.cs:行号 258
+   在 AdminWeb.Areas.Set.Controllers.AdminController.List(Int32 id) 位置 G:\我的项目\Shop\Shop2.0\AdminWeb\Areas\Set\Controllers\AdminController.cs:行号 54
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)---2018/1/10 星期三 下午 8:30:51
+2018-01-10 20:31:38 7867************ /n/n财务出纳
+2018-01-10 20:31:38 7877************ /n/n商铺管理员
+2018-01-10 20:31:38 7877************ /n/n美的总部管理员
+2018-01-10 20:31:38 7877************ /n/n总经理
+2018-01-10 20:31:38 7877************ /n/n收银
+2018-01-10 20:31:38 7887************ /n/n超管
+2018-01-10 20:31:38 7887************ /n/n小米董事长
+2018-01-10 20:31:38 7887************ /n/n总部管理员
+2018-01-10 20:31:38 7887************ /n/n终端操作员
+2018-01-10 20:32:40 2422************ /n/n财务出纳
+2018-01-10 20:32:40 2422************ /n/n商铺管理员
+2018-01-10 20:32:40 2432************ /n/n美的总部管理员
+2018-01-10 20:32:40 2432************ /n/n总经理
+2018-01-10 20:32:40 2432************ /n/n收银
+2018-01-10 20:32:40 2432************ /n/n超管
+2018-01-10 20:32:40 2432************ /n/n小米董事长
+2018-01-10 20:32:40 2442************ /n/n总部管理员
+2018-01-10 20:32:40 2442************ /n/n终端操作员

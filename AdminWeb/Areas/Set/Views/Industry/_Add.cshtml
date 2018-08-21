@@ -1,0 +1,151 @@
+﻿
+@{Layout = null;}
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/Content/kindeditor/lang/zh_CN.js"></script>
+<div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="headerTitle">新增行业</h4>
+            </div>
+            <div class="modal-body">
+                <div class="portlet-body form">
+                    @using (Html.BeginForm("AddSave", "Industry", FormMethod.Post, new { id = "add", @class = "form-horizontal" }))
+                    {
+                        <input type="hidden" value="" id="Guid" name="Guid" />
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">
+                                        行业名称<span class="required"> * </span>
+                                    </label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control input-sm" name="Title" id="Title" datatype="*" nullmsg="请输入行业名称!" sucmsg=" " errormsg="请输入行业名称!" value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            上级行业<span class="required"> * </span>
+                                        </label>
+                                        <div class="col-sm-5">
+
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">
+                                        行业图标<span class="required">&nbsp;&nbsp;</span>
+                                    </label>
+                                    <div class="col-sm-5">
+                                        <div class="input-group">
+                                            <input type="text" id="url1" name="Icon" class="form-control input-sm" value="" readonly="readonly" />
+
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary btn-sm" type="button" id="image">上传图片</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">
+                                        显示顺序<span class="required"> * </span>
+                                    </label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control input-sm input-inline" name="Sort" id="Sort" datatype="n" nullmsg="请输入显示顺序!" sucmsg=" " errormsg="请输入数字!" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="message-text" class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-6" id="tip">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="保存" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#Add').on('hidden.bs.modal', function (e)
+    {
+        layer.closeAll('tips'); //关闭所有的tips层
+    })
+
+    KindEditor.ready(function (K)
+    {
+        var editor = K.editor({
+            allowFileManager: true
+        });
+
+        K('#image').click(function ()
+        {
+            editor.loadPlugin('image', function ()
+            {
+                editor.plugin.imageDialog({
+                    showRemote: false,
+                    imageUrl: K('#url').val(),
+                    clickFn: function (url, title, width, height, border, align)
+                    {
+                        K('#url').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+    function ShowValidformMsg(msg, id)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    layer.closeAll();
+                    parent.layer.closeAll();
+                    parent.layer.msg(data.msg, { icon: 1 });
+                    $('#Add').modal('hide')
+                    $(".pagination .active").find("a").click();
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg.trim() != "" && o.type != 1)
+                { ShowValidformMsg(msg, $(o.obj).attr("id")); }
+            }
+        }
+     );
+    })
+
+</script>

@@ -1,0 +1,198 @@
+﻿
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@using Shop.Dal.Emnu;
+@{
+    Layout = null;
+    string actionString = RoleLogic.GetPowerStr("MemberCategory", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+    <script src="~/Content/LwsJS/List.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <style>
+        .pibarea {
+            float: left;
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">会员管理></a></li>
+            <li class="active">会员列表</li>
+        </ol>
+
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" style="padding:0px;" role="search">
+                <a href="#QueryInfo" class="btn btn-primary btn-sm" data-toggle="collapse"><span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>&nbsp;高级查询</a>
+
+                <a href="#" id="btnImportMember" class="btn btn-primary btn-sm" onclick="$('#divMemberImport').modal('show');"><span class="glyphicon glyphicon-circle-arrow-up"></span>&nbsp;导入会员</a>
+
+                <a class="btn btn-primary btn-sm" href="/MemberManage/MemberList/%23%23" onclick="return MemberExportShow();"><span class="glyphicon glyphicon-circle-arrow-down"></span>&nbsp;导出会员</a>
+
+                <a href="#" id="btnOperatePoint" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;增减积分</a>
+                <a href="#" id="btnSendMsg" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span>&nbsp;短信发送</a>
+
+                <a href="#" id="btnSendCoupon" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send"></span>&nbsp;发送代金券</a>
+                <a href="#" id="btnLockedMember" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-lock"></span>&nbsp;锁定</a>
+
+                <a href="#" id="btnUnLockedMember" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span>&nbsp;解锁</a>
+
+                <a href="#" id="btnDeleteMember" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                @Html.Partial("Search")
+            </div>
+            <div id="divTable">
+                <table class="table table-bordered  table-condensed table-condensed  table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>头像</th>
+                            <th>姓名</th>
+                            <th>推荐人</th>
+                            <th>状态</th>
+                            <th>所属门店</th>
+                            <th>会员等级</th>
+                            <th>性别</th>
+                            <th>手机</th>
+                            <th>卡号</th>
+                            <th>可用积分(分)</th>
+                            <th>可用余额(元)</th>
+                            <th>注册方式</th>
+                            <th>注册时间</th>
+                            <th class="hidden-xs">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="subBox" value="@row["Guid"]" id="ck@(row["Guid"])" />
+                                </td>
+                                <td class="title"><img style="width:25px;" src="@row["HeadImg"]" onerror="this.src='/Content/img/people.png'" /></td>
+                                <td class="title">@row["MemberName"]</td>
+
+                                <td> @(!DBNull.Value.Equals(row["RemName"]) ? row["RemName"] : "-") </td>
+                                @switch (row["Status"].ToString())
+                                {
+                                    case "0":
+                                        <td><span class="labele-success"></span>正常</td>
+                                        break;
+                                    case "-1":
+                                        //列表不显示删除的
+                                        <td><span class="label label-danger">已删除</span></td>
+                                        break;
+                                    case "1":
+                                        <td><span class="label label-danger">锁定</span></td>
+                                        break;
+                                }
+
+                                <td>@row["Name"]</td>
+                                <td> @row["Title"] </td>
+                                <td>@(row["Sex"].ToString() == "0" ? "男" : "女")</td>
+                                <td>@row["Mobile"]</td>
+                                <td>@row["CardID"]</td>
+                                <td>@row["AvailablePoint"]</td>
+                                <td>@row["AvailableValue"]</td>
+                                <td>@Enum.GetName(typeof(MemberSource), row["RegSource"])</td>
+                                <td>@Convert.ToDateTime(row["RegTime"]).ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    @if (actionString.Contains("Edit"))
+                                    {
+                                        <a class="btn btn-default btn-xs" title='编辑信息' href="/Member/MemberCategory/add/@row["Guid"]?pageIndex=@Model.CurrentPageIndex">编辑</a>
+                                    }
+                                    @if (actionString.Contains("Delete"))
+                                    {
+                                        <a class="btn btn-default btn-xs" title='' onclick="Delete('@row["Guid"]','/Member/MemberCategory/delete','/Member/MemberCategory/list/@(Model.CurrentPageIndex - 1 > 1 ? Model.CurrentPageIndex - 1 : 1)');">删除 </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-xs-9" style="width:auto;padding-left:0px;">
+                    <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+                    <ul class="pagination">
+                        <li>
+                            <span aria-hidden="true">
+                                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+                            </span>
+                        </li>
+                        <li>
+                            <span aria-hidden="true">
+                                每页
+                                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                条
+                            </span>
+                        </li>
+                    </ul>
+                    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    OnSuccess = "Success()",
+    EnablePartialLoading = true
+}
+)
+                    <ul class="pagination" style="width:20%;margin-top: 0px;">
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon">第</span>
+                                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                                <span class="input-group-addon">页</span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-sm" type="button">GO</button>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+        }
+    </div>
+    <script type="text/javascript">
+        function InputPageIndex(obj) {
+            var pageIndex = $(obj).val().trim();
+            if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val())) {
+                $(obj).val($("#TotalPageCount").val());
+            }
+        }
+    </script>
+</body>
+</html>

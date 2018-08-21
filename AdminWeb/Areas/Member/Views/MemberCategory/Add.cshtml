@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+@using Shop.Entity;
+@model TMemberCategory
+
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+<link href="~/Content/Validform_v5.3.2/Validform_v5.3.2/demo/css/style.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<ol class="breadcrumb">
+    <li><a href="/set/admin/center">首页></a></li>
+    <li><a href="#">会员管理></a></li>
+    <li><a href="/member/membercategory/list">会员级别></a></li>
+    <li class="active">@(Model.Guid == Guid.Empty ? "新增会员级别" : "编辑会员级别")</li>
+</ol>
+<div class="modal-body">
+    @{Html.BeginForm("AddSave", "memberCategory", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+    @Html.HiddenFor(c => c.Guid)
+    @Html.HiddenFor(c => c.OperatorGuid)
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*级别标题</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "标题不能超过50个字符！", @nullmsg = "请输入标题！" })
+                </div>
+                <label class="col-sm-2 control-label">办理收费</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.SoldMoney, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "价格必须是数字!", @nullmsg = "请填写售价!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*初始积分</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.DefaultPoint, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "初始积分必须是数字!", @nullmsg = "请填写初始积分!" })
+                </div>
+                <label class="col-sm-2 control-label">*初始余额</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.DefaultValue, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "初始余额必须是数字!", @nullmsg = "请填写初始余额!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*推荐奖励</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.RecommendPoint, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "初始积分必须是数字!", @nullmsg = "请填写初始积分!" })
+                </div>
+                <label class="col-sm-2 control-label">*升级门槛</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.UpgradeNeedPoint, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "初始余额必须是数字!", @nullmsg = "请填写初始余额!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员权益</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(c => c.MemberRight, new { @style = "width:550px;height:300px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" style="margin-left: -30%;" value="保存" />
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:history.back(-1);">取消</button>
+    </div>
+    @{Html.EndForm();}
+</div>
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<script type="text/javascript">
+
+    var editor;
+    KindEditor.ready(function (K)
+    {
+        editor = K.create('#MemberRight',
+            {
+                uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                allowFileManager: false,
+                formatUploadUrl: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
+                afterBlur: function () { this.sync(); }
+            });
+    });
+
+
+    function ShowTipMsg(id, msg)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/member/memberCategory/list/@Request.QueryString["pageIndex"]';
+                } else
+                { alert(data.msg); }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg != "通过信息验证！")
+                {
+
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+            }
+        }
+        );
+    });
+</script>

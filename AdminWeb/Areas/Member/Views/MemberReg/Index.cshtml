@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+@using Shop.Entity;
+@using Shop.Help;
+@model TMember
+
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+<link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li><a href="/set/admin/center">首页></a></li>
+        <li><a href="/member/member/list">会员列表></a></li>
+        <li class="active">会员办理</li>
+    </ol>
+    <div class="modal-body">
+        @{Html.BeginForm("Save", "memberreg", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+        @Html.HiddenFor(c => c.Guid)
+        @Html.HiddenFor(c => c.OperatorGuid)
+        @Html.HiddenFor(c => c.BusinessGuid)
+        @Html.HiddenFor(c => c.ChainStoreGuid)
+        @Html.HiddenFor(c => c.RecommendMemberGuid)
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">*姓名</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.Name, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "姓名不能超过20个字符！", @nullmsg = "请输入姓名！" })
+                    </div>
+                    <label class="col-sm-2 control-label">*级别</label>
+                    <div class="col-sm-3">
+                        @Html.DropDownListFor(c => c.CategoryGuid, (SelectList)ViewData["MemberCateGory"], "-选择级别-", new { id = "Category", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择会员级别!", @errormsg = "请选择会员级别!" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">*手机</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.Mobile, new { @class = "form-control input-sm", @placeholder = "", @ajaxurl = "/member/memberreg/CheckExists", @datatype = "m", @nullmsg = "请输入会员手机号!", @errormsg = "请输入正确的手机号!" })
+                    </div>
+                    <label class="col-sm-2 control-label">*卡号</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.CardID, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "*1-50", @errormsg = "卡号最多不能超过50个字符！" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">*性别</label>
+                    <div class="col-sm-3">
+
+                        <div class="radio radio-primary radio-inline">
+                            @Html.RadioButtonFor(c => c.Sex, 0, new { @id = "nan" })
+                            <label for="nan">男</label>
+                        </div>
+
+                        <div class="radio radio-primary radio-inline">
+                            @Html.RadioButtonFor(c => c.Sex, 1, new { @id = "nv" })
+                            <label for="nv">女</label>
+                        </div>
+                    </div>
+                    <label class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.Email, new { @class = "form-control input-sm", @placeholder = "", @datatype = "e", @ignore = "ignore", @errormsg = "您输入邮箱格式不正确！" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">推荐人</label>
+                    <div class="col-sm-3">
+
+                        @Html.TextBox("RemcommendMobile", "", new { @class = "form-control input-sm", @datatype = "*", @ignore = "ignore", @ajaxurl = "/member/memberreg/CheckRemExists" })
+                    </div>
+                    <label class="col-sm-2 control-label">推荐人姓名</label>
+                    <div class="col-sm-3">
+                        @Html.TextBox("RemcommendName", "", new { @class = "form-control input-sm", @autocomplete = "off" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-3">
+                        @Html.PasswordFor(c => c.PassWord, new { @class = "form-control input-sm", @placeholder = "不填则为系统默认密码", @autocomplete = "off", @datatype = "*1-20", @ignore = "ignore", @errormsg = "密码不能超过20个字符!" })
+                    </div>
+                    <label class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-3">
+                        @Html.TextBox("PwdReCheck", "", new { @class = "form-control input-sm", @datatype = "*", @errormsg = "两次输入密码不一致!" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">生日</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.BirthDay, new { @class = "form-control input-sm", @placeholder = "", @onclick = "WdatePicker({startDate:'1990-01-01'});" })
+                    </div>
+                    <label class="col-sm-2 control-label">职业</label>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(c => c.Profession, new { @class = "form-control input-sm", @placeholder = "" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所在地</label>
+                    <div class="col-sm-6">
+                        @Html.GetAddress(c => c.ProvinceId, c => c.CityId, c => c.DistrictId, new { })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详细地址</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(c => c.Address, new { @class = "form-control input-sm", @placeholder = "区县街道", @datatype = "*1-100", @errormsg = "详细地址不能超过100个字符！", @nullmsg = "请输入详细地址！" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" style="margin-left: -30%;" value="保存" />
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:history.back(-1);">取消</button>
+        </div>
+        @{Html.EndForm();}
+    </div>
+
+</div>
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<script type="text/javascript">
+
+    function ShowTipMsg(id, msg)
+    {
+        if (String(msg).indexOf("请稍后") > -1) {
+            return;
+        }
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/member/member/list/@Request.QueryString["pageIndex"]';
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (o.type==3)
+                {
+
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+
+            }
+
+            ,
+            ajaxurl: {
+                success: function (data, obj) {
+                    //data是返回的json数据;
+                    //obj是当前正做实时验证表单元素的jquery对象;
+                    //注意：5.3版中，实时验证的返回数据须是含有status值的json数据！
+                    //跟callback里的ajax返回数据格式统一，建议不再返回字符串"y"或"n"。目前这两种格式的数据都兼容。
+
+                    if (data.status == "n") {
+
+                        ShowTipMsg($(obj).attr("id"), data.msg);
+                        $("#RecommendMemberGuid").val('');
+                        if (data.name != undefined) {
+                            $("#RemcommendName").val(data.name);
+                        }
+                    } else {
+                        if (data.msg != "") {
+                            $("#RecommendMemberGuid").val(data.msg);
+                            if (data.name != undefined) {
+                                $("#RemcommendName").val(data.name);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        );
+    });
+</script>

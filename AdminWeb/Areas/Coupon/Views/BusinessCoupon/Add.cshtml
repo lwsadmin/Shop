@@ -1,0 +1,265 @@
+﻿
+@{     Layout = null;}
+@using Shop.Entity;
+
+@model TBusinessCoupon
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li><a href="/set/admin/center">首页></a></li>
+        <li><a href="/coupon/BusinessCoupon/list">代金券</a>></li>
+        <li class="active">商户代金券</li>
+    </ol>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>提示:</strong>如果该代金券参与领取或消费,则不能修改金额，使用条件。图片建议尺寸比例  <span style="font-weight: bold; color: red;">宽:高 &nbsp;为 1.66:1</span>
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm("Save", "businessCoupon", FormMethod.Post, new { id = "add", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(c => c.Guid)
+            @Html.HiddenFor(c => c.OperatorGuid)
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                *名称
+                            </label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-100", @errormsg = "名称不能超过100个字符！", @nullmsg = "请输入名称！" })
+                            </div>
+                            <label class="control-label col-sm-2">
+                                *面额
+                            </label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <div class="input-group-addon">可抵用</div>
+                                    @Html.TextBoxFor(c => c.Value, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "面额必须是数字!", @nullmsg = "请填写面额!" })
+                                    <div class="input-group-addon">元</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                *抵用
+                            </label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <div class="input-group-addon">消费满</div>
+                                    @Html.TextBoxFor(c => c.UseValueLimit, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "请输入数字!", @nullmsg = "请输入使用规则!" })
+                                    <div class="input-group-addon">元可抵用</div>
+                                </div>
+                            </div>
+                            <label class="control-label col-sm-2">
+                                *总数量
+                            </label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(c => c.TotalCount, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "n", @errormsg = "总数量必须是数字!", @nullmsg = "请填写总数量!" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                *单人限领
+                            </label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(c => c.SigleReceiveCount, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "n", @errormsg = "必须是数字!", @nullmsg = "请填写领取限制!" })
+                            </div>
+                            <label class="col-sm-2 control-label">图片</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(c => c.Image, new { @id = "url1", @class = "form-control input-sm", @value = "", @readonly = "readonly" })
+                                    <span class="input-group-btn">
+                                        <button type="button" id="image1" class="btn btn-primary btn-sm" style="margin-left: -20px;">上传图片</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">*有效期</label>
+                            <div class="col-sm-3">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default btn-sm @(Model.ValidityType == 0 ? "active" : "")" onclick="Change(0);">
+                                        @Html.RadioButton("ValidityType", 0, new { @name = "options", @id = "option1" })
+                                        相对有效期
+                                    </label>
+                                    <label class="btn btn-default btn-sm @(Model.ValidityType == 1 ? "active" : "")" onclick="Change(1);">
+                                        @Html.RadioButton("ValidityType", 1, new { @name = "options", @id = "option2" })
+                                        固定有效期
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="deday" style="display:@(Model.ValidityType==0?"block":"none");">
+                                <label class="col-sm-2 control-label">*领取后</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(c => c.ValidityDay, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "n", @errormsg = "过期时间必须是数字!", @nullmsg = "请填写过期时间!" })
+                                        <div class="input-group-addon">天内有效</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="display:@(Model.ValidityType==1?"block":"none");" id="day">
+                                <div class="col-sm-5">
+                                    @Html.TextBoxFor(c => c.BeginTime, Model.BeginTime == null ? "" : Convert.ToDateTime(Model.BeginTime).ToString("yyyy-MM-dd"), new { @class = "form-control input-sm", @placeholder = "选择开始时间", @onclick = "WdatePicker();" })
+                                </div>
+                                <span style="float: left;">至</span>
+                                <div class="col-sm-5">
+                                    @Html.TextBoxFor(c => c.EndTime, Model.EndTime == null ? "" : Convert.ToDateTime(Model.EndTime).ToString("yyyy-MM-dd"), new { @class = "form-control input-sm", @placeholder = "选择结束时间", @onclick = "WdatePicker({minDate:'%y-%M-%d'})" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">叠加发送</label>
+                            <div class="col-sm-3">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default btn-sm @(Model.IsOverlay ? "active" : "")">
+                                        @Html.RadioButton("IsOverlay", true)
+                                        允许叠加&nbsp;
+                                    </label>
+                                    <label class="btn btn-default btn-sm @(Model.IsOverlay ? "" : "active")">
+                                        @Html.RadioButton("IsOverlay", false)
+                                        禁止叠加&nbsp;
+                                    </label>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label">所属商户</label>
+                            <div class="col-sm-3">
+                                <div class="btn-group" data-toggle="buttons">
+                                    @Html.DropDownListFor(c => c.BusinessGuid, ViewData["Business"] as IEnumerable<SelectListItem>, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">使用说明</label>
+                            <div class="col-sm-8">
+                                @Html.TextArea("Introduce", Model.Introduce, new { @style = "width:600px;height:300px;" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSaveCoupon">
+                    保存
+                </button>
+                <button type="button" data-dismiss="modal" class="btn btn-default">
+                    取消
+                </button>
+            </div>
+        }
+    </div>
+
+    </div>
+    <script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script type="text/javascript">
+
+    var editor;
+    KindEditor.ready(function (K)
+    {
+        editor = K.create('#Introduce',
+            {
+                uploadJson: '/Assets/admin/kindeditor-4.1.10/asp.net/upload_json.ashx',
+                fileManagerJson: '/Assets/admin/kindeditor-4.1.10/asp.net/file_manager_json.ashx',
+                allowFileManager: false,
+                formatUploadUrl: false,
+                items: [
+                    'undo', 'redo', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'table', 'link', 'emoticons', 'baidumap', 'quickformat',
+                    'preview', 'fullscreen',],
+                afterBlur: function () { this.sync(); }
+            });
+        K('#image1').click(function ()
+        {
+            editor.loadPlugin('image', function ()
+            {
+                editor.plugin.imageDialog({
+                    imageUrl: K('#Image').val(),
+                    showRemote: false,
+                    clickFn: function (url, title, width, height, border, align)
+                    {
+                        K('#Image').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+
+
+    function Change(type)
+    {
+        if (type == 1)
+        {
+            $("#deday").css("display", "none");
+            $("#day").css("display", "block");
+        } else
+        {
+            $("#day").css("display", "none");
+            $("#deday").css("display", "block");
+        }
+    }
+    function ShowTipMsg(id, msg)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/coupon/businessCoupon/list/@Request.QueryString["pageIndex"]';
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg != "通过信息验证！")
+                {
+
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+
+            }
+
+        }
+        );
+    });
+
+    </script>

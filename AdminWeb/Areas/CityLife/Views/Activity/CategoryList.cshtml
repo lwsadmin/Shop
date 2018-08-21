@@ -1,0 +1,105 @@
+﻿
+@using System.Data;
+@using Shop.Entity;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Content/admin/js/bootstrap.min.js"></script>
+    <script src="/Content/MvcPager/MvcPager.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">同城生活></a></li>
+            <li class="active">联盟活动</li>
+        </ol>
+
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" role="search" style="padding:0px;">
+                <a class="btn btn-primary btn-sm " onclick="Add();"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</a>
+            </div>
+            <form class="navbar-form navbar-left" id="formSearch" role="form">
+                <input type="hidden" name="PageSize" value="15" />
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入分类名称" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_CategoryTable", Model)
+
+            </div>
+            @section Scripts{@{Html.RegisterMvcPagerScriptResource();}}
+            <div id="divAdd">
+                @Html.Partial("_CategoryAdd", new TActivityCategory())
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+
+        function Add()
+        {
+            $("#Guid").val("");
+            $("#headerTitle").html("新增分类");
+            $("#Title").val("");
+            $("#Sort").val("");
+            $("#Remark").val("");
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+        function EditShow(data)
+        {
+            $("#divAdd").html("");
+            $("#divAdd").html(data);
+            $("#headerTitle").html("编辑分类-" + $("#Title").val().trim());
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+        function Delete(obj, title)
+        {
+            parent.layer.confirm('确定要删除【' + title + '】吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function ()
+            {
+                $.post("/CityLife/Activity/CategoryDelete", { id: obj }, function (data)
+                {
+                    parent.layer.closeAll('dialog'); //关闭信息框
+                    if (data.succ)
+                    {
+                        $("#formSearch").submit();
+                        layer.msg('删除成功!', { icon: 1 });
+                        //  window.location.reload();
+                    } else
+                    {
+                        parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 5000 });
+                    }
+
+                })
+            }, function () { });
+        }
+
+        function PageSizeChange()
+        {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            $("#formSearch").submit();
+        }
+    </script>
+</body>
+</html>

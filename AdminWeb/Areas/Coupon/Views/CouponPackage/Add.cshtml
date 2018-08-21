@@ -1,0 +1,144 @@
+﻿@{     Layout = null;}
+@using Shop.Entity;
+@using System.Web.Mvc;
+@model TCouponPackage
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/multiselect2/css/jquery.multiselect2side.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/multiselect2/js/jquery.js" charset="gbk"></script>
+    <script src="~/Content/multiselect2/js/jquery.multiselect2side.js" charset="gbk"></script>
+</head>
+<body>
+    <ol class="breadcrumb">
+        <li><a href="/set/admin/center">首页></a></li>
+        <li><a href="/coupon/couponpackage/list">代金券包</a>></li>
+        <li class="active">代金券包</li>
+    </ol>
+    <div class="modal-body">
+        @using (Html.BeginForm("Save", "CouponPackage", FormMethod.Post, new { id = "add", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(c => c.Guid)
+            @Html.HiddenFor(c => c.OperatorGuid)
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                *名称
+                            </label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(c => c.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-100", @errormsg = "名称不能超过100个字符！", @nullmsg = "请输入名称！" })
+                            </div>
+                            <label class="control-label col-sm-2">
+                                *价值
+                            </label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(c => c.Price, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "面额必须是数字!", @nullmsg = "请填写面额!" })
+                                    <div class="input-group-addon">元</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                *积分
+                            </label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(c => c.Point, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "请输入数字!", @nullmsg = "请输入使用规则!" })
+                                    <div class="input-group-addon">分可兑换</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                *选择项
+                            </label><div class="col-sm-8">
+                                <select name="searchable[]" id="searchable" multiple="multiple" size="6" style="display: none;">
+                                    @foreach (SelectListItem item in ViewData["SelectListItem"] as IEnumerable<SelectListItem>)
+                                    {
+                                        <option id="@item.Value" value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-8">
+                                @Html.TextAreaFor(c => c.Memo, new { @class = "form-control input-sm", @style = "text-align:left;", @rows = "5" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSaveCoupon">
+                    保存
+                </button>
+                <button type="button" data-dismiss="modal" class="btn btn-default" onclick="javascript: history.back(-1);">
+                    取消
+                </button>
+            </div>
+        }
+    </div>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script type="text/javascript">
+        $().ready(function ()
+        {
+            $('#searchable').multiselect2side({ 'search': '搜索:' });
+            var guidStr = '@ViewData["list"]';
+            var strArray = guidStr.split(',')
+
+            $("#searchablems2side__sx").find("option").each(function ()
+            {
+                var value = $(this).val().trim();
+                if (guidStr.indexOf(value) != -1 && value.trim().length > 0)
+                {
+                    $('#searchable').multiselect2side('addOption', { name: $(this).text(), value: value, selected: true });
+                    $(this).remove();
+                }
+
+            });
+        });
+        $(function ()
+        {
+            $("#add").Validform({
+                ajaxPost: true,
+                showAllError: true,
+                beforeSubmit: function (curform)
+                {
+                    layer.msg('正在执行操作...', { icon: 16 });
+                    return true;
+                },
+                tiptype: function (msg, o)
+                {
+                    if (msg != "通过信息验证！")
+                    {
+                        // alert(msg);
+                        //layer.tips(msg, '#Title', { tipsMore: true, time: 4000 });
+                        //ShowTipMsg($(o.obj).attr("id"), msg);
+                        //return false;
+                    }
+                }
+            }
+            );
+        });
+    </script>
+</body>
+</html>

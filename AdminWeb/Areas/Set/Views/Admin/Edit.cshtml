@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+@using Shop.Entity;
+@model TManager
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="headerTitle">编辑操作员</h4>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("add", "admin", FormMethod.Post, new { id = "formEdit", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(c => c.Guid)
+                @Html.HiddenFor(c => c.AddTime)
+
+                @Html.HiddenFor(c => c.OperatorGuid)
+                @Html.HiddenFor(c => c.BusinessGuid)
+                @Html.HiddenFor(c => c.ChainStoreGuid)
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">*姓&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(c => c.Name, new { @id = "EditName", @class = "form-control input-sm", @placeholder = "请输入真实姓名", @datatype = "s2-5", @nullmsg = "请输入操作员姓名!", @errormsg = "姓名在2至5个字符！", @sucmsg = " " })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">*权&nbsp;限&nbsp;组&nbsp;:</label>
+                            <div class="col-sm-7">
+                                @Html.DropDownListFor(c => c.ManagerRoleGuid, ViewData["RoleList"] as List<SelectListItem>, "-请选择-", new { @id = "EditManagerRoleGuid", @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属角色!", @sucmsg = " " })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">*账&nbsp;&nbsp;&nbsp;&nbsp;号:</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(c => c.LoginName, new { @id = "EditLoginName", @class = "form-control input-sm", @placeholder = "请输入账号", @datatype = "s5-20", @nullmsg = "请输入登录账号!", @errormsg = "账号至少5个字符，最多20个字符！", @sucmsg = " " })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">*密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                                <div class="col-sm-7">
+                                    @Html.PasswordFor(c => c.LoginPwd, new { @id = "EditLoginPwd", @class = "form-control input-sm", @placeholder = "不修改密码则不填", @datatype = " *6-20", @nullmsg = "请输入密码!", @ignore = "ignore", @errormsg = "密码必须在6至20个字符之间！", @sucmsg = " " })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">*确认密码:</label>
+                                <div class="col-sm-7">
+                                    <input type="password" id="EditPassword2" class="form-control input-sm" placeholder="请再次输入密码" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">联系方式:</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(c => c.Phone, new { @id = "EditPhone", @class = "form-control input-sm", @placeholder = "手机号 / 电话 /" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">电子邮件:</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(c => c.Email, new { @id = "EditEmail", @class = "form-control input-sm", @placeholder = "请输入邮箱" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">备注信息:</label>
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(c => c.Remark, new { @id = "EditRemark", @class = "form-control input-sm", @placeholder = "备注" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="message-text" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-6" id="tip">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" value="保存">保存</button>
+                        <button type="button" id="" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#DivEdit').on('hidden.bs.modal', function (e) {
+        layer.closeAll('tips'); //关闭所有的tips层
+    })
+
+    $(function () {
+        $("#formEdit").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform) {
+                var EditLoginPwd = $("#EditLoginPwd").val().trim();
+                if (EditLoginPwd != "") {
+                    var EditPassword2 = $("#EditPassword2").val().trim();
+                    if (EditPassword2 != EditLoginPwd) {
+                        layer.tips("两次输入密码不一致!", '#EditPassword2', { tipsMore: true });
+                        return false;
+                    }
+                } else {
+                    //layer.msg('正在执行操作...', { icon: 16 });
+                    return true;
+                }
+
+
+            },
+            callback: function (data) {
+                if (data.succ) {
+                    parent.layer.closeAll();
+                    parent.layer.msg('保存成功！', { icon: 1 });
+                    $('#DivEdit').modal('hide');
+                    if ($(".pagination .active").find("a").html() != undefined) {
+                        $(".pagination .active").find("a").click();
+                    } else {
+                        $("#formSearch").submit();
+                    }
+
+                }
+            },
+            tiptype: function (msg, o) {
+                if (msg.trim() != "" && o.type != 1) {
+                    layer.tips(msg, '#' + $(o.obj).attr("id"), { tipsMore: true });
+                }
+            }
+        });
+    })
+</script>

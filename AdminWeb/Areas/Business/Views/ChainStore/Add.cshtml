@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+@using Shop.Entity;
+@using Shop.ViewModel;
+@using Shop.Help;
+@model  StoreView
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+<link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+@*<link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+@*<div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>提示:</strong>图片建议尺寸为400*200像素.
+    </div>*@
+<div class="container-fluid">
+    <div class="modal-body">
+
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线上商城></a></li>
+            <li class="active"><a href="javascript:void(0);">@(Model.store.Guid == Guid.Empty ? "添加" : "编辑")门店</a></li>
+        </ol>
+
+        <div class="tabbable tabbable-custom boxless tabbable-reversed">
+            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#basic" id="basic-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">基本信息</a></li>
+                <li role="presentation" class=""><a href="#images" role="tab" id="images-tab" data-toggle="tab" aria-controls="images" aria-expanded="false">图片上传</a></li>
+
+            </ul>@{Html.BeginForm("add", "chainstore", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="basic" aria-labelledby="home-tab">
+                    <br />
+
+                    @Html.HiddenFor(c => c.store.Guid)
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">*门店名称</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(c => c.store.Name, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "门店名称不能超过50个字符！", @nullmsg = "请输入门店名称！" })
+                                </div>
+                                <label class="col-sm-2 control-label">所属商户</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(c => c.store.BusinessGuid, ViewData["Business"] as IEnumerable<SelectListItem>, "-选择商户-", new { @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属商户！" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">*联系人</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(c => c.store.Contact, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-20", @errormsg = "联系人不能超过20个字符！", @nullmsg = "请输入联系人！" })
+                                </div>
+                                <label class="col-sm-2 control-label">*手机号码</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(c => c.store.Mobile, new { @class = "form-control input-sm", @placeholder = "", @datatype = "m", @errormsg = "手机号码不正确！", @nullmsg = "请输入联系方式！" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">*人均消费</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(c => c.store.AveragePrice, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "人均消费金额应该是数字", @nullmsg = "请输入人均消费！" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">*起送金额</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(c => c.store.TakeoutPrice, new { @class = "form-control input-sm", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "外卖起送金额必须数字！", @nullmsg = "请填写起送金额!" })
+                                        <div class="input-group-addon">元</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">外送服务</label>
+                                <div class="col-sm-3">
+                                    <div class="radio radio-primary radio-inline">
+                                        @Html.RadioButtonFor(c => c.store.IsTakeOut, "true", new { @id = "allowT" })
+                                        <label for="allowT">开启</label>
+                                    </div>
+
+                                    <div class="radio radio-primary radio-inline">
+                                        @Html.RadioButtonFor(c => c.store.IsTakeOut, "false", new { @id = "noT" })
+                                        <label for="noT">关闭</label>
+                                    </div>
+
+                                </div>
+                                <label class="col-sm-2 control-label">下单短信</label>
+                                <div class="col-sm-3">
+
+                                    <div class="radio radio-primary radio-inline">
+                                        @Html.RadioButtonFor(c => c.store.IsTakeoutSms, "true", new { @id = "allowSms" })
+                                        <label for="allowSms">开启通知</label>
+                                    </div>
+
+                                    <div class="radio radio-primary radio-inline">
+                                        @Html.RadioButtonFor(c => c.store.IsTakeoutSms, "false", new { @id = "noSms" })
+                                        <label for="noSms">关闭通知</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">*显示顺序</label>
+                                <div class="col-sm-3">
+
+                                    @Html.TextBoxFor(c => c.store.Sort, new { @class = "form-control input-sm", @datatype = "n", @errormsg = "显示顺序必须数字！", @nullmsg = "请填写显示顺序!" })
+
+                                </div>
+                                <label class="col-sm-2 control-label">形象图片</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(c => c.store.Image, new { @id = "url1", @class = "form-control input-sm", @value = "", @readonly = "readonly" })
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary btn-sm" type="button" id="image1">上传图片</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">*所在地区</label>
+                                <div class="col-sm-6">
+                                    @Html.GetAddress(c => c.store.ProvinceId, c => c.store.CityId, c => c.store.DistrictId, new { })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">*详细地址</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(c => c.store.Address, new { @class = "form-control input-sm", @placeholder = "区县街道", @datatype = "*1-100", @errormsg = "详细地址不能超过100个字符！", @nullmsg = "请输入详细地址！" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注信息</label>
+                                <div class="col-sm-8">
+                                    @Html.TextAreaFor(c => c.store.Memo, new { @class = "form-control ", @placeholder = "", @datatype = "*1-200", @errormsg = "备注不能超过200个字符！", @ignore = "ignore" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">详细介绍</label>
+                                <div class="col-sm-8">
+                                    @Html.TextAreaFor(c => c.store.Introduce, new { @style = "width:100%;height:300px;" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="images" aria-labelledby="images-tab">
+                    <div class="bs-example" id="divTable" data-example-id="simple-thumbnails">
+                        @Html.Partial("_Image")
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin: 1% 20% 1% 1%;">
+                    <input type="submit" class="btn btn-primary" value="保存" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:history.back(-1);">取消</button>
+                </div>
+                @{Html.EndForm();}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<script type="text/javascript">
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        e.target // newly activated tab
+        e.relatedTarget // previous active tab
+        layer.closeAll();
+    })
+    $(function ()
+    {
+        var editor;
+        KindEditor.ready(function (K)
+        {
+            editor = K.create('#store_Introduce',
+                {
+                    uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                    fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                    allowFileManager: false,
+                    formatUploadUrl: false,
+                    items: [
+                        'undo','redo','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                         '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'table', 'link', 'emoticons', 'baidumap', 'quickformat',
+                    'preview','fullscreen',],
+                    afterBlur: function () { this.sync(); }
+                });
+            K('#image1').click(function ()
+            {
+                editor.loadPlugin('image', function ()
+                {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#url1').val(),
+                        urlType: "relative",
+                        showRemote: false,
+                        clickFn: function (url, title, width, height, border, align)
+                        {
+                            K('#url1').val(url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+        $("#add").Validform({
+            // tiptype: 1
+            showAllError: false,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/business/chainstore/list/@Request.QueryString["pageIndex"]';
+                } else {
+                    alert(data.msg);
+                }
+            },
+            beforeCheck: function (curform) {
+                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话将不会继续执行验证操作;
+            },
+            tiptype: function (msg, o)
+            {
+                 if (msg != "通过信息验证！"&&msg.trim() != "" && o.type != 1)
+                 {
+
+                     if ($("#myTabs").find(".active").find("a").attr("aria-controls") != "home") {
+                         layer.closeAll();
+                         $('#basic-tab').tab('show');
+                         setTimeout(function () {
+                             $("#" + $(o.obj).attr("id")).focus();
+                             layer.tips(msg, '#' + $(o.obj).attr("id"), { tipsMore: true });
+
+                         }, 300);
+                         return;
+                     } else {
+                        // alert(1);
+                         layer.tips(msg, '#' + $(o.obj).attr("id"), { tipsMore: true });
+                     }
+
+                 }
+            }
+        }
+        );
+    });
+</script>

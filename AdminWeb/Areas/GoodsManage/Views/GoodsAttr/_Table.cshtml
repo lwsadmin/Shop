@@ -1,0 +1,159 @@
+﻿@using System.Data;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@using Shop.Entity;
+@using Shop.Bll;
+@model  PagedList<DataRow>
+
+@{ Layout = null;}
+
+<table class="table table-bordered  table-condensed table-condensed  table-hover table-condensed" id="treeTable1">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>所属分类</th>
+            <th>类型</th>
+            <th>默认值</th>
+            <th>可选项</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td class="title"> @row["Name"]</td>
+                <td>@row["Title"]</td>
+                @switch (row["DataType"].ToString().ToLower())
+                {
+                    case "text":
+                        <td>文本框</td>
+                        break;
+                    case "textarea":
+                        <td>多行文本框</td>
+                        break;
+                    case "option":
+                        <td>下拉框</td>
+                        break;
+                    default:
+                        <td>@row["DataType"].ToString()</td>
+                        break;
+                }
+
+                <td>@row["DefaultValue"]</td>
+                @if (!DBNull.Value.Equals(row["Options"])&& row["DataType"].ToString()== "option")
+                {
+                    <td>
+                        @{ string[] array = row["Options"].ToString().Split('-');}
+                        <select class="form-control input-xs" style="height: 24px;font-size: 10px;padding: 0;">
+                            @for (int i = 0; i < array.Length; i++)
+                            {
+                                if (row["DefaultValue"].ToString() == array[i])
+                                {
+                                    <option selected="selected" value="@array[i]">@array[i]</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@array[i]">@array[i]</option>
+
+                                }
+
+                            }
+                        </select>
+                    </td>
+                            }
+                            else
+                            {
+                                <td> </td> }
+
+                <td>
+
+                    @Ajax.ActionLink("编辑", "Add", new { guid = row["Guid"] }, new AjaxOptions
+               {
+                   OnSuccess = "Edit",
+                   HttpMethod = "GET",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "divAdd"
+
+               }, new { @class = "btn  btn-default btn-xs" })
+
+                    <a class="btn btn-default btn-xs" title='删除' onclick="Delete('@row["Guid"]','@row["Title"]' )">删除</a>
+                </td>
+            </tr>
+                            }
+    </tbody>
+</table>
+<div class="col-xs-10" style="width:auto;padding-left:0px;">
+    <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/GoodsManage/GoodsAttr/List/{0}\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    //EnablePartialLoading = true,//3.0不需再引入js，不需再EnablePartialLoading = true
+    //OnSuccess = "EditMsg",
+}
+)
+</div>
+<div class="pagination" style="width:20%;margin-top: 0px;">
+    <ul class="pagination">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">跳转到第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" type="button" onclick="GoPageIndex();">Go</button>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var txt = $("#SearchTitle").val().trim();
+    if (txt.length > 0)
+    {
+        $(".title").each(function ()
+        {
+                        var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+            $(this).html(newTxt);
+                    });
+    }
+    $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+    $("#PageSize").val(@ViewData["NowPageSize"]);
+    $('[data-toggle="popover"]').popover();
+</script>

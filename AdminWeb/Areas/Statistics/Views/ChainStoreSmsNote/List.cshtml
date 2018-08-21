@@ -1,0 +1,137 @@
+﻿
+@using Shop.Bll;
+@using System.Data;
+@using Shop.ViewModel;
+@using Shop.Help;
+@using Shop.Bll;
+@using Webdiyer.WebControls.Mvc
+@{
+
+    Layout = null;
+}
+@model  CommonDataRow
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+    <style>
+        .navbar-form {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">统计分析></a></li>
+            <li class="active">门店短信统计</li>
+        </ol>
+        <div class="portlet-body">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_recharge" data-toggle="tab">短信充值统计</a></li>
+                <li><a href="#tab_send" data-toggle="tab">短信发送统计</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_recharge">
+                    <div class="modal-body">
+
+                        <form class="navbar-form navbar-left" id="formRechargeSearch" role="form" action="/Statistics/ChainStoreSmsNote/List">
+                            <input type="hidden" name="buyPageSize" value="@ViewData["buyPageSize"]" />
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" id="StoreName" name="StoreName" placeholder="请输入门店名称" />
+                                <input type="text" class="form-control input-sm" name="BuyTimeFrom" id="OperateTimeFrom" placeholder="充值时间" onclick="WdatePicker();" />
+                                至
+                                <input type="text" class="form-control input-sm" name="BuyTimeTo" id="OperateTimeTo" placeholder="充值时间" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'OperateTimeFrom\')}' });" />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm ">
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                            </button>
+
+                        </form>
+                        <div id="RechargeTable">
+                            @Html.Partial("_RechargeTable", Model.RowList1)
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab_send">
+                    <div class="modal-body">
+                        <form class="navbar-form navbar-left" id="formSendSearch" role="form" action="/Statistics/ChainStoreSmsNote/List">
+                            <input type="hidden" name="sendPageSize" value="@ViewData["sendPageSize"]" />
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" id="Content" name="Content" placeholder="请输入短信内容" />
+                                <input type="text" class="form-control input-sm" name="SendTimeFrom" id="SendTimeFrom" placeholder="发送时间" onclick="WdatePicker();" />
+                                至
+                                <input type="text" class="form-control input-sm" name="SendTimeTo" id="SendTimeTo" placeholder="发送时间" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'OperateTimeFrom\')}' });" />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm ">
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                            </button>
+                        </form>
+                        <div id="SendTable">
+                            @Html.Partial("_SendTable", Model.RowList2)
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            @section scripts{@{Html.RegisterMvcPagerScriptResource();}}
+        </div>
+
+        <script type="text/javascript">
+
+
+            function GoPageIndex()
+            {
+                var pager = Webdiyer.MvcPagers[0];
+                var pageIndex = $("#pageIndexBox").val().trim();
+                var TotalPageCount = $("#TotalPageCount").val().trim();
+                if (parseInt(pageIndex) > parseInt(TotalPageCount))
+                {
+                    pageIndex = TotalPageCount;
+                }
+                if (pager != null)
+                {
+                    pager.goToPage(parseInt(pageIndex));
+                } else
+                { alert("找不到指定的MvcPager！"); }
+
+            }
+            function InputPageIndex(obj)
+            {
+                var pageIndex = $(obj).val().trim();
+                if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+                {
+                    $(obj).val($("#TotalPageCount").val());
+                }
+            }
+
+            function Success()
+            {
+                var txt = $("#SearchTitle").val().trim();
+                if (txt.length > 0)
+                {
+                    $(".title").each(function ()
+                    {
+                        var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+                        $(this).html(newTxt);
+                    });
+                }
+
+                $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+                $("#PageSize").val(@ViewData["NowPageSize"]);
+            }
+        </script>
+
+
+    </div>
+</body>
+</html>

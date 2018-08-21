@@ -1,0 +1,257 @@
+﻿
+
+@using System.Data;
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@model  PagedList<DataRow>
+@{
+    string actionString = RoleLogic.GetPowerStr("ArticleComment", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+    <style>
+        #divTable > .media {
+            border-bottom: .5px solid #d2d2d2;
+        }
+
+        .glyphicon {
+            border-color: #46b8da;
+            color: #46b8da;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">同城生活></a></li>
+            <li class="active"><a href="#">资讯评论</a></li>
+        </ol>
+        <div class="portlet-body">
+            <div class="tabbable tabbable-custom boxless tabbable-reversed">
+
+
+                <form action="/articleinfo/comment/list" class="form-inline" id="Search" method="post" style="margin-left:70px;">
+
+                    @*<button type="submit" class="btn btn-primary btn-sm ">
+                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                        </button>*@
+                </form>
+
+                <div id="divTable">
+                    @foreach (var item in Model)
+                    {
+                        <div class="media">
+                            <div class="media-left">
+
+                                <img class="media-object" src="@item["HeadImg"]" onerror="this.src='/Content/img/people.png'" data-holder-rendered="true" style="width: 64px; height: 64px;">
+
+                                <p class="text-warning text-center"><small>@item["Name"]</small></p>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading text-primary">@item["Title"]</h4>
+                                <br />
+                                <p>@item["Content"]</p>
+                                <p class="text-right">
+                                    <span style="float:left;" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"><small style="vertical-align:text-top;margin-left:5px;">@(item["SupportCount"])</small></span>
+                                    <label style="display: inline;" class="text-danger">@(item["status"].ToString() == "0" ? "(已显示)" : "(已隐藏)")</label>
+                                    <span>@item["SubmitTime"]</span>
+                                    <a href="javascript:void(0);" class="btn btn-default btn-xs" data-guid="@item["guid"]" data-title="@item["Name"]" onclick="Show(this)">回复</a>
+                                    <a href="javascript:void(0);" class="btn btn-default btn-xs" onclick="Change('@item["guid"]')">@(item["status"].ToString() == "0" ? "隐藏" : "显示")</a>
+                                </p>
+                                <p class="text-right">
+                                    <button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>查看回复</button>
+                                </p>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="1" onerror="this.src='/Content/img/people.png'" style="width: 64px; height: 64px;" />
+                                            <p class="text-warning text-center"><small>贺龙</small></p>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+                    <div class="col-xs-9" style="width:auto;padding-left:0px;">
+                        <ul class="pagination">
+                            <li>
+                                <span aria-hidden="true">
+                                    @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+                                </span>
+                            </li>
+                            <li>
+                                <span aria-hidden="true">
+                                    每页
+                                    <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                                        <option value="10">10</option>
+                                        <option selected="selected" value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    条
+                                </span>
+                            </li>
+                        </ul>
+                        @Ajax.Pager(Model,
+        new PagerOptions
+        {
+            PageIndexParameterName = "id",
+            CssClass = "pagination",
+            FirstPageText = "首页",
+            LastPageText = "尾页",
+            PrevPageText = "上一页",
+            PageIndexBoxId = "pageIndexBox",
+            GoToButtonId = "Go",
+            PageIndexOutOfRangeErrorMessage = "页码有误!",
+            NumericPagerItemCount = 8,
+            NextPageText = "下一页",
+            CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/articleinfo/comment/list/{0}\">{0}</a></li>",
+            DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+            PagerItemTemplate = "<li>{0}</li>",
+            AutoHide = false,
+
+        }, new MvcAjaxOptions
+        {
+            UpdateTargetId = "divTable",
+            HttpMethod = "Post",
+            DataFormId = "Search",
+            EnableHistorySupport = false,
+            EnablePartialLoading = true,
+            OnSuccess = "Success();"
+            //EnablePartialLoading = true
+        }
+        )
+                    </div>
+                    <div class="pagination" style="width:20%;margin-top: 0px;">
+                        <ul class="pagination">
+                            <li>
+                                <div class="input-group">
+                                    <span class="input-group-addon">第</span>
+                                    <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                                    <span class="input-group-addon">页</span>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary btn-sm" id="Go" type="button">Go</button>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                @section Scripts{@{Html.RegisterMvcPagerScriptResource();}}
+            </div>
+            <div class="modal fade" id="Reply" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" id="headerTitle"></h4>
+                        </div>
+
+                        <form action="/ArticleInfo/Comment/Reply" class="form-horizontal" id="FormReply" method="post">
+                            <br>           <br>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">
+                                            内容
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input type="hidden" value="" id="Guid" name="Guid">
+
+
+                                            <textarea name="Content" style="text-align: left;" class="form-control" cols="10" rows="3" id="Content"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>            <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="Save();">
+                                保存
+                            </button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default">
+                                取消
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <script type="text/javascript">
+
+                function Save() {
+
+                    if ($("#Content").val().trim().length == 0) {
+                        $("#Content").focus(); return;
+                    }
+                    if ($("#Content").val().trim().length > 0) {
+
+                        $.post("/ArticleInfo/Comment/Reply", { guid: $("#Guid").val(), Content: $("#Content").val() }, function (data) {
+                            if (data.succ) {
+                                $("#Reply").modal('hide');
+                                $(".active").find("a").click();
+                            } else {
+                                parent.layer.alert(data.msg, { title: "提示", icon: 2 });
+                            }
+                        });
+                    }
+                }
+
+
+            </script>
+
+            <script>
+
+
+                function Show(obj) {
+                    $(this).removeData('modal');
+                    var guid = $(obj).data("guid");
+
+                    var txt = $(obj).data("title");
+                    $("#headerTitle").text("回复--" + txt);
+                    $("#Content").focus().val("");
+                    $("#Guid").val(guid);
+
+                    $(this).removeData('modal');
+                    $("#Reply").modal('show');
+
+                    $("#Content").val("");
+                }
+
+
+                function Change(guid) {
+                    $.ajax(
+                        {
+                            url: "/articleinfo/comment/Change",
+                            data: { "guid": guid },
+                            type: "post",
+                            success: function () {
+                                $("#Reply").modal('hide');
+                                $(".active").find("a").click();
+                            }
+                        });
+                }
+            </script>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+﻿
+
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@model  PagedList<DataRow>
+
+
+<style>
+    .input-sm {
+        width: 80px;
+    }
+</style>
+@*http://markcell.github.io/jquery-tabledit/#documentation*@
+<div class="modal-dialog modal-lg" style="width:80%;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">门店结算-@Request.QueryString["name"]</h4>
+            <input type="hidden" id="hiddenChainStore" value="@ViewData["id"]" />
+        </div>
+        <div class="modal-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist" id="tabUl">
+                <li role="presentation" class="active"><a href="#ChinStoreSet" role="tab" data-toggle="tab">设置</a></li>
+                <li role="presentation"><a href="#value" role="tab" data-toggle="tab">其他</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="ChinStoreSet">
+                    <div class="modal-body">
+                        <table class="table table-bordered  table-condensed table-condensed" id="table">
+                            <thead>
+                                <tr>
+                                    <th>会员等级</th>
+                                    <th style="display:none;">会员等级Guid</th>
+                                    <th style="display:none;">门店Guid</th>
+                                    <th>线下折扣</th>
+                                    <th>线下返点</th>
+                                    <th>线上返点</th>
+                                    <th>积分返点</th>
+                                    <th>发卡商返点</th>
+                                    <th>会员返点</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item["Title"]</td>
+                                        <td style="display:none;">@item["MemberCategoryGuid"]</td>
+                                        <td class="hiddenChainStore" style="display:none;">@ViewData["id"]</td>
+                                        <td>@item["OffLineConsumeDiscount"]</td>
+                                        <td>@item["OffLineConsumeRebate"]</td>
+                                        <td>@item["OnLineConsumeRebate"]</td>
+                                        <td>@item["PointPaidRebate"]</td>
+                                        <td>@item["BusinessProfitProportion"]</td>
+                                        <td>@item["MemberProfitProportion"]</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="value">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#table').Tabledit({
+        url: '/Settlement/StoreSet/SetSave',
+        deleteButton: false,
+        buttons: {
+            edit: {
+                class: 'btn btn-sm btn-default',
+                html: '<span class="glyphicon glyphicon-pencil"></span>',
+                action: 'edit'
+            },
+            save: {
+                class: 'btn btn-sm btn-primary',
+                html: '保存'
+            }
+        },
+        columns: {
+            identifier: [0, ''],
+            editable: [[1, 'MemberCategoryGuid'], [2, 'ChainStoreGuid'], [3, 'OffLineConsumeDiscount'],
+                [4, 'OffLineConsumeRebate'], [5, 'OnLineConsumeRebate'],
+                [6, 'PointPaidRebate'], [7, 'BusinessProfitProportion'], [8, 'MemberProfitProportion']]
+        },
+        onSuccess(data, textStatus, jqXHR)
+        {
+            if (data.succ)
+            {
+                parent.layer.msg('保存成功!', { icon: 1, time: 2000 });
+            } else
+            {
+                parent.layer.msg('保存失败!', { icon: 5, time: 2000 });
+            }
+        },
+        onAjax(action, serialize)
+        {
+            var flag = true;
+            $(".tabledit-input").not(":hidden").each(function ()
+            {
+                var reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
+                if (!reg.test($(this).val()))
+                {
+                    parent.layer.msg('请填写数字!', function () { });
+                    $(this).focus();
+                    flag = false;
+                }
+            });
+            return flag;
+        },
+        onDraw()
+        {
+        }
+    });
+</script>

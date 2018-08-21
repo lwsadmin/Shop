@@ -1,0 +1,12 @@
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\Shop.ViewModel.dll
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\Shop.ViewModel.pdb
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\Shop.Entity.dll
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\EntityFramework.dll
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\Shop.Entity.pdb
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\Shop.Entity.dll.config
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\EntityFramework.xml
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\obj\Debug\Shop.ViewModel.csprojResolveAssemblyReference.cache
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\obj\Debug\Shop.ViewModel.dll
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\obj\Debug\Shop.ViewModel.pdb
+G:\我的项目\Shop\Shop2.0\Shop.ViewModel\obj\Debug\Shop.ViewModel.csproj.CoreCompileInputs.cache

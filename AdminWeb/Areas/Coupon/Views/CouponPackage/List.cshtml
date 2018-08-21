@@ -1,0 +1,209 @@
+﻿@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Shop.Help;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+    string serverPath = Safe.GetWebConfigValueByKey("ServerPath");
+    string actionString = RoleLogic.GetPowerStr("BusinessCoupon", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+</head>
+<body>
+    <ol class="breadcrumb">
+        <li><a href="/set/admin/center">首页></a></li>
+        <li><a href="#">代金券></a></li>
+        <li class="active">代金券包</li>
+    </ol>
+    <div class="portlet-body">
+        @if (actionString.Contains("Add"))
+        {
+            <div class="navbar-form navbar-left" role="search">
+                <a class="btn btn-primary btn-sm " data-toggle="modal" href="/coupon/couponpackage/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新增</a>
+            </div>}
+
+        <form class="navbar-form navbar-left" id="formSearch" role="form" action="/coupon/couponpackage/List">
+            <div class="form-group">
+                <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入标题" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm ">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+            </button>
+        </form>
+        <div id="divTable">
+            <table class="table table-bordered  table-condensed table-condensed  table-hover">
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>面额</th>
+                        <th>积分</th>
+                        <th>备注</th>
+                        <th>创建时间</th>
+                        <th class="hidden-xs">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow item in Model)
+            {
+                        <tr>
+                            @if (item["Title"].ToString().Length >= 20)
+                            {
+                                <td id="@item["Guid"]" onmouseover="ShowMsg('@item["Guid"]','@item["Title"]')">@item["Title"].ToString().Substring(0, 20)  ...</td>
+                            }
+                            else
+                            {
+                                <td>@item["Title"]</td>
+                            }
+                            <td>@item["Price"]</td>
+                            <td>@item["point"]</td>
+                            <td>@item["Memo"]</td>
+                            <td>@Convert.ToDateTime(item["CreateTime"]).ToString("yyyy-MM-dd HH:MM:ss")</td>
+                            <td>
+                                @if (actionString.Contains("Edit"))
+                                {
+                                    <a class="btn btn-default btn-xs" title='编辑代金券包' href="/coupon/couponpackage/add/@item["Guid"]?pageIndex=@Model.CurrentPageIndex">编辑</a>
+                                }
+
+                                @if (actionString.Contains("Delete"))
+                                {
+                                    <a class="btn btn-default btn-xs" title='' onclick="Delete('@item["Guid"]','@item["Title"]');">删除 </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+                <ul class="pagination">
+                    <li>
+                        <span aria-hidden="true">
+                            @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+                        </span>
+                    </li>
+                </ul>
+                @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "pageIndex",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    //OnSuccess = "EditMsg",
+    EnablePartialLoading = true
+}
+)
+                <ul class="pagination">
+                    <li>
+                        <span aria-hidden="true" style="padding: 2px 3px;">
+                            跳转到第<input id="pageIndexBox" class="form-control input-sm" style="width:auto;display:inline-block;" oninput="InputPageIndex(this);" />
+                            <button class="btn btn-primary btn-sm" id="goBtn1" onclick="GoPageIndex();">Go</button>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+    }
+    <script src="/Content/layer/layer.js"></script>
+    <script src="/Content/LwsJS/List.js"></script>
+    <script type="text/javascript">
+        function ShowMsg(id, msg)
+        {
+            layer.tips(msg, "#" + id, {
+                tips: [2, '#3595CC'],
+                time: 4000
+            });
+            $("#" + id).mouseout(function ()
+            {
+                layer.closeAll('tips'); //关闭所有的tips层
+            });
+        }
+        function MouseShowImage(obj)
+        {
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                shade: 0,
+                area: '516px',
+                content: "<img style='postion:fiexd;width:100%;' src='" + $(obj).attr("src") + "'/>"
+            });
+            $(obj).mouseout(function ()
+            {
+                layer.closeAll();
+            });
+        }
+        function InputPageIndex(obj)
+        {
+            var pageIndex = $(obj).val().trim();
+            if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+            {
+                $(obj).val($("#TotalPageCount").val());
+            }
+        }
+        function GoPageIndex()
+        {
+            var pager = Webdiyer.MvcPagers[0];
+            var pageIndex = $("#pageIndexBox").val().trim();
+            var TotalPageCount = $("#TotalPageCount").val().trim();
+            if (parseInt(pageIndex) > parseInt(TotalPageCount))
+            {
+                pageIndex = TotalPageCount;
+            }
+            if (pager != null)
+            {
+                pager.goToPage(parseInt(pageIndex));
+            } else
+            { alert("找不到指定的MvcPager！"); }
+        }
+
+        function Delete(obj, title)
+        {
+            parent.layer.confirm('确定要删除【' + title + '】吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function ()
+            {
+                $.post("/coupon/couponPackage/delete", { id: obj }, function (data)
+                {
+                    parent.layer.closeAll('dialog'); //关闭信息框
+                    if (data.succ)
+                    {
+                        window.location.reload();
+                    } else
+                    {
+                        parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 5000 });
+                    }
+
+                })
+            }, function () { });
+        }
+    </script>
+</body>
+</html>

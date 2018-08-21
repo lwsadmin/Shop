@@ -1,0 +1,124 @@
+﻿@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+    string actionString = RoleLogic.GetPowerStr("Article", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="portlet-body">
+            <ol class="breadcrumb">
+                <li><a href="/set/admin/center">首页></a></li>
+                <li><a href="#">资讯信息></a></li>
+                <li class="active">资讯管理</li>
+            </ol>
+            <div class="navbar-form navbar-left" style="padding:0px;" role="search">
+                @if (actionString.Contains("Add"))
+            {
+                    <a class="btn btn-primary btn-sm " data-toggle="modal" href="/articleinfo/article/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新增</a>
+                }
+                @if (actionString.Contains("Delete"))
+            {
+                    <button type="submit" class="btn btn-primary btn-sm " id="checkAll" onclick="CheckAll(this);">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true">全选</span>
+                    </button>
+                }
+                @if (actionString.Contains("Delete"))
+            {
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="Delete(null, '/articleinfo/article/delete',DeleteBack);">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
+                    </button>
+                }
+            </div>
+
+            <form class="navbar-form navbar-left" id="formSearch" role="form" action="/articleinfo/article/List">
+                <div class="form-group">
+                    @Html.DropDownList("Category", (List<SelectListItem>)ViewData["CateGory"], "-选择分类-", new { id = "Category", @class = "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入标题" />
+                </div>
+                <input type="hidden" name="PageSize" value="10" />
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table")
+            </div>
+            @section Scripts{
+                @{Html.RegisterMvcPagerScriptResource();}
+            }
+        </div>
+    </div>
+    <script src="/Content/layer/layer.js"></script>
+    <script src="/Content/LwsJS/List.js"></script>
+    <script>
+        function PageSizeChange()
+        {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            $("#formSearch").submit();
+        }
+
+        function Success()
+        {
+            var txt = $("#SearchTitle").val().trim();
+            if (txt.length > 0)
+            {
+                $(".title").each(function ()
+                {
+                    var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+                    $(this).html(newTxt);
+                });
+            }
+            $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+            $("#PageSize").val(@ViewData["NowPageSize"]);
+        }
+
+        function ShowMsg(id, msg)
+        {
+            layer.tips(msg, "#" + id, {
+                tips: [2, '#3595CC'],
+                time: 4000
+            });
+            $("#" + id).mouseout(function ()
+            {
+                layer.closeAll('tips'); //关闭所有的tips层
+            });
+        }
+        function MouseShowImage(obj)
+        {
+            layer.open({
+                type: 5,
+                title: false,
+                closeBtn: 0,
+                shade: 0,
+                content: "<img src='" + $(obj).attr("src") + "'/>"
+            });
+            $(obj).mouseout(function ()
+            {
+                layer.closeAll();
+            });
+        }
+
+        function DeleteBack() {
+            alert(1);
+            $("#formSearch").submit();
+        }
+    </script>
+</body>
+</html>

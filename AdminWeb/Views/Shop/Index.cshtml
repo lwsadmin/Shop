@@ -1,0 +1,348 @@
+﻿
+@{
+    Layout = null;
+    List<Power> PowerList = ViewData["PowerList"] as List<Power>;
+}
+@using Shop.Bll;
+@using Shop.Entity;
+@using Shop.Help;
+@using System.Xml;
+@model TManager
+@{
+    TManagerRole role = new TManagerRole();
+    if (Model != null)
+    {
+        role = RoleLogic.GetEntity(Model.ManagerRoleGuid);
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="@ViewData["OperatorName"] @ViewData["ChainStoreName"] - 国内最大的异业联盟平台" />
+    <meta name="Description" content="@ViewData["OperatorName"] @ViewData["ChainStoreName"] - 国内最转业的商户联盟管理平台" />
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/menu/app.css" rel="stylesheet" />
+    <link href="~/Content/admin/menu/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/admin/menu/menu.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <title>@ViewData["OperatorName"] @ViewData["ChainStoreName"]管理系统</title>
+    <style>
+        .pur {
+            background-color: rgb(84, 54, 74);
+            background-size: cover;
+            background-image: url("http://www.riaxe.com/marketplace/thin-admin/images/i.jpg");
+        }
+
+        .caret_right {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 2px;
+            vertical-align: middle;
+            border-left: 4px solid;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div id="navigation">
+            <div class="container-fluid">
+                <div style="float:left;color:white;margin-left:5px;">
+                    <h4>@ViewData["OperatorName"]</h4>
+                </div>
+                <ul class='main-nav' style="margin-left:10%;">
+                    @*<li class='active'>
+                            <a href="/wechat/index/aid/55663612">
+                                <span>管理平台</span>
+                            </a>
+                        </li>*@
+                    @*<li><a href="/site/guide1" target="_blank">功能介绍</a> </li>*@
+                    <li>
+                        <a data-hover="dropdown" href="javascript:void(0);" target="_blank">
+                            <span>下载ios版</span>
+                        </a>
+                        <ul class="dropdown-menu code_download">
+                            <li><img style="width:100%;" src="~/Content/img/noImg.jpg" /></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a data-hover="dropdown" href="javascript:void(0);" target="_blank">
+                            <span>下载安卓版</span>
+                        </a>
+                        <ul class="dropdown-menu code_download">
+                            <li><img style="width:100%;" src="~/Content/img/noImg.jpg" /></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a data-hover="dropdown" href="#" onClick="javascript:return false;">
+                            <span>关注我们</span>
+                        </a>
+                        <ul class="dropdown-menu code_download">
+                            <li><img style="width:100%;" src="~/Content/img/noImg.jpg" /></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-toggle="dropdown" class='dropdown-toggle' data-hover="dropdown">
+                            <span>帮助中心</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0);" target="_blank">使用指南</a></li>
+                            <li><a href="javascript:void(0);" target="_blank">商品问答</a></li>
+                            <li><a href="javascript:void(0);" target="_blank">在线客服</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://www.baidu.com" target="_blank">
+                            同城社区
+                            <img style="position:absolute;right:-3px;top:5px" src="~/Content/admin/img/hot.gif">
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="user">
+                    <ul class="icon-nav">
+                        <!--                 <li>
+                            <a href="javascript:;" title="全屏" data-toggle="fullscreen"><i class="icon-fullscreen"></i></a></li>-->
+
+                    </ul>
+                    <div class="dropdown ">
+                        <a href="#" class='dropdown-toggle' data-toggle="dropdown">
+                            <nobr>
+                                <span style="overflow:hidden;">@ViewData["ChainStoreName"] (@(Model.Name))</span>
+                                <img src="http://wx.qlogo.cn/mmhead/0wRpPfN90ibBXpwEcr0gEdvlUtM2LMTOAkQhljPHoibWy3GE8xXlDARw/132" style="width: 27px; height: 27px" alt="">
+                                <span class="caret"></span>
+                            </nobr>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:void(0);" target="_self">管理帐号</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" target="mainFrame">账户信息</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="LoginOut();" target="_self">退出</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="content" style="height:90vh;">
+            <div class="btn-toolbar clearfix" id="shortcutMenu">
+                <div class="btn-group" style="margin-left:20px">
+
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">快捷菜单 <span class="caret"></span></button>
+                    <ul class="dropdown-menu text-left" style="z-index:10000" id="shortcutHrefList">
+                        <li><a id="25" title="自定义菜单" data-url="/menu/list?aid=55663612" href="/menu/list?aid=55663612" target="mainFrame">自定义菜单</a></li>
+                        <li><a id="290" title="关键词回复" data-url="/replys/keywordReplyList?aid=55663612" href="/replys/keywordReplyList?aid=55663612" target="mainFrame">关键词回复</a></li>
+                        <li><a id="125" title="商户设置" data-url="/Newmembercardset/SetBusiness?aid=55663612" href="/Newmembercardset/SetBusiness?aid=55663612" target="mainFrame">商户设置</a></li>
+                        <li><a id="126" title="会员卡设置" data-url="/newmembercard/Addcard?aid=55663612" href="/newmembercard/Addcard?aid=55663612" target="mainFrame">会员卡设置</a></li>
+                        <li><a id="127" title="微信会员管理" data-url="/newmem/MemberList?aid=55663612" href="/newmem/MemberList?aid=55663612" target="mainFrame">微信会员管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="left">
+                @{ XmlNodeList MenuList = MenuLogic.GetFrist(); }
+
+                @foreach (XmlNode FisrtMeun in MenuList)
+                {
+                    if (RoleLogic.CheckPower(Model.ManagerRoleGuid, FisrtMeun.Attributes["Name"].Value))
+                    {
+                        <div class="subnav">
+                            <div class="subnav-title first-subnav">
+                                <a href="javascript:void(0)" class='toggle-subnav'>
+                                    <em>
+                                        <strong class="icon-menu"><i class="@FisrtMeun.Attributes["Icon"].Value"></i></strong>
+                                        <b class="bg-icon-color"></b>
+                                    </em>
+
+                                    <span>@FisrtMeun.Attributes["Title"].Value</span>
+                                    <span style="position:absolute;right:10px;top:20px;" class="caret caret_right"></span>
+                                </a>
+                            </div>
+                            <ul class="subnav-menu" style="display:none;">
+                                @foreach (XmlNode SecondMenu in MenuLogic.GetSecond(FisrtMeun.Attributes["Name"].Value))
+                                {
+                                    if (RoleLogic.CheckPower(Model.ManagerRoleGuid, SecondMenu.Attributes["Name"].Value))
+                                    {
+                                        if (!string.IsNullOrEmpty(SecondMenu.Attributes["Url"].Value))
+                                        {
+                                            <li>
+                                                <div class="subnav-title second-subnav isurl">
+                                                    <a href="@SecondMenu.Attributes["Url"].Value" class="toggle-subnav " target="mainFrame">
+                                                        <span>@SecondMenu.Attributes["Title"].Value</span>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <div class="subnav-title second-subnav">
+                                                    <a href="javascript:void(0)" class='toggle-subnav '>
+                                                        <span>@SecondMenu.Attributes["Title"].Value</span>
+                                                        <span style="position:absolute;right:15px;top:20px;" class="caret caret_right"></span>
+                                                    </a>
+                                                </div>
+                                                <ul class="subnav-menu third-subnav" style="display:none;">
+                                                    @foreach (XmlNode ThirdMenu in MenuLogic.GetThird(SecondMenu.Attributes["Name"].Value))
+                                                    {
+                                                        <li>
+                                                            <!-- class="active" -->
+                                                            <a href="@ThirdMenu.Attributes["Url"].Value" target="mainFrame">@ThirdMenu.Attributes["Title"].Value</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+                <br /><br /><br />
+            </div>
+        </div>
+        <div class="right">
+            <div class="main">
+                <iframe id="mainframe" style="width:100%;height:90%;" name="mainFrame" frameborder="0" src="/set/admin/center"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- 反馈建议弹框开始 -->
+    <div id="feedback" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><i class="icon-comment-alt"></i>反馈建议 </h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="modal-body" style="overflow: visible">
+                        <div class="row-fluid">
+                            <div id="pp">
+                                <p>亲爱的用户</p>
+                                <p class="bbottom">欢迎您访问网站！您对商户联盟有任何意见和建议，或在使用过程中遇到问题，请在本页面反馈。我们会实时关注您的反馈不断优化，您的建议将帮助我们改进，为您提供更好的服务！</p>
+                                <p><b>请留下您的宝贵意见和建议！（请填写）</b></p>
+
+                                <textarea name="info" class="input-block-level" placeholder="输入文本..." rows="4" id="feedback-text"></textarea>
+                                <p>您常用的电子邮箱是？（请填写）</p>
+                                <p>*请尽量填写，以便我们尽快回复您！</p>
+                                <input type="text" placeholder="如：...163.com" name="email" class="input-block-level" id="feedback-input" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="feedbackSubmit(); return false;" id="submit_but">提交</button>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true" id="close_but">取消 </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 反馈建议弹框 结束 -->
+    <!-- 反馈建议按钮开始 -->
+    <div id="feedback_btn">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=4006305400&site=qq&menu=yes" target="_blank" class="tile-themed" title="联系客服"><i class="glyphicon glyphicon-headphones"></i></a>
+        <a href="#feedback" data-toggle="modal" title="反馈建议" class="tile-themed"><i class="glyphicon glyphicon-pencil"></i></a>
+    </div>
+    <style>
+        .active {
+            background-color: #368ee0;
+        }
+
+            .active .glyphicon {
+                color: white;
+            }
+
+            .active span {
+                color: white;
+            }
+    </style>
+    <script>
+        $("#left div.subnav-title").click(function ()
+        {
+
+            var c = $(this);
+            c.next("ul.subnav-menu").slideToggle(300);
+            var b = $(this).find("i").not(".wmfontset");
+            var d = c.parent().siblings();
+            if (c.hasClass("first-subnav"))
+            {
+                if (c.hasClass("active"))
+                {
+                    $(this).find("a").find("span").eq(1).addClass("caret_right");
+                    c.removeClass("active");
+                } else
+                {
+                    c.addClass("active");
+                    $(this).find("a").find("span").eq(1).removeClass("caret_right");
+                }
+            } else
+            {
+                if (c.hasClass("second-subnav"))
+                {
+                    $("#left div.second-subnav").removeClass("active");
+                    c.addClass("active");
+                    if (c.next(".subnav-menu").length > 0)
+                    {
+                        if (c.find("span").eq(1).hasClass("caret_right"))
+                        {
+                            c.find("span").eq(1).removeClass("caret_right");
+                        } else
+                        { c.find("span").eq(1).addClass("caret_right"); }
+                        b.attr("class", "icon-angle-up");
+                        c.find("a").css("border-bottom", "1px solid #d1d1d1")
+                    }
+                }
+            }
+            d.children("ul.subnav-menu").slideUp("slow");
+            d.children().removeClass("active");
+            d.find(".caret").addClass("caret_right");
+        });
+        $(".third-subnav a").click(function ()
+        {
+            if (!$(this).parent().hasClass("second-subnav"))
+            {
+                var b = $(this).parents(".subnav").siblings(".subnav");
+                b.find(".subnav-menu").hide();
+                b.find(".subnav-menu .second-subnav").removeClass("active");
+                b.find(".subnav-menu .second-subnav i").not(".icon-space,wmfontset").attr("class", "icon-angle-down");
+                $("#left").find("li").removeClass("active");
+
+                $(this).parent("li").addClass("active").siblings().removeClass("active")
+            }
+        });
+
+        $("#theme").find("span").click(function ()
+        {
+            $("#navigation").css("background", $(this).css("background"));
+            $("#left").css("background", $(this).css("background")).css("opacity", ".9");
+            $("#shortcutMenu").css("background", $(this).css("background")).css("opacity", ".9");
+            $(".toggle-subnav").css("color", "white");
+
+        });
+        function LoginOut()
+        {
+            layer.confirm('确定要退出系统吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function ()
+            {
+                window.location.href = '/shop/LoginOut';
+            }, function () { });
+        }
+    </script>
+</body>
+</html>

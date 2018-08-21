@@ -1,0 +1,350 @@
+﻿@{
+    Layout = null;
+}
+@using Shop.Entity;
+@using Shop.ViewModel;
+@model GroupBuyImage
+
+<link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+<link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+<link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+<ol class="breadcrumb">
+    <li><a href="/set/admin/center">首页></a></li>
+    <li><a href="/groupbuy/groupbuy/list">抢购管理></a></li>
+    <li class="active">@(Model.GroupBuy.Guid == Guid.Empty ? "新增抢购" : "编辑抢购")</li>
+</ol>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <strong>提示:</strong>图片建议尺寸为400*400像素 1:1.
+</div>
+<div class="modal-body">
+    @{Html.BeginForm("AddSave", "groupbuy", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+    @Html.HiddenFor(c => c.GroupBuy.Guid)
+    @Html.HiddenFor(c => c.GroupBuy.OperatorGuid)
+    @Html.HiddenFor(c => c.GroupBuy.ChainStoreGuid)
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">*标题</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.Title, new { @class = "form-control input-sm", @placeholder = "", @datatype = "*1-50", @errormsg = "标题不能超过50个字符！", @nullmsg = "请输入标题！" })
+                </div>
+
+                <label class="col-sm-2 control-label">所属商户</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(c => c.GroupBuy.BusinessGuid, ViewData["Business"] as IEnumerable<SelectListItem>, "-选择商户-", new { @class = "form-control input-sm", @datatype = "*", @nullmsg = "请选择所属商户！" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">门市价</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.GroupBuy.MarketPrice, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "价格必须是数字!", @nullmsg = "请填写原价!" })
+                        <div class="input-group-addon">元</div>
+                    </div>
+
+                </div>
+                <label class="col-sm-2 control-label">抢购价</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.GroupBuy.Price, new { @class = "form-control input-sm", @placeholder = "", @datatype = "/^[0-9]+([.]{1}[0-9]+){0,1}$/", @errormsg = "价格必须是数字!", @nullmsg = "请填写抢购价!" })
+                        <div class="input-group-addon">元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">库存</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.StoreCount, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "n", @errormsg = "抢购库存必须是数字!", @nullmsg = "请填写库存数量!" })
+                </div>
+                <label class="col-sm-2 control-label">封面图片</label>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(c => c.GroupBuy.Images, new { @id = "url1", @class = "form-control input-sm", @value = "", @readonly = "readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-sm" type="button" id="image1">上传图片</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">抢购图册</label>
+                <div class="col-sm-8">
+                    <input type="button" class="btn btn-primary btn-sm" id="J_selectImage" value="批量上传" />
+                    (最多允许上传6张图片)
+                </div>
+            </div>
+        </div>
+    </div>
+    @for (int i = 0; i < 6; i++)
+    {
+        @Html.HiddenFor(c => c.ImageList[i].Url, new { @class = "hidden" })
+        @Html.HiddenFor(c => c.ImageList[i].Guid, new { @id = "hiddenGuid" + i, @Value = Model.ImageList[i].Guid })
+    }
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                @for (int i = 0; i < 3; i++)
+                {
+                    <div class="col-xs-3 col-md-3">
+                        <div class="thumbnail">
+                            @if (!string.IsNullOrEmpty(Model.ImageList[i].Url))
+                            {
+                                <button type="button" class="close" aria-label="Close" onclick="DelImage('@Model.ImageList[i].Guid','@(i)');">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            }
+                            <img src="@Model.ImageList[i].Url " id="thumbnail@(i)" style="height: 130px;width: 100%;" />
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                @for (int i = 3; i < 6; i++)
+                {
+                    <div class="col-xs-3 col-md-3">
+                        <div class="thumbnail">
+                            @if (!string.IsNullOrEmpty(Model.ImageList[i].Url))
+                            {
+                                <button type="button" class="close" aria-label="Close" onclick="DelImage('@Model.ImageList[i].Guid','@(i)');">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            }
+                            <img src="@Model.ImageList[i].Url" id="thumbnail@(i)" style="height: 130px;width: 100%;" />
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">显示销量</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.DefaltSellCount, new { @class = "form-control input-sm", @placeholder = "", @ignore = "ignore", @datatype = "n", @errormsg = "销量必须是数字!", @nullmsg = "请输入显示销量!" })
+                </div>
+                <label class="col-sm-2 control-label">实际销量</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.SellCount, new { @class = "form-control input-sm", @placeholder = "数字小优先显示", @datatype = "n", @errormsg = "销量必须是数字!", @nullmsg = "请输入实际销量!" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">预约设置</label>
+                <div class="col-sm-3">
+                    <div class="radio radio-primary radio-inline">
+                        @Html.RadioButtonFor(c => c.GroupBuy.NeedBook, false, new { @id = "book1", @class = "" })
+                        <label for="book1">免预约</label>
+                    </div>
+                    <div class="radio radio-primary radio-inline">
+                        @Html.RadioButtonFor(c => c.GroupBuy.NeedBook, true, new { @id = "book2", @class = "" })
+                        <label for="book2">需预约</label>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label">显示顺序</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.Sort, new { @class = "form-control input-sm", @placeholder = "数字小优先显示", @datatype = "n", @errormsg = "排序必须是数字", @nullmsg = "请填写展示顺序!" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">开始时间</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.BeginTime,
+                    new
+                    {
+                        @class = "form-control input-sm",
+                        @placeholder = "选择开始时间",
+                        @datatype = "*",
+                        @nullmsg = "请选择开始时间!",
+                        @onclick = "WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'});",
+                        @Value = @Model.GroupBuy.Guid == Guid.Empty ? "" : Model.GroupBuy.BeginTime.ToString("yyyy-MM-dd HH:mm")
+                    })
+                </div>
+                <label class="col-sm-2 control-label">结束时间</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(c => c.GroupBuy.EndTime, new
+               {
+                   @class = "form-control input-sm",
+                   @placeholder = "选择结束时间",
+                   @datatype = "*",
+                   @nullmsg = "请选择开始时间!",
+                   onclick = "WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', minDate: '#F{$dp.$D(\\'GroupBuy_BeginTime\\')}' });",
+                   @Value = @Model.GroupBuy.Guid == Guid.Empty ? "" : Model.GroupBuy.EndTime.ToString("yyyy-MM-dd HH:mm")
+               })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">抢购详情</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(c => c.GroupBuy.Detail, new { @style = "width:550px;height:300px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="text-align:center;">
+        <input type="submit" class="btn btn-primary" value="保存" />
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:history.go(-1);">取消</button>
+    </div>
+    @{Html.EndForm();}
+</div>
+
+<script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+
+<script src="~/Content/admin/js/bootstrap.min.js"></script>
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function (K)
+    {
+        editor = K.create('#GroupBuy_Detail',
+            {
+                uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                allowFileManager: false,
+                formatUploadUrl: false,
+                afterBlur: function () { this.sync(); }
+            });
+        K('#image1').click(function ()
+        {
+            editor.loadPlugin('image', function ()
+            {
+                editor.plugin.imageDialog({
+                    imageUrl: K('#url1').val(),
+                    urlType: "relative",
+                    showRemote: false,
+                    clickFn: function (url, title, width, height, border, align)
+                    {
+                        K('#url1').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+
+        K('#J_selectImage').click(function ()
+        {
+            editor.loadPlugin('multiimage', function ()
+            {
+                editor.plugin.multiImageDialog({
+                    clickFn: function (urlList)
+                    {
+                        K.each(urlList, function (i, data)
+                        {
+                            $(".thumbnail").each(function ()
+                            {
+                                var ImgSrc = $(this).find("img").attr("src");
+                                if (ImgSrc == undefined || ImgSrc == "")
+                                {
+                                    $(this).find("img").attr("src", data.url);
+                                    return false;
+                                }
+                            });
+                            $(".hidden").each(function ()
+                            {
+                                var HiddenImgSrc = $(this).val();
+                                if (HiddenImgSrc == undefined || HiddenImgSrc == "")
+                                {
+                                    $(this).val(data.url);
+                                    return false;
+                                }
+                            });
+                        });
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+
+
+    function ShowTipMsg(id, msg)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            ajaxPost: true,
+            showAllError: true,
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    window.location.href = '/groupbuy/groupbuy/list/@Request.QueryString["pageIndex"]';
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg != "通过信息验证！")
+                {
+                    ShowTipMsg($(o.obj).attr("id"), msg)
+                }
+            }
+        }
+        );
+    });
+
+    function DelImage(id, i)
+    {
+        if (id != '@Guid.Empty')
+        {
+            parent.layer.confirm('确定要删除这张图片吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function ()
+            {
+                $.post("/GroupBuy/GroupBuy/DeleteImage", { guid: id }, function (data)
+                {
+                    if (data.succ)
+                    {
+                        $("#thumbnail" + i).attr("src", "");
+                        $("#hiddenGuid" + i).val("");
+                    }
+                });
+            });
+        }
+    }
+
+</script>

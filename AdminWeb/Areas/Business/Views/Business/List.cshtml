@@ -1,0 +1,70 @@
+﻿@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using System.Data;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+    string actionString = RoleLogic.GetPowerStr("MyBusiness", ManagerLogic.GetLoginInfo().ManagerRoleGuid);
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/MvcPager/MvcPager.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">商户管理></a></li>
+            <li class="active">商户列表</li>
+        </ol>
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" style="padding:0 0;" role="search">
+                <a class="btn btn-primary btn-sm " data-toggle="modal" href="/business/business/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新增</a>
+                <button type="submit" class="btn btn-primary btn-sm " id="checkAll" onclick="CheckAll(this);">
+                    <span class="glyphicon glyphicon-check" aria-hidden="true">全选</span>
+                </button>
+                @if (actionString.Contains("Add"))
+            {
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="Delete(null, '/business/article/delete', '/cms/article/list/@(Model.CurrentPageIndex - 1 > 1 ? Model.CurrentPageIndex - 1 : 1)');">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
+                    </button>
+                }
+
+            </div>
+            <form class="navbar-form navbar-left" role="search" id="formSearch">
+                <div class="form-group">
+                    <input type="text" name="BusinessName" class="form-control input-sm" placeholder="请输入商户名称" value="@Request.QueryString["BusinessName"]"/>
+                </div>
+
+                @Html.DropDownList("Industry", (IEnumerable<SelectListItem>)ViewData["Industry"], "-选择行业-", new { @class = "form-control input-sm" })
+
+                <input type="hidden" name="PageSize" value="15" />
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table")
+                @section Scripts{@{Html.RegisterMvcPagerScriptResource();}
+                }
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        function PageSizeChange()
+        {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            $("#formSearch").submit();
+        }
+    </script>
+</body>
+</html>

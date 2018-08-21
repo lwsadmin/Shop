@@ -1,0 +1,5 @@
+G:\我的项目\Shop\Shop2.0\Shop.AliPay\bin\Debug\Shop.AliPay.dll
+G:\我的项目\Shop\Shop2.0\Shop.AliPay\bin\Debug\Shop.AliPay.pdb
+G:\我的项目\Shop\Shop2.0\Shop.AliPay\obj\Debug\Shop.AliPay.dll
+G:\我的项目\Shop\Shop2.0\Shop.AliPay\obj\Debug\Shop.AliPay.pdb
+G:\我的项目\Shop\Shop2.0\Shop.AliPay\obj\Debug\Shop.AliPay.csproj.CoreCompileInputs.cache

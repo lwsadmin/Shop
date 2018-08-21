@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopEntityStoreContainer" CdmEntityContainer="dbContext">
+    <EntitySetMapping Name="TArticle">
+      <EntityTypeMapping TypeName="Shop.Entity.TArticle">
+        <MappingFragment StoreEntitySet="TArticle">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="CategoryGuid" ColumnName="CategoryGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="Souce" ColumnName="Souce" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+          <ScalarProperty Name="IsManager" ColumnName="IsManager" />
+          <ScalarProperty Name="SmallImg" ColumnName="SmallImg" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Target" ColumnName="Target" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Describle" ColumnName="Describle" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Click" ColumnName="Click" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TLog">
+      <EntityTypeMapping TypeName="Shop.Entity.TLog">
+        <MappingFragment StoreEntitySet="TLog">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TManager">
+      <EntityTypeMapping TypeName="Shop.Entity.TManager">
+        <MappingFragment StoreEntitySet="TManager">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerRoleGuid" ColumnName="ManagerRoleGuid" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetPaged" FunctionName="Shop.Entity.Store.GetPaged" />
+    <EntitySetMapping Name="TImage">
+      <EntityTypeMapping TypeName="Shop.Entity.TImage">
+        <MappingFragment StoreEntitySet="TImage">
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDefult" ColumnName="IsDefult" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ObjectGuid" ColumnName="ObjectGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOperator">
+      <EntityTypeMapping TypeName="Shop.Entity.TOperator">
+        <MappingFragment StoreEntitySet="TOperator">
+          <ScalarProperty Name="LoginAccount" ColumnName="LoginAccount" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMemberCategory">
+      <EntityTypeMapping TypeName="Shop.Entity.TMemberCategory">
+        <MappingFragment StoreEntitySet="TMemberCategory">
+          <ScalarProperty Name="MemberRight" ColumnName="MemberRight" />
+          <ScalarProperty Name="UpgradeNeedPoint" ColumnName="UpgradeNeedPoint" />
+          <ScalarProperty Name="RecommendPoint" ColumnName="RecommendPoint" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="DefaultPoint" ColumnName="DefaultPoint" />
+          <ScalarProperty Name="SoldMoney" ColumnName="SoldMoney" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TManagerRole">
+      <EntityTypeMapping TypeName="Shop.Entity.TManagerRole">
+        <MappingFragment StoreEntitySet="TManagerRole">
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="IsBusinessSuper" ColumnName="IsBusinessSuper" />
+          <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+          <ScalarProperty Name="ManageRole" ColumnName="ManageRole" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ManageRange" ColumnName="ManageRange" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TCoupon">
+      <EntityTypeMapping TypeName="Shop.Entity.TCoupon">
+        <MappingFragment StoreEntitySet="TCoupon">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="MemberUseCount" ColumnName="MemberUseCount" />
+          <ScalarProperty Name="MemberReceiveCount" ColumnName="MemberReceiveCount" />
+          <ScalarProperty Name="ParticipateStoreCount" ColumnName="ParticipateStoreCount" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="ValidityDay" ColumnName="ValidityDay" />
+          <ScalarProperty Name="ValidityType" ColumnName="ValidityType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SigleReceiveCount" ColumnName="SigleReceiveCount" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+          <ScalarProperty Name="UseValueLimit" ColumnName="UseValueLimit" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBusinessCoupon">
+      <EntityTypeMapping TypeName="Shop.Entity.TBusinessCoupon">
+        <MappingFragment StoreEntitySet="TBusinessCoupon">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="MemberUseCount" ColumnName="MemberUseCount" />
+          <ScalarProperty Name="MemberReceiveCount" ColumnName="MemberReceiveCount" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="ValidityDay" ColumnName="ValidityDay" />
+          <ScalarProperty Name="ValidityType" ColumnName="ValidityType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsOverlay" ColumnName="IsOverlay" />
+          <ScalarProperty Name="SigleReceiveCount" ColumnName="SigleReceiveCount" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+          <ScalarProperty Name="UseValueLimit" ColumnName="UseValueLimit" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TCouponPackage">
+      <EntityTypeMapping TypeName="Shop.Entity.TCouponPackage">
+        <MappingFragment StoreEntitySet="TCouponPackage">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TCouponPackageItem">
+      <EntityTypeMapping TypeName="Shop.Entity.TCouponPackageItem">
+        <MappingFragment StoreEntitySet="TCouponPackageItem">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ObjectGuid" ColumnName="ObjectGuid" />
+          <ScalarProperty Name="CouponPackageGuid" ColumnName="CouponPackageGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGift">
+      <EntityTypeMapping TypeName="Shop.Entity.TGift">
+        <MappingFragment StoreEntitySet="TGift">
+          <ScalarProperty Name="ExchangeCount" ColumnName="ExchangeCount" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="StockCount" ColumnName="StockCount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExchangeAddress" ColumnName="ExchangeAddress" />
+          <ScalarProperty Name="ExchangeNotes" ColumnName="ExchangeNotes" />
+          <ScalarProperty Name="ExchangeType" ColumnName="ExchangeType" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="SingleLimit" ColumnName="SingleLimit" />
+          <ScalarProperty Name="GiftCategoryGuid" ColumnName="GiftCategoryGuid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TParameter">
+      <EntityTypeMapping TypeName="Shop.Entity.TParameter">
+        <MappingFragment StoreEntitySet="TParameter">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStorePointNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStorePointNote">
+        <MappingFragment StoreEntitySet="TChainStorePointNote">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="OperatePoint" ColumnName="OperatePoint" />
+          <ScalarProperty Name="MoneyPayable" ColumnName="MoneyPayable" />
+          <ScalarProperty Name="MoneyFactPay" ColumnName="MoneyFactPay" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Way" ColumnName="Way" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAnnouncement">
+      <EntityTypeMapping TypeName="Shop.Entity.TAnnouncement">
+        <MappingFragment StoreEntitySet="TAnnouncement">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+          <ScalarProperty Name="AnnouncementContent" ColumnName="AnnouncementContent" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAnnouncementReader">
+      <EntityTypeMapping TypeName="Shop.Entity.TAnnouncementReader">
+        <MappingFragment StoreEntitySet="TAnnouncementReader">
+          <ScalarProperty Name="OperterTime" ColumnName="OperterTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="AnnouncementGuid" ColumnName="AnnouncementGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStoreValueNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStoreValueNote">
+        <MappingFragment StoreEntitySet="TChainStoreValueNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OperateTime" ColumnName="OperateTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="PayValue" ColumnName="PayValue" />
+          <ScalarProperty Name="DoneValue" ColumnName="DoneValue" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStoreSettleSet">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStoreSettleSet">
+        <MappingFragment StoreEntitySet="TChainStoreSettleSet">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="MemberSaleProfitProportion" ColumnName="MemberSaleProfitProportion" />
+          <ScalarProperty Name="MemberProfitProportion" ColumnName="MemberProfitProportion" />
+          <ScalarProperty Name="BusinessProfitProportion" ColumnName="BusinessProfitProportion" />
+          <ScalarProperty Name="PointPaidRebate" ColumnName="PointPaidRebate" />
+          <ScalarProperty Name="OnLineConsumeRebate" ColumnName="OnLineConsumeRebate" />
+          <ScalarProperty Name="OffLineConsumeRebate" ColumnName="OffLineConsumeRebate" />
+          <ScalarProperty Name="OffLineConsumeDiscount" ColumnName="OffLineConsumeDiscount" />
+          <ScalarProperty Name="MemberCategoryGuid" ColumnName="MemberCategoryGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMemberValueNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TMemberValueNote">
+        <MappingFragment StoreEntitySet="TMemberValueNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="IsUndo" ColumnName="IsUndo" />
+          <ScalarProperty Name="Operatetime" ColumnName="Operatetime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Way" ColumnName="Way" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStoreSmsSendNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStoreSmsSendNote">
+        <MappingFragment StoreEntitySet="TChainStoreSmsSendNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+          <ScalarProperty Name="SendChanelKeyName" ColumnName="SendChanelKeyName" />
+          <ScalarProperty Name="SmsCount" ColumnName="SmsCount" />
+          <ScalarProperty Name="SmsContent" ColumnName="SmsContent" />
+          <ScalarProperty Name="Mobiles" ColumnName="Mobiles" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMemberCoupon">
+      <EntityTypeMapping TypeName="Shop.Entity.TMemberCoupon">
+        <MappingFragment StoreEntitySet="TMemberCoupon">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="UsedTime" ColumnName="UsedTime" />
+          <ScalarProperty Name="UsedChainStoreGuid" ColumnName="UsedChainStoreGuid" />
+          <ScalarProperty Name="UsedAssociateBillNumber" ColumnName="UsedAssociateBillNumber" />
+          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+          <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+          <ScalarProperty Name="SendAssociateBillNumber" ColumnName="SendAssociateBillNumber" />
+          <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="CouponCode" ColumnName="CouponCode" />
+          <ScalarProperty Name="CouponGuid" ColumnName="CouponGuid" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGiftExchangeNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TGiftExchangeNote">
+        <MappingFragment StoreEntitySet="TGiftExchangeNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OpertorTime" ColumnName="OpertorTime" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="RelationBillNumber" ColumnName="RelationBillNumber" />
+          <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGiftExchangeNoteItem">
+      <EntityTypeMapping TypeName="Shop.Entity.TGiftExchangeNoteItem">
+        <MappingFragment StoreEntitySet="TGiftExchangeNoteItem">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="GiftGuid" ColumnName="GiftGuid" />
+          <ScalarProperty Name="GiftExchangeGuid" ColumnName="GiftExchangeGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMemberConsumeNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TMemberConsumeNote">
+        <MappingFragment StoreEntitySet="TMemberConsumeNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OperateTime" ColumnName="OperateTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="CutAmount" ColumnName="CutAmount" />
+          <ScalarProperty Name="OtherPaid" ColumnName="OtherPaid" />
+          <ScalarProperty Name="CouponCode" ColumnName="CouponCode" />
+          <ScalarProperty Name="AliPaid" ColumnName="AliPaid" />
+          <ScalarProperty Name="ThirdPaid" ColumnName="ThirdPaid" />
+          <ScalarProperty Name="CouponPaid" ColumnName="CouponPaid" />
+          <ScalarProperty Name="PointPaid" ColumnName="PointPaid" />
+          <ScalarProperty Name="CardPaid" ColumnName="CardPaid" />
+          <ScalarProperty Name="ValuePaid" ColumnName="ValuePaid" />
+          <ScalarProperty Name="MoneyPaid" ColumnName="MoneyPaid" />
+          <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+          <ScalarProperty Name="ShouldAmount" ColumnName="ShouldAmount" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMemberPointNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TMemberPointNote">
+        <MappingFragment StoreEntitySet="TMemberPointNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Operatetime" ColumnName="Operatetime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Way" ColumnName="Way" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStoreCapitalNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStoreCapitalNote">
+        <MappingFragment StoreEntitySet="TChainStoreCapitalNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="AllValue" ColumnName="AllValue" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Way" ColumnName="Way" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStoreBuySmsNote">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStoreBuySmsNote">
+        <MappingFragment StoreEntitySet="TChainStoreBuySmsNote">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OperateTime" ColumnName="OperateTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="FactPay" ColumnName="FactPay" />
+          <ScalarProperty Name="ShouldPay" ColumnName="ShouldPay" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TChainStore">
+      <EntityTypeMapping TypeName="Shop.Entity.TChainStore">
+        <MappingFragment StoreEntitySet="TChainStore">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="SettlementMoney" ColumnName="SettlementMoney" />
+          <ScalarProperty Name="AvailableValue" ColumnName="AvailableValue" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="AvailablePoint" ColumnName="AvailablePoint" />
+          <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+          <ScalarProperty Name="TotalSmsCount" ColumnName="TotalSmsCount" />
+          <ScalarProperty Name="AvailableSmsCount" ColumnName="AvailableSmsCount" />
+          <ScalarProperty Name="IsTakeoutSms" ColumnName="IsTakeoutSms" />
+          <ScalarProperty Name="TakeoutPrice" ColumnName="TakeoutPrice" />
+          <ScalarProperty Name="AveragePrice" ColumnName="AveragePrice" />
+          <ScalarProperty Name="IsTakeOut" ColumnName="IsTakeOut" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIndustry">
+      <EntityTypeMapping TypeName="Shop.Entity.TIndustry">
+        <MappingFragment StoreEntitySet="TIndustry">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBusiness">
+      <EntityTypeMapping TypeName="Shop.Entity.TBusiness">
+        <MappingFragment StoreEntitySet="TBusiness">
+          <ScalarProperty Name="IndustryGuid" ColumnName="IndustryGuid" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+          <ScalarProperty Name="DueTime" ColumnName="DueTime" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+          <ScalarProperty Name="IsSystemBusiness" ColumnName="IsSystemBusiness" />
+          <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
+          <ScalarProperty Name="AgentsGuid" ColumnName="AgentsGuid" />
+          <ScalarProperty Name="BusinessName" ColumnName="BusinessName" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_SelectGoodsCategory" FunctionName="Shop.Entity.Store.usp_SelectGoodsCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Shop.Entity.usp_GoodsCategory">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="TBrand">
+      <EntityTypeMapping TypeName="Shop.Entity.TBrand">
+        <MappingFragment StoreEntitySet="TBrand">
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGoodsCategory">
+      <EntityTypeMapping TypeName="Shop.Entity.TGoodsCategory">
+        <MappingFragment StoreEntitySet="TGoodsCategory">
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TArticleCategory">
+      <EntityTypeMapping TypeName="Shop.Entity.TArticleCategory">
+        <MappingFragment StoreEntitySet="TArticleCategory">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TActivity">
+      <EntityTypeMapping TypeName="Shop.Entity.TActivity">
+        <MappingFragment StoreEntitySet="TActivity">
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ApplCount" ColumnName="ApplCount" />
+          <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CategoryGuid" ColumnName="CategoryGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TActivityCategory">
+      <EntityTypeMapping TypeName="Shop.Entity.TActivityCategory">
+        <MappingFragment StoreEntitySet="TActivityCategory">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGoods">
+      <EntityTypeMapping TypeName="Shop.Entity.TGoods">
+        <MappingFragment StoreEntitySet="TGoods">
+          <ScalarProperty Name="Parameter10" ColumnName="Parameter10" />
+          <ScalarProperty Name="Parameter9" ColumnName="Parameter9" />
+          <ScalarProperty Name="Parameter8" ColumnName="Parameter8" />
+          <ScalarProperty Name="Parameter7" ColumnName="Parameter7" />
+          <ScalarProperty Name="Parameter6" ColumnName="Parameter6" />
+          <ScalarProperty Name="Parameter5" ColumnName="Parameter5" />
+          <ScalarProperty Name="Parameter4" ColumnName="Parameter4" />
+          <ScalarProperty Name="Parameter3" ColumnName="Parameter3" />
+          <ScalarProperty Name="Parameter2" ColumnName="Parameter2" />
+          <ScalarProperty Name="Parameter1" ColumnName="Parameter1" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="SellCount" ColumnName="SellCount" />
+          <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsTakeOut" ColumnName="IsTakeOut" />
+          <ScalarProperty Name="DistributionMoney" ColumnName="DistributionMoney" />
+          <ScalarProperty Name="AllowDistribution" ColumnName="AllowDistribution" />
+          <ScalarProperty Name="OnLinePrice" ColumnName="OnLinePrice" />
+          <ScalarProperty Name="MarketPrice" ColumnName="MarketPrice" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="BrandGuid" ColumnName="BrandGuid" />
+          <ScalarProperty Name="GoodsCategoryGuid" ColumnName="GoodsCategoryGuid" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TMember">
+      <EntityTypeMapping TypeName="Shop.Entity.TMember">
+        <MappingFragment StoreEntitySet="TMember">
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+          <ScalarProperty Name="RegSource" ColumnName="RegSource" />
+          <ScalarProperty Name="RegTime" ColumnName="RegTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LastConsumeTime" ColumnName="LastConsumeTime" />
+          <ScalarProperty Name="TotalConsumeCount" ColumnName="TotalConsumeCount" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="AvailableValue" ColumnName="AvailableValue" />
+          <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+          <ScalarProperty Name="AvailablePoint" ColumnName="AvailablePoint" />
+          <ScalarProperty Name="RecommendMemberGuid" ColumnName="RecommendMemberGuid" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+          <ScalarProperty Name="Profession" ColumnName="Profession" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="CategoryGuid" ColumnName="CategoryGuid" />
+          <ScalarProperty Name="HeadImg" ColumnName="HeadImg" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CardID" ColumnName="CardID" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGiftCategory">
+      <EntityTypeMapping TypeName="Shop.Entity.TGiftCategory">
+        <MappingFragment StoreEntitySet="TGiftCategory">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TComment">
+      <EntityTypeMapping TypeName="Shop.Entity.TComment">
+        <MappingFragment StoreEntitySet="TComment">
+          <ScalarProperty Name="SubmitTime" ColumnName="SubmitTime" />
+          <ScalarProperty Name="OppositionCount" ColumnName="OppositionCount" />
+          <ScalarProperty Name="SupportCount" ColumnName="SupportCount" />
+          <ScalarProperty Name="StartLevel" ColumnName="StartLevel" />
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+          <ScalarProperty Name="ObjectGuid" ColumnName="ObjectGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRushBuy">
+      <EntityTypeMapping TypeName="Shop.Entity.TRushBuy">
+        <MappingFragment StoreEntitySet="TRushBuy">
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ValidityDays" ColumnName="ValidityDays" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="NeedBook" ColumnName="NeedBook" />
+          <ScalarProperty Name="StoreCount" ColumnName="StoreCount" />
+          <ScalarProperty Name="SingleBuyLimit" ColumnName="SingleBuyLimit" />
+          <ScalarProperty Name="SellCount" ColumnName="SellCount" />
+          <ScalarProperty Name="DefaltSellCount" ColumnName="DefaltSellCount" />
+          <ScalarProperty Name="MarketPrice" ColumnName="MarketPrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ChainStoreGuid" ColumnName="ChainStoreGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TGoodsProperty">
+      <EntityTypeMapping TypeName="Shop.Entity.TGoodsProperty">
+        <MappingFragment StoreEntitySet="TGoodsProperty">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Options" ColumnName="Options" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="ValueName" ColumnName="ValueName" />
+          <ScalarProperty Name="Searchable" ColumnName="Searchable" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="GoodsCategoryGuid" ColumnName="GoodsCategoryGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRushBuyOrder">
+      <EntityTypeMapping TypeName="Shop.Entity.TRushBuyOrder">
+        <MappingFragment StoreEntitySet="TRushBuyOrder">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="RefundNO" ColumnName="RefundNO" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="PointPaid" ColumnName="PointPaid" />
+          <ScalarProperty Name="AliPaid" ColumnName="AliPaid" />
+          <ScalarProperty Name="WeiXinPaid" ColumnName="WeiXinPaid" />
+          <ScalarProperty Name="ValuePaid" ColumnName="ValuePaid" />
+          <ScalarProperty Name="TotalPay" ColumnName="TotalPay" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="BusinessGuid" ColumnName="BusinessGuid" />
+          <ScalarProperty Name="MemberGuid" ColumnName="MemberGuid" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="RushBuyGuid" ColumnName="RushBuyGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRushOrderItem">
+      <EntityTypeMapping TypeName="Shop.Entity.TRushOrderItem">
+        <MappingFragment StoreEntitySet="TRushOrderItem">
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="UsedTime" ColumnName="UsedTime" />
+          <ScalarProperty Name="UsedChainStore" ColumnName="UsedChainStore" />
+          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+          <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+          <ScalarProperty Name="RushOrderGuid" ColumnName="RushOrderGuid" />
+          <ScalarProperty Name="OperatorGuid" ColumnName="OperatorGuid" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

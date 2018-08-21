@@ -1,0 +1,203 @@
+﻿@using System.Data;
+@using Shop.Entity;
+@using Shop.Help;
+@using Shop.Bll;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@model  PagedList<DataRow>
+
+@{
+    Layout = null;
+}
+
+<table class="table table-bordered  table-condensed table-condensed  table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>门店</th>
+            <th>所属商户</th>
+            <th>展示图</th>
+            <th>联系人</th>
+            <th>电话</th>
+            <th>外送</th>
+            <th>显示顺序</th>
+            <th>加盟时间</th>
+            <th class="hidden-xs">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="subBox" value="@row["Guid"]" />
+                </td>
+                <td style="text-align:left;" class="title">@row["Name"]</td>
+                <td style="text-align:left;">@row["BusinessName"]</td>
+                <td style="padding: 5px;">
+                    <img onmouseover="MouseShowImage(this);" style="height:25px;width:40px;" alt="" src="@row["Image"]" onerror="this.src='/Content/noImg.jpg'" />
+                </td>
+                <td>@row["Contact"]</td>
+                <td>@row["Mobile"]</td>
+                <td>@(Convert.ToBoolean(row["IsTakeOut"]) ? "开启" : "关闭")</td>
+                <td>@row["Sort"]</td>
+                <td>@Convert.ToDateTime(row["CreateTime"]).ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a class="btn btn-default btn-xs" data-toggle="modal" data-target="" href="/business/chainstore/map?guid=@row["Guid"]&lng=@row["Longitude"]&lat=@row["Latitude"]">位置</a>
+
+                    <a class="btn btn-default btn-xs" title='编辑信息' href="/business/chainstore/add/@row["Guid"]?pageIndex=@Model.CurrentPageIndex">编辑</a>
+
+                    <a class="btn btn-default btn-xs" title='' onclick="Delete('@row["Guid"]')">删除 </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+<div class="text-left">
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/articleinfo/articlecategory/list/{0}\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Get",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    OnSuccess = "Success()",
+}
+)
+    <ul class="pagination" style="width:20%;margin-top: 0px;">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2">
+                <span class="input-group-addon">页</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" type="button">Go</button>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    function ShowMap(guid, Longitude, Latitude)
+    {
+        $("#Longitude").val(Longitude);
+        $("#Latitude").val(Latitude);
+        $("#ChainStoreGuid").val(guid);
+        $("#MapModal").css("display", "block");//最顶级页面如果display none 则百度地图第二次加载出问题
+        $("#txtAddress").val("");
+        if (Longitude == "" || Latitude == "")
+        {
+            DefaultPoint();
+        } else
+        {
+            PointMap(Longitude, Latitude);
+        }
+        $('#MapModal').modal('show');
+    }
+
+
+    function Success()
+    {
+        var txt = $("#StoreName").val().trim();
+        if (txt.length > 0)
+        {
+            $(".title").each(function ()
+            {
+                var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+                $(this).html(newTxt);
+            });
+        }
+        $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+        $("#PageSize").val(@ViewData["NowPageSize"]);
+    }
+    function PageSizeChange()
+    {
+        $("input[name='PageSize']").val($("#PageSize").val());
+        $("#formSearch").submit();
+    }
+    function ShowMsg(id, msg)
+    {
+        layer.tips(msg, "#" + id, {
+            tips: [2, '#3595CC'],
+            time: 4000
+        });
+        $("#" + id).mouseout(function ()
+        {
+            layer.closeAll('tips'); //关闭所有的tips层
+        });
+    }
+    function MouseShowImage(obj)
+    {
+        layer.open({
+            type: 5,
+            title: false,
+            closeBtn: 0,
+            shade: 0,
+            content: "<img src='" + $(obj).attr("src") + "'/>"
+        });
+        $(obj).mouseout(function ()
+        {
+            layer.closeAll();
+        });
+    }
+    function InputPageIndex(obj)
+    {
+        var pageIndex = $(obj).val().trim();
+        if (parseInt(pageIndex) > parseInt($("#TotalPageCount").val()))
+        {
+            $(obj).val($("#TotalPageCount").val());
+        }
+    }
+
+    function GoPageIndex()
+    {
+        var pager = Webdiyer.MvcPagers[0];
+        var pageIndex = $("#pageIndexBox").val().trim();
+        var TotalPageCount = $("#TotalPageCount").val().trim();
+        if (parseInt(pageIndex) > parseInt(TotalPageCount))
+        {
+            pageIndex = TotalPageCount;
+        }
+        if (pager != null)
+        {
+            pager.goToPage(parseInt(pageIndex));
+        } else
+        { alert("找不到指定的MvcPager！"); }
+
+    }
+</script>

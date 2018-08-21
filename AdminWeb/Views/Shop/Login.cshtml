@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商盟后台登录</title>
+    <meta name="keywords" content="商户联盟,异业联盟，O2O电商" />
+    <meta name="description" content="商户联盟,异业联盟，O2O电商" />
+    <link href="~/Content/admin/css/login.css" rel="stylesheet" />
+    <script src="~/Content/admin/js/jquery-1.10.2.min.js"></script>
+
+</head>
+<body class="loginbody">
+    <div class="login-box">
+        <h1 style="margin-left: 15%;">商户联盟系统后台登录</h1>
+        <form method="post" action="/shop/login" id="form1">
+            <div class="name">
+                <label>商户号：</label>
+                <input type="text" name="loginAccount" id="loginAccount" tabindex="1" autocomplete="on" value="@ViewData["loginAccount"]" />
+            </div>
+            <div class="name">
+                <label>账&nbsp;&nbsp;&nbsp;号：</label>
+                <input type="text" name="loginName" id="loginName" tabindex="1" autocomplete="on" value="@ViewData["loginName"]" />
+            </div>
+            <div class="password">
+                <label>密&nbsp;&nbsp;&nbsp;码：</label>
+                <input type="password" id="pwd" name="pwd" maxlength="16" tabindex="2" value="@ViewData["pwd"]" />
+            </div>
+            <div class="code">
+                <label>验证码：</label>
+                <input type="text" id="yzm" name="yzm" maxlength="4" tabindex="3" />
+                <div class="codeImg">
+                    <img src="/shop/YanZhengMa" onclick="Change(this)" />
+                </div>
+            </div>
+            <div class="remember">
+                <input type="checkbox" id="remember" tabindex="4" />
+                <label>记住密码</label>
+            </div>
+            <div class="login">
+                <button type="submit" tabindex="5" onclick="return FormSubmit();">登录</button>
+            </div>
+        </form>
+    </div>
+
+    <canvas id="canv" width="1366" height="643"></canvas>
+    <div class="bottom">©2017 Leting <a href="javascript:;" target="_blank">关于</a> <span>Copyright©  2017 版权所有 京ICP备05019125号-10 </span>李文尚</div>
+
+    <script src="~/Content/layer/layer.js"></script>
+    @MvcHtmlString.Create(ViewData["msg"].ToString())
+    <script type="text/javascript">
+        $(function ()
+        {
+            $("#loginAccount").focus();
+        });
+        if (window.parent.length > 0)
+        {
+            top.location = "/shop/login";
+        }
+        function ShowValidformMsg(msg, id)
+        {
+            //小tips
+            layer.tips(msg, '#' + id, {
+                tips: [1, '#3595CC'],
+                time: 4000
+            });
+            $("#" + id).focus();
+        }
+        function Change(obj)
+        {
+            var s = new Date();
+            $(obj).attr("src", "/shop/YanZhengMa?time=" + s.getTime());
+        }
+
+        function FormSubmit()
+        {
+            if ($("#loginAccount").val().trim().length == 0)
+            {
+                ShowValidformMsg("请输入登录商户号", "loginAccount");
+                return false;
+            }
+            if ($("#loginName").val().trim().length == 0)
+            {
+                ShowValidformMsg("请输入登录账号", "loginName");
+                return false;
+            }
+            if ($("#pwd").val().trim().length == 0)
+            {
+                ShowValidformMsg("请输入登录密码", "pwd");
+                return false;
+            }
+            if ($("#yzm").val().trim().length == 0)
+            {
+                ShowValidformMsg("请输入验证码", "yzm");
+                return false;
+            }
+            var index = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+            return true;
+        }
+    </script>
+    <script src="~/Content/admin/js/login.js"></script>
+</body>
+</html>

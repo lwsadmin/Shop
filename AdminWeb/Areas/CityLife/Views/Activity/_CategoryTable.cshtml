@@ -1,0 +1,108 @@
+﻿
+@using System.Data;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@using Shop.Entity;
+@using Shop.Bll;
+@model  PagedList<DataRow>
+@{Layout = null;}
+<table class="table table-bordered  table-condensed table-condensed  table-hover table-condensed" id="treeTable1">
+    <thead>
+        <tr>
+            <th>类别名称</th>
+            <th>显示顺序</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td class="title"> @row["Title"]</td>
+                <td>@row["Sort"]</td>
+                <td>@row["Remark"] </td>
+                <td>
+                    @Ajax.ActionLink("编辑", "CategoryEdit", new { guid = row["Guid"] }, new AjaxOptions
+               {
+                   OnSuccess = "EditShow",
+                   HttpMethod = "GET",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "divAdd"
+
+               }, new { @class = "btn  btn-default btn-xs" })
+
+                    <a class="btn btn-default btn-xs" title='删除' onclick="Delete('@row["Guid"]','@row["Title"]' )">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-left">
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/CityLife/Activity/CategoryList/{0}\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    //OnSuccess = "EditMsg",
+}
+)
+    <ul class="pagination" style="width:20%;margin-top: 0px;">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">跳转到第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" type="button">Go</button>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var txt = $("#SearchTitle").val().trim();
+    $("#PageSize").val(@ViewData["NowPageSize"]);
+    if (txt.length > 0)
+    {
+        $(".title").each(function ()
+        {
+            var newTxt = $(this).html().replace(txt, txt.fontcolor("red"));
+            $(this).html(newTxt);
+        });
+    }
+</script>

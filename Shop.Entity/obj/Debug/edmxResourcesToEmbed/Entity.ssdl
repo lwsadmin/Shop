@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Shop.Entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TActivity">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Images" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="BeginTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ReadCount" Type="int" Nullable="false" />
+    <Property Name="ApplCount" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TActivityCategory">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TAnnouncement">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AnnouncementContent" Type="nvarchar(max)" />
+    <Property Name="ReadCount" Type="int" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TAnnouncementReader">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AnnouncementGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="OperterTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TArticle">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" />
+    <Property Name="Souce" Type="nvarchar" MaxLength="200" />
+    <Property Name="author" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsManager" Type="bit" Nullable="false" />
+    <Property Name="SmallImg" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Target" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Level" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Describle" Type="nvarchar" MaxLength="500" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="Click" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TArticleCategory">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ParentGuid" Type="uniqueidentifier" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TBrand">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="300" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="Url" Type="nvarchar" MaxLength="500" />
+    <Property Name="Introduce" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TBusiness">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AgentsGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StoreCount" Type="int" Nullable="false" />
+    <Property Name="IsSystemBusiness" Type="bit" />
+    <Property Name="RegisterTime" Type="datetime" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DueTime" Type="datetime" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="300" />
+    <Property Name="IndustryGuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="TBusinessCoupon">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UseValueLimit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalCount" Type="int" Nullable="false" />
+    <Property Name="SigleReceiveCount" Type="int" Nullable="false" />
+    <Property Name="IsOverlay" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ValidityType" Type="int" Nullable="false" />
+    <Property Name="ValidityDay" Type="int" />
+    <Property Name="BeginTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="MemberReceiveCount" Type="int" Nullable="false" />
+    <Property Name="MemberUseCount" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+    <Property Name="Introduce" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TChainStore">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsSystem" Type="bit" Nullable="false" />
+    <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+    <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsTakeOut" Type="bit" Nullable="false" />
+    <Property Name="AveragePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TakeoutPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsTakeoutSms" Type="bit" Nullable="false" />
+    <Property Name="AvailableSmsCount" Type="int" Nullable="false" />
+    <Property Name="TotalSmsCount" Type="int" Nullable="false" />
+    <Property Name="TotalPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AvailablePoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AvailableValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SettlementMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="500" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Introduce" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TChainStoreBuySmsNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="ShouldPay" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="FactPay" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="OperateTime" Type="datetime" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TChainStoreCapitalNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Way" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AllValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="OperatorTime" Type="datetime" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TChainStorePointNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Way" Type="int" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MoneyFactPay" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MoneyPayable" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OperatePoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="500" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TChainStoreSettleSet">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" />
+    <Property Name="MemberCategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OffLineConsumeDiscount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OffLineConsumeRebate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OnLineConsumeRebate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PointPaidRebate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="BusinessProfitProportion" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MemberProfitProportion" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MemberSaleProfitProportion" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TChainStoreSmsSendNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Mobiles" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SmsContent" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="SmsCount" Type="int" Nullable="false" />
+    <Property Name="SendChanelKeyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SendTime" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TChainStoreValueNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DoneValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PayValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OperateTime" Type="datetime" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TComment">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ParentGuid" Type="uniqueidentifier" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="Images" Type="nvarchar" MaxLength="1000" />
+    <Property Name="StartLevel" Type="int" Nullable="false" />
+    <Property Name="SupportCount" Type="int" Nullable="false" />
+    <Property Name="OppositionCount" Type="int" Nullable="false" />
+    <Property Name="SubmitTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TCoupon">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UseValueLimit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalCount" Type="int" Nullable="false" />
+    <Property Name="SigleReceiveCount" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ValidityType" Type="int" Nullable="false" />
+    <Property Name="ValidityDay" Type="int" />
+    <Property Name="BeginTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="ParticipateStoreCount" Type="int" Nullable="false" />
+    <Property Name="MemberReceiveCount" Type="int" Nullable="false" />
+    <Property Name="MemberUseCount" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+    <Property Name="Introduce" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TCouponPackage">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TCouponPackageItem">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CouponPackageGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TGift">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="GiftCategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SingleLimit" Type="int" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+    <Property Name="ExchangeCount" Type="int" Nullable="false" />
+    <Property Name="ExchangeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ExchangeNotes" Type="nvarchar(max)" />
+    <Property Name="ExchangeAddress" Type="nvarchar" MaxLength="300" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StockCount" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TGiftCategory">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentGuid" Type="uniqueidentifier" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TGiftExchangeNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TotalPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="RelationBillNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OpertorTime" Type="datetime" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TGiftExchangeNoteItem">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GiftExchangeGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GiftGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="TotalPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TGoods">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GoodsCategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BrandGuid" Type="uniqueidentifier" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="MarketPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OnLinePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AllowDistribution" Type="bit" />
+    <Property Name="DistributionMoney" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsTakeOut" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="StoreCount" Type="nchar" MaxLength="10" />
+    <Property Name="SellCount" Type="nchar" MaxLength="10" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Parameter1" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter2" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter3" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter4" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter5" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter6" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter7" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter8" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter9" Type="nvarchar" MaxLength="500" />
+    <Property Name="Parameter10" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TGoodsCategory">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentGuid" Type="uniqueidentifier" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Brand" Type="nvarchar(max)" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TGoodsProperty">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GoodsCategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DataType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Searchable" Type="bit" Nullable="false" />
+    <Property Name="ValueName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DefaultValue" Type="nvarchar" MaxLength="500" />
+    <Property Name="Options" Type="nvarchar" MaxLength="500" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TImage">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsDefult" Type="bit" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Size" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="300" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="UploadTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIndustry">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" />
+    <Property Name="ParentGuid" Type="uniqueidentifier" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TLog">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="500" />
+    <Property Name="OperatorTime" Type="datetime" Nullable="false" />
+    <Property Name="IP" Type="nvarchar" MaxLength="100" />
+    <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TManager">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoginPwd" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ManagerRoleGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="LastLoginTime" Type="datetime" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TManagerRole">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" />
+    <Property Name="ManageRange" Type="nvarchar" MaxLength="500" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ManageRole" Type="nvarchar(max)" />
+    <Property Name="IsSystem" Type="bit" Nullable="false" />
+    <Property Name="IsBusinessSuper" Type="bit" Nullable="false" />
+    <Property Name="Action" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TMember">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CardID" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="NickName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="HeadImg" Type="nvarchar" MaxLength="300" />
+    <Property Name="CategoryGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Sex" Type="int" Nullable="false" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Profession" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="RecommendMemberGuid" Type="uniqueidentifier" />
+    <Property Name="AvailablePoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AvailableValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalConsumeCount" Type="int" Nullable="false" />
+    <Property Name="LastConsumeTime" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="RegTime" Type="datetime" Nullable="false" />
+    <Property Name="RegSource" Type="int" />
+    <Property Name="OpenID" Type="nvarchar" MaxLength="100" />
+    <Property Name="Memo" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="TMemberCategory">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoldMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DefaultPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DefaultValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="RecommendPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UpgradeNeedPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MemberRight" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TMemberConsumeNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="ShouldAmount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="MoneyPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="ValuePaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CardPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="PointPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CouponPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="ThirdPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="AliPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CouponCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="OtherPaid" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CutAmount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="OperateTime" Type="datetime" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TMemberCoupon">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CouponGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CouponCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="BeginDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="SendTime" Type="datetime" Nullable="false" />
+    <Property Name="SendAssociateBillNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsLocked" Type="bit" Nullable="false" />
+    <Property Name="IsUsed" Type="bit" Nullable="false" />
+    <Property Name="UsedAssociateBillNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="UsedChainStoreGuid" Type="uniqueidentifier" />
+    <Property Name="UsedTime" Type="datetime" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TMemberPointNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Way" Type="int" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Operatetime" Type="datetime" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TMemberValueNote">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BillNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Way" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Operatetime" Type="datetime" Nullable="false" />
+    <Property Name="IsUndo" Type="bit" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TOperator">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="LoginAccount" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TParameter">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="KeyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TRushBuy">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Images" Type="nvarchar" MaxLength="500" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ChainStoreGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MarketPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="DefaltSellCount" Type="int" Nullable="false" />
+    <Property Name="SellCount" Type="int" Nullable="false" />
+    <Property Name="SingleBuyLimit" Type="int" Nullable="false" />
+    <Property Name="StoreCount" Type="int" Nullable="false" />
+    <Property Name="NeedBook" Type="bit" Nullable="false" />
+    <Property Name="BeginTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="ValidityDays" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TRushBuyOrder">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RushBuyGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MemberGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BusinessGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BeginTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="TotalMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalPay" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ValuePaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="WeiXinPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AliPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PointPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Point" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="RefundNO" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TRushOrderItem">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OperatorGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RushOrderGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsUsed" Type="bit" Nullable="false" />
+    <Property Name="UsedChainStore" Type="uniqueidentifier" />
+    <Property Name="UsedTime" Type="datetime" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <Function Name="GetPaged" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PageIndex" Type="int" Mode="In" />
+    <Parameter Name="PageSize" Type="int" Mode="In" />
+    <Parameter Name="Table" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Field" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="OrderBy" Type="nvarchar" Mode="In" />
+    <Parameter Name="Where" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TotalCount" Type="int" Mode="InOut" />
+    <Parameter Name="Descript" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="usp_SelectGoodsCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OperatorGuid" Type="nvarchar" Mode="In" />
+    <Parameter Name="BusinessGuid" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ShopEntityStoreContainer">
+    <EntitySet Name="TActivity" EntityType="Self.TActivity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TActivityCategory" EntityType="Self.TActivityCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TAnnouncement" EntityType="Self.TAnnouncement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TAnnouncementReader" EntityType="Self.TAnnouncementReader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TArticle" EntityType="Self.TArticle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TArticleCategory" EntityType="Self.TArticleCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBrand" EntityType="Self.TBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBusiness" EntityType="Self.TBusiness" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBusinessCoupon" EntityType="Self.TBusinessCoupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStore" EntityType="Self.TChainStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStoreBuySmsNote" EntityType="Self.TChainStoreBuySmsNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStoreCapitalNote" EntityType="Self.TChainStoreCapitalNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStorePointNote" EntityType="Self.TChainStorePointNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStoreSettleSet" EntityType="Self.TChainStoreSettleSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStoreSmsSendNote" EntityType="Self.TChainStoreSmsSendNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TChainStoreValueNote" EntityType="Self.TChainStoreValueNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TComment" EntityType="Self.TComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TCoupon" EntityType="Self.TCoupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TCouponPackage" EntityType="Self.TCouponPackage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TCouponPackageItem" EntityType="Self.TCouponPackageItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGift" EntityType="Self.TGift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGiftCategory" EntityType="Self.TGiftCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGiftExchangeNote" EntityType="Self.TGiftExchangeNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGiftExchangeNoteItem" EntityType="Self.TGiftExchangeNoteItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGoods" EntityType="Self.TGoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGoodsCategory" EntityType="Self.TGoodsCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TGoodsProperty" EntityType="Self.TGoodsProperty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TImage" EntityType="Self.TImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIndustry" EntityType="Self.TIndustry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TLog" EntityType="Self.TLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TManager" EntityType="Self.TManager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TManagerRole" EntityType="Self.TManagerRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMember" EntityType="Self.TMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMemberCategory" EntityType="Self.TMemberCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMemberConsumeNote" EntityType="Self.TMemberConsumeNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMemberCoupon" EntityType="Self.TMemberCoupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMemberPointNote" EntityType="Self.TMemberPointNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TMemberValueNote" EntityType="Self.TMemberValueNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TOperator" EntityType="Self.TOperator" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TParameter" EntityType="Self.TParameter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRushBuy" EntityType="Self.TRushBuy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRushBuyOrder" EntityType="Self.TRushBuyOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRushOrderItem" EntityType="Self.TRushOrderItem" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,203 @@
+﻿@using System.Data;
+@using Webdiyer.WebControls.Mvc
+@using System.Web.Mvc.Ajax;
+@using Shop.Entity;
+@using Shop.Bll;
+@model  PagedList<DataRow>
+@{ Layout = null;
+    string actionString = RoleLogic.GetPowerStr("Industry", ManagerLogic.GetLoginInfo().ManagerRoleGuid);}
+<table class="table table-bordered  table-condensed table-condensed" id="treeTable1">
+    <thead>
+        <tr>
+            <th>行业名称</th>
+            <th>上级行业</th>
+            <th>显示顺序</th>
+            <th class="hidden-xs">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+            {
+            <tr id="@row["Guid"]" hasChild="true">
+                <td style="text-align:left;" class="title">@row["Title"]</td>
+                <td></td>
+                <td>@row["Sort"] </td>
+                <td>
+                    @if (actionString.Contains("Edit"))
+                    {
+                        <a title="编辑" class="btn  btn-default btn-xs" data-ajax="true" onclick="EditShow('@row["Guid"]','@row["title"]','@row["icon"]','@row["Sort"]');">
+                            编辑
+                        </a>}
+                    @if (actionString.Contains("Delete"))
+                    {
+                        <a class="btn btn-default btn-xs" title='删除' onclick="Delete('@row["Guid"]','@row["Title"]');">
+                            删除
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.CurrentPageIndex" id="PageIndex" />
+<div class="col-xs-10" style="width:auto;padding-left:0px;">
+    <input type="hidden" value="@Model.TotalPageCount" id="TotalPageCount" />
+    <ul class="pagination">
+        <li>
+            <span aria-hidden="true">
+                @(Model.PageSize)条/页，@(Model.TotalPageCount)页, 共@(Model.TotalItemCount)条
+            </span>
+        </li>
+        <li>
+            <span aria-hidden="true">
+                每页
+                <select style="border-radius:4px;font-family:normal;vertical-align: text-bottom;" id="PageSize" name="PageSize" onchange="PageSizeChange();">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                条
+            </span>
+        </li>
+    </ul>
+    @Ajax.Pager(Model,
+new PagerOptions
+{
+    PageIndexParameterName = "id",
+    CssClass = "pagination",
+    FirstPageText = "首页",
+    LastPageText = "尾页",
+    PrevPageText = "上一页",
+    PageIndexBoxId = "pageIndexBox",
+    NextPageText = "下一页",
+    CurrentPagerItemTemplate = "<li class=\"active\"><a data-pageindex=\"{0}\" href=\"/GoodsManage/Brand/List/{0}\">{0}</a></li>",
+    DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+    PagerItemTemplate = "<li>{0}</li>",
+    AutoHide = false,
+
+}, new MvcAjaxOptions
+{
+    UpdateTargetId = "divTable",
+    HttpMethod = "Post",
+    DataFormId = "formSearch",
+    EnableHistorySupport = false,
+    //OnSuccess = "EditMsg",
+}
+)
+</div>
+<div class="pagination" style="width:20%;margin-top: 0px;">
+    <ul class="pagination">
+        <li>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">跳转到第</span>
+                <input type="text" id="pageIndexBox" class="form-control input-sm" placeholder="" aria-describedby="sizing-addon2" oninput="InputPageIndex(this);">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" type="button" onclick="GoPageIndex();">Go</button>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+
+    $("input[name='PageSize']").val('@ViewData["NowPageSize"]');
+    $("#PageSize").val(@ViewData["NowPageSize"]);
+
+    function jsonDateFormat(jsonDate)
+    {//json日期格式转换为正常格式
+        try
+        {//出自http://www.cnblogs.com/ahjesus 尊重作者辛苦劳动成果,转载请注明出处,谢谢!
+            var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+            var milliseconds = date.getMilliseconds();
+            return date.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+        } catch (ex)
+        {
+            return "";
+        }
+    }
+
+    $(function ()
+    {
+        var option = {
+            theme: 'default',
+            expandLevel: 1,
+            beforeExpand: function ($treeTable, id)
+            {
+                //判断id是否已经有了孩子节点，如果有了就不再加载，这样就可以起到缓存的作用
+                if ($('.' + id, $treeTable).length) { return; }
+                //这里的html可以是ajax请求
+                var str = "";
+                $.post("/set/Industry/GetChildCategory", { ParentGuid: id }, function (data)
+                {
+                    if (data.data != "")
+                    {
+                        debugger;
+                        //  var json = JSON.parse(data.data);
+                        $(data.data).each(function ()
+                        {
+                            str += "<tr id='" + this.Guid + "' pId='" + this.ParentGuid + "' hasChild='true' >\
+                <td style='text-align: left;'>"+ this.Title + "</td>\
+                <td style='text-align: center;'>" + $("#" + this.ParentGuid).find("td").eq(1).html() + "</td>\
+                <td style='text-align: center;'>" + this.Sort + "</td>\
+                <td style='text-align: center;'>"+ this.Remark + "</td>\
+                <td style='text-align: center;'>" + jsonDateFormat(this.AddTime) + "</td>\
+                <td style='text-align: center;'>\
+       <a title='编辑' class='btn  btn-default btn-xs' data-ajax='true' data-ajax-method='GET' data-ajax-mode='replace' data-ajax-success='EditShow' data-ajax-update='#divAdd' href='/Goods/GoodsCategory/Add?guid=" + this.Guid + "'>编辑</a>\
+                <a title='删除' class='btn  btn-default btn-xs' title='' onclick='Delete(\"" + this.Guid + "\",\"" + this.Title + "\")'>删除</a>\
+                </td>\
+            </tr>";
+                        });
+                        $treeTable.addChilds(str);
+                    }
+                });
+            },
+            onSelect: function ($treeTable, id)
+            {
+                window.console && console.log('onSelect:' + id);
+            }
+        };
+        $('#treeTable1').treeTable(option);
+    });
+    function EditShow(Guid, Title, Icon, Sort)
+    {
+        $("#headerTitle").text("编辑分类");
+        $(this).removeData('modal');
+        $("#Add").modal('show');
+        $("#Title").focus();
+        $("#Title").val(Title);
+        $("#Guid").val(Guid);
+        $("#Url").val(Icon);
+        $("#Sort").val(Sort);
+    }
+    function Delete(obj, title)
+    {
+        parent.layer.confirm('确定要删除行业【' + title + '】吗?', {
+            title: "提示", icon: 3,
+            btn: ['确定', '取消'] //按钮
+        }, function ()
+        {
+            $.post("/set/industry/delete", { guid: obj }, function (data)
+            {
+                parent.layer.closeAll('dialog'); //关闭信息框
+                if (data.succ)
+                {
+                    window.location.reload();
+                } else
+                {
+                    parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 10000 });
+                }
+
+            })
+        }, function () { });
+    }
+
+    function GoPageIndex()
+    {
+
+    }
+</script>

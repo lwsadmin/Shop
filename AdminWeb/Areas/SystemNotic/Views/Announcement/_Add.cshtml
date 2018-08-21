@@ -1,0 +1,87 @@
+﻿
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+
+<div class="modal" id="Add" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="headerTitle">发布联盟公告</h4>
+            </div>
+            @using (Html.BeginForm("Add", "Announcement", FormMethod.Post, new { id = "add", @class = "form-horizontal" }))
+            {
+                <div class="form-body">
+                    <br />
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label col-sm-2">
+                                    标题<span class="required"> * </span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-sm input-inline" name="Title" id="Title" datatype="*1-50" nullmsg="请输入标题!" sucmsg=" " errormsg="标题最多50个字符！" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">公告内容</label>
+                                <div class="col-sm-10" id="Content">
+                                    <textarea id="contentqq" name="hidContent" style="width: 390px; height: 200px; visibility: hidden;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="确认发布" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#Add').on('hidden.bs.modal', function (e)
+    {
+        layer.closeAll('tips'); //关闭所有的tips层
+    })
+    function ShowValidformMsg(msg, id)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true });
+    }
+    $(function ()
+    {
+        $("#add").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.succ)
+                {
+                    layer.msg('保存成功!', { icon: 1 });
+                    $("#Add").modal('hide');
+                    $("#formSearch").submit();
+                }
+            },
+            tiptype: function (msg, o)
+            {
+                if (msg.trim() != "" && o.type != 1)
+                { ShowValidformMsg(msg, $(o.obj).attr("id")); }
+            }
+        }
+     );
+    })
+</script>

@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = null;
+}
+@using Shop.ViewModel
+
+@model GoodsModel
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+
+    <link href="@Url.Content("/Content/admin/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="~/Content/checkbox/css/build.css" rel="stylesheet" />
+    <link href="~/Content/checkbox/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <style>
+        #divTable > .media {
+            border-bottom: .5px solid #d2d2d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线上商城></a></li>
+            <li class="active"><a href="#">@(Model.goods.Guid == Guid.Empty ? "添加" : "编辑")商品</a></li>
+        </ol>
+        <div class="portlet-body">
+            @{Html.BeginForm("AddPost", "Goods", FormMethod.Post, new { @class = "form-horizontal", @id = "add" });}
+
+            @Html.HiddenFor(c => c.goods.Guid)
+            @Html.HiddenFor(c => c.goods.OperatorGuid)
+            @Html.HiddenFor(c => c.goods.ChainStoreGuid)
+            <div class="tabbable tabbable-custom boxless tabbable-reversed">
+                <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#basic" id="basic-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">基本信息</a></li>
+                    <li role="presentation" class=""><a href="#images" role="tab" id="images-tab" data-toggle="tab" aria-controls="images" aria-expanded="false">商品图册</a></li>
+                    <li role="presentation" class=""><a href="#attr" role="tab" id="attr-tab" data-toggle="tab" aria-controls="attr" aria-expanded="false">商品属性</a></li>
+                    <li role="presentation" class=""><a href="#spec" role="tab" id="spec-tab" data-toggle="tab" aria-controls="spec" aria-expanded="false">商品规格</a></li>
+
+                    <li role="presentation" class=""><a href="#take" role="tab" id="take-tab" data-toggle="tab" aria-controls="take" aria-expanded="false">物流配送</a></li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="basic" aria-labelledby="home-tab">
+                        @Html.Partial("_tabBasic", Model.goods)
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="images" aria-labelledby="images-tab">
+                        @Html.Partial("_tabImages", Model)
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="spec" aria-labelledby="spec-tab">
+                        <h1>spec</h1>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="attr" aria-labelledby="attr-tab">
+                        @Html.Partial("_tabAttr")
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="take" aria-labelledby="take-tab">
+                        <h1>take</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" style="margin-left: -20%;" value="保存" />
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript: self.location = document.referrer;">取消</button>
+            </div>
+            @{Html.EndForm();}
+        </div>
+    </div>
+    <script src="~/Content/kindeditor/kindeditor-all-min.js"></script>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('[data-toggle="tooltip"]').tooltip();
+        var editor;
+        KindEditor.ready(function (K)
+        {
+            editor = K.create('#Detail',
+                {
+                    uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+                    fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+                    allowFileManager: false,
+                    formatUploadUrl: false,
+                    items: [
+                        'undo', 'redo', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'table', 'link', 'emoticons', 'baidumap', 'quickformat',
+                        'preview', 'fullscreen',],
+                    afterBlur: function () { this.sync(); }
+                });
+        });
+
+
+        function ShowTipMsg(id, msg)
+        {
+            layer.tips(msg, '#' + id, { tipsMore: true, time: 4000 });
+        }
+        $(function ()
+        {
+            $("#add").Validform({
+                ajaxPost: true,
+                showAllError: true,
+                beforeSubmit: function (curform)
+                {
+                    layer.msg('正在执行操作...', { icon: 16 });
+                    return true;
+                },
+                callback: function (data)
+                {
+                    if (data.succ)
+                    {
+                        window.location.href = '/GoodsManage/Goods/List/@Request.QueryString["pageIndex"]';
+                    } else
+                    {
+                        parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 5000 });
+                    }
+                },
+                tiptype: function (msg, o)
+                {
+                    if (msg != "通过信息验证！")
+                    {
+                        ShowTipMsg($(o.obj).attr("id"), msg)
+                    }
+                }
+            }
+            );
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+﻿
+@{
+    ViewBag.Title = "Recharge";
+}
+<script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="~/Content/layer/layer.js"></script>
+<div class="modal fade" id="ReCharge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">门店充值</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="tabUl">
+                    <li role="presentation" class="active"><a href="#point" role="tab" data-toggle="tab">充积分</a></li>
+                    <li role="presentation"><a href="#value" role="tab" data-toggle="tab">充余额</a></li>
+                    <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">充短信</a></li>
+                    <li role="presentation"><a href="#info" role="tab" data-toggle="tab">其他信息</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="point">
+                        <br />
+                        <form class="form-horizontal" role="form" id="PointRecharge" action="/Settlement/StoreCapital/BuyPoint">
+                            <input type="hidden" name="PointGuid" id="PointGuid" value="" />
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">本次充值</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" name="PointRechageValue" id="PointRechageValue" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="充值额度必须是数字!" nullmsg="请填写充值额度!" onblur="SetPoint();" />
+                                            <span class="input-group-addon">分</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">应收金额</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" name="PointShouldInput"
+                                                   id="PointShouldInput" placeholder="系统自动计算" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/"
+                                                   errormsg="应收金额必须是数字!" nullmsg="请填写应收金额!" />
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">实收金额</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" id="PointFactInput" name="PointFactInput"
+                                                   value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="实收金额必须是数字!"
+                                                   nullmsg="请填写实收金额!">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">备&nbsp;&nbsp;&nbsp;注</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <textarea name="PointNote" class="form-control input-sm" id="PointNote" value="" datatype="*1-300" errormsg="最多不能超过300字符!" ignore="ignore"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align:center;">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-sm">确认充值</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="value">
+                        <br />
+                        <form class="form-horizontal" role="form" id="ValueRecharge" action="/Settlement/StoreCapital/BuyValue">
+                            <input type="hidden" value="" name="ValueGuid" id="ValueGuid" />
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">本次充值</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" placeholder="" name="ValueRechageValue" id="ValueRechageValue" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="充值额度必须是数字!" nullmsg="请填写充值额度!">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">实付金额</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" name="ValuePayValue" id="ValuePayValue" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="实付金额必须是数字!" nullmsg="请填写实付金额!">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">备&nbsp;&nbsp;&nbsp;注</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <textarea class="form-control input-sm" name="ValueNote" id="ValueNote" datatype="*1-300" errormsg="最多不能超过300字符!" ignore="ignore"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align:center;">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-sm">确认充值</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="messages">
+                        <br />
+                        <form class="form-horizontal" role="form" id="SmsRecharge" action="/Settlement/StoreCapital/BuySms">
+                            <input type="hidden" name="SmsGuid" id="SmsGuid" value="" />
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">短信数量</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" placeholder="" name="SmsRechageValue" id="SmsRechageValue" value="" datatype="n" errormsg="短信数量必须是数字!" nullmsg="请填写短信数量!" />
+                                            <span class="input-group-addon">条</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">应收金额</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" name="SmsShouldPay" id="SmsShouldPay" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="应收金额必须是数字!" nullmsg="请填写应收金额!">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">实收金额</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control input-sm" name="SmsFactPay" id="SmsFactPay" value="" datatype="/^[0-9]+([.]{1}[0-9]+){0,1}$/" errormsg="实收金额必须是数字!" nullmsg="请填写实收金额!">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">备&nbsp;&nbsp;&nbsp;注</label>
+                                <div class="col-sm-5">
+                                    <div class="form-group has-default">
+                                        <textarea class="form-control input-sm" name="SmsNote" id="SmsNote" value="" datatype="*1-300" errormsg="最多不能超过300字符!" ignore="ignore"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align:center;">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-sm">确认充短信</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="info">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">剩余积分:<strong id="AvailablePoint"></strong>分</li>
+                                    <li class="list-group-item">剩余余额:<strong id="AvailableValue">458.69</strong>元</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">历史总积分:<strong id="TotalPoint">458.69</strong>元</li>
+                                    <li class="list-group-item">历史总余额:<strong id="TotalValue">458.69</strong>分</li>
+                                    <li class="list-group-item">历史总短信:<strong id="TotalSmsCount">458.69</strong>条</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#ReCharge').on('hidden.bs.modal', function (e)
+    {
+        layer.closeAll('tips'); //关闭所有的tips层
+    }).on("show.bs.modal", function ()
+    {
+        $('#tabUl a:first').tab('show')
+        $(".tab-content").find("input").each(function ()
+        {
+            $(this).val("");
+        });
+    });
+    function ShowValidformMsg(msg, id)
+    {
+        layer.tips(msg, '#' + id, { tipsMore: true });
+    }
+
+    function SetPoint()
+    {
+        if ($("#PointRechageValue").val().trim().length == 0)
+        {
+            return;
+        }
+        $.post("/Settlement/StoreCapital/GetPointMoney",
+            {
+                point: $("#PointRechageValue").val().trim()
+            }, function (data)
+            {
+                $("#PointShouldInput").val(data);
+                $("#PointShouldInput").attr("readonly", "readonly");
+            });
+    }
+    function FormClear()
+    {
+        $(".tab-content").find("input").each(function ()
+        {
+            $(this).val("");
+        });
+    }
+    $(function ()
+    {
+        //积分充值
+        $("#PointRecharge").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.closeAll();
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                if (data.success)
+                {
+                    layer.msg(data.msg, { icon: 1 });
+                    FormClear();
+                } else
+                { layer.msg(data.msg, { icon: 2 }); }
+            },
+            tiptype: function (msg, o)
+            {
+                //type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态,
+                if (o.type == 3)
+                { ShowValidformMsg(msg, $(o.obj).attr("id")); }
+            }
+        });
+
+        //余额充值
+        $("#ValueRecharge").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.closeAll();
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                alert(data.succ);
+                if (data.succ)
+                {
+                    layer.msg(data.msg, { icon: 1 });
+                    FormClear();
+                } else
+                { layer.msg(data.msg, { icon: 2 }); }
+            },
+            tiptype: function (msg, o)
+            {
+                //type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态,
+                if (o.type == 3)
+                { ShowValidformMsg(msg, $(o.obj).attr("id")); }
+            }
+        });
+        //短信充值
+
+        $("#SmsRecharge").Validform({
+            showAllError: true,
+            ajaxPost: true,
+            beforeSubmit: function (curform)
+            {
+                layer.closeAll();
+                layer.msg('正在执行操作...', { icon: 16 });
+                return true;
+            },
+            callback: function (data)
+            {
+                alert(data.succ);
+                if (data.succ)
+                {
+                    layer.msg(data.msg, { icon: 1 });
+                    FormClear();
+                } else
+                { layer.msg(data.msg, { icon: 2 }); }
+            },
+            tiptype: function (msg, o)
+            {
+                //type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态,
+                if (o.type == 3)
+                { ShowValidformMsg(msg, $(o.obj).attr("id")); }
+            }
+        });
+    });
+</script>

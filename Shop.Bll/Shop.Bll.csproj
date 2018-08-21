@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70BAC27B-0931-42EB-AA39-4BC1F2F90A11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shop.Bll</RootNamespace>
+    <AssemblyName>Shop.Bll</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticleInfo\ArticleCategoryLogic.cs" />
+    <Compile Include="ArticleInfo\ArticleLogic.cs" />
+    <Compile Include="ArticleInfo\CommentLogic.cs" />
+    <Compile Include="Business\BuinessLogic.cs" />
+    <Compile Include="Business\ChainStoreLogic.cs" />
+    <Compile Include="CityLife\ActivityLogic.cs" />
+    <Compile Include="Common\CommonLogic.cs" />
+    <Compile Include="Goods\GoodsPropertyLogic.cs" />
+    <Compile Include="Common\ImagesLogic.cs" />
+    <Compile Include="Coupon\BusinessCouponLogic.cs" />
+    <Compile Include="Coupon\CouponLogic.cs" />
+    <Compile Include="Coupon\CouponPackageLogic.cs" />
+    <Compile Include="Gift\GiftCategoryLogic.cs" />
+    <Compile Include="Gift\GiftLogic.cs" />
+    <Compile Include="Goods\BrandLogic.cs" />
+    <Compile Include="Goods\GoodsCategoryLogic.cs" />
+    <Compile Include="Goods\GoodsImagesLogic.cs" />
+    <Compile Include="Goods\GoodsLogic.cs" />
+    <Compile Include="GroupBuy\GroupBuyImageLogic.cs" />
+    <Compile Include="GroupBuy\GroupBuyLogic.cs" />
+    <Compile Include="GroupBuy\RushOrderLogic.cs" />
+    <Compile Include="Member\MemberCategoryLogic.cs" />
+    <Compile Include="Member\MemberLogic.cs" />
+    <Compile Include="OffLine\MemberRechargeLogic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settlement\StoreCapitalSetLogic.cs" />
+    <Compile Include="Settlement\StoreCapitalSettlementLogic.cs" />
+    <Compile Include="SystemNotic\AnnouncementLogic.cs" />
+    <Compile Include="SystemNotic\SmsSendLogic.cs" />
+    <Compile Include="SystemSet\IndustryLogic.cs" />
+    <Compile Include="SystemSet\LogLogic.cs" />
+    <Compile Include="SystemSet\ManagerLogic.cs" />
+    <Compile Include="SystemSet\MenuLogic.cs" />
+    <Compile Include="SystemSet\OperatorLogic.cs" />
+    <Compile Include="SystemSet\ParameterLogic.cs" />
+    <Compile Include="SystemSet\RoleLogic.cs" />
+    <Compile Include="SystemSet\StorePointStatisticsLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.Dal\Shop.Dal.csproj">
+      <Project>{cb71f002-b3bb-45ff-968c-f26f3a209c2e}</Project>
+      <Name>Shop.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Entity\Shop.Entity.csproj">
+      <Project>{5a92bf5e-f642-4866-89a5-cea61a4ceca4}</Project>
+      <Name>Shop.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Help\Shop.Help.csproj">
+      <Project>{41fb0cfd-578d-4f07-8977-5259e0a8597d}</Project>
+      <Name>Shop.Help</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.ViewModel\Shop.ViewModel.csproj">
+      <Project>{46052901-7c22-4a75-8c8d-a34a539c62cb}</Project>
+      <Name>Shop.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Statistics\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

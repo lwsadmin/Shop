@@ -1,0 +1,125 @@
+﻿
+@using System.Data;
+@using Shop.Entity;
+@using Webdiyer.WebControls.Mvc;
+@{
+    Layout = null;
+}
+@model  PagedList<DataRow>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>列表</title>
+    <link href="~/Content/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/admin/js/bootstrap.min.js"></script>
+    @*<script src="~/Content/MvcPager/MvcPager.js"></script>*@
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="/set/admin/center">首页></a></li>
+            <li><a href="#">线上商城></a></li>
+            <li class="active">自定义属性</li>
+        </ol>
+
+        <div class="portlet-body">
+            <div class="navbar-form navbar-left" role="search" style="padding:0px;">
+               
+                @Ajax.ActionLink("新增", "Add", new { }, new AjaxOptions
+                           {
+                               OnSuccess = "Add",
+                               HttpMethod = "GET",
+                               InsertionMode = InsertionMode.Replace,
+                               UpdateTargetId = "divAdd"
+                           },
+               new { @class = "btn  btn-primary  btn-sm" })
+            </div>
+            <form class="navbar-form navbar-left" id="formSearch" role="form" action="/GoodsManage/GoodsAttr/List">
+                <div class="form-group">
+                    <input type="hidden" name="PageSize" value="15" />
+                    <input type="text" class="form-control input-sm" id="SearchTitle" name="title" placeholder="请输入名称" />
+                    @Html.DropDownList("GoodsCategory", (SelectList)ViewData["CateGory"], "-商品分类-", new { @class = "form-control input-sm" })
+
+                    <select class="form-control input-sm" name="dataType" id="dataType" onchange="DateTypeChange();">
+                        <option value="">-数据类型-</option>
+                        <option value="text">文本框</option>
+                        <option value="option">下拉框</option>
+                        <option value="textArea">多行文本框</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm ">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>&nbsp;搜索
+                </button>
+            </form>
+            <div id="divTable">
+                @Html.Partial("_Table", Model)
+    
+            </div>
+            @{Html.RegisterMvcPagerScriptResource();}
+            <div id="divAdd">
+                @Html.Partial("_Add", new TGoodsProperty())
+            </div>
+        </div>
+    </div>
+    <script src="/Content/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script type="text/javascript">
+        function Add(data) {
+            $("#divAdd").html("");
+            $("#divAdd").html(data);
+            $("#Guid").val("");
+            $("#Title").val("");
+            $("#Sort").val("");
+            $("#Remark").val("");
+            $("#headerTitle").val("新增");
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Title").focus();
+        }
+
+        function Edit(data) {
+            $("#divAdd").html(data);
+            $("#headerTitle").html("编辑");
+            $(this).removeData('modal');
+            $("#Add").modal('show');
+            $("#Name").focus();
+        }
+        function Delete(obj, title)
+        {
+            parent.layer.confirm('确定要删除【' + title + '】吗?', {
+                title: "提示", icon: 3,
+                btn: ['确定', '取消'] //按钮
+            }, function ()
+            {
+                $.post("/GoodsManage/GoodsAttr/delete", { guid: obj }, function (data)
+                {
+                    parent.layer.closeAll('dialog'); //关闭信息框
+                    if (data.succ)
+                    {
+                        parent.layer.msg('删除成功!', { icon: 1 });
+                  
+                        $(".pagination .active").find("a").click();
+                        //$("#formSearch").submit();
+                    } else
+                    {
+                        parent.layer.alert(data.msg, { title: "提示", icon: 5, time: 5000 });
+                    }
+
+                })
+            }, function () { });
+        }
+
+        function PageSizeChange()
+        {
+            $("input[name='PageSize']").val($("#PageSize").val());
+            $("#formSearch").submit();
+        }
+    </script>
+</body>
+</html>
