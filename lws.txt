@@ -1,1 +1,78 @@
-本次传输完成 iiiii
+USE [UnionMallDb]
+GO
+/****** Object:  StoredProcedure [dbo].[Global_GetPaged]    Script Date: 2018/9/7 18:13:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Global_GetPaged]
+ @PageIndex int = 1,      -- 当前页码
+ @PageSize int = 10,     -- 每页记录条数(页面大小)
+ @Table nvarchar(MAX),    -- 表名或视图名，可以是嵌套SQL
+ @OrderBy nvarchar(100) = 'Id desc', -- 排序规则
+ @Where nvarchar(max)='',    -- 过滤条件
+ @TotalCount int output,    -- 记录总数
+ @Descript varchar(100) output  -- 结果描述
+AS
+BEGIN
+ Set ROWCOUNT @PageSize;
+
+ Set @Descript = 'successful';
+ -------------------参数检测----------------
+ IF LEN(RTRIM(LTRIM(@Table))) !> 0
+ Begin
+  Set @Descript = 'table name is empty';
+  Return;
+ End
+
+ IF ISNULL(@PageSize,0) <= 0
+ Begin
+  Set @Descript = '页大小不能为0';
+  Return;
+ End
+
+ IF ISNULL(@PageIndex,0) <= 0
+ Begin
+  Set @Descript = '页码不能小于1';
+  Return;
+ End
+ -------------------检测结束----------------
+IF LEN(RTRIM(LTRIM(@OrderBy))) !>0
+BEGIN
+	Set @OrderBy = 'Guid ASC';
+END
+
+ Begin Try
+  -- 整合SQL
+  Declare @SQL nvarchar(MAX)
+
+  Set @SQL =@Table+ ' order by '+@OrderBy+' OFFSET '+cast((@PageIndex-1)*@PageSize as nvarchar(max))+' ROW FETCH NEXT '+cast(@PageSize as nvarchar(20))+' ROWS only';
+
+  -- 执行SQL, 取当前页记录集
+    print @SQL
+  Execute(@SQL);
+
+  --------------------------------------------------------------------
+
+  -- 整合SQL
+  Set @SQL = 'Set @Rows = (SELECT COUNT(*) FROM (' + @Table + ') T)';
+	
+  -- 执行SQL, 取总记录
+  Execute sp_executesql @SQL, N'@Rows int output', @TotalCount output;
+ End Try
+ Begin Catch
+  -- 捕捉错误
+  Set @Descript = 'error line: ' + CAST(ERROR_LINE() AS varchar(8)) + ', error number: ' + CAST(ERROR_NUMBER() AS varchar(8)) + ', error message: ' + ERROR_MESSAGE();
+  Return;
+ End Catch;
+
+ -- 执行成功
+ Return;
+END
+
+
+
+----2----------------------------------------------
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+
