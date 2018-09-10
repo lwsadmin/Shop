@@ -10,7 +10,7 @@ ALTER PROCEDURE [dbo].[Global_GetPaged]
  @PageSize int = 10,     -- 每页记录条数(页面大小)
  @Table nvarchar(MAX),    -- 表名或视图名，可以是嵌套SQL
  @OrderBy nvarchar(100) = 'Id desc', -- 排序规则
- @Where nvarchar(max)='',    -- 过滤条件
+ --@Where nvarchar(max)='',    -- 过滤条件
  @TotalCount int output,    -- 记录总数
  @Descript varchar(100) output  -- 结果描述
 AS
