@@ -39,7 +39,7 @@ BEGIN
  -------------------检测结束----------------
 IF LEN(RTRIM(LTRIM(@OrderBy))) !>0
 BEGIN
-	Set @OrderBy = 'Guid ASC';
+	Set @OrderBy = 'id desc';
 END
 
  Begin Try
